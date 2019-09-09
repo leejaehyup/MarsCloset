@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>closet</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/closet.css" />
+  </head>
+  <body>
+    <button onclick="goBack()" class="btBack">&nbsp;&lt;&nbsp;</button>
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+
+    <!-- TAB CONTROLLERS -->
+
+    <input
+      id="panel-1-ctrl"
+      class="panel-radios"
+      type="radio"
+      name="tab-radios"
+      value="all"
+      checked
+    />
+    <input
+      id="panel-2-ctrl"
+      class="panel-radios"
+      type="radio"
+      name="tab-radios"
+      value="top"
+    />
+    <input
+      id="panel-3-ctrl"
+      class="panel-radios"
+      type="radio"
+      name="tab-radios"
+      value="bottom"
+    />
+    <input
+      id="panel-4-ctrl"
+      class="panel-radios"
+      type="radio"
+      name="tab-radios"
+      value="outer"
+    />
+    <input
+      id="panel-5-ctrl"
+      class="panel-radios"
+      type="radio"
+      name="tab-radios"
+      value="onepiece"
+    />
+
+    <!-- TABS LIST -->
+    <ul id="tabs-list">
+      <!-- MENU TOGGLE -->
+      <button class="btC" id="btn1">
+        <li id="li-for-panel-1">
+          <label class="panel-label" for="panel-1-ctrl">전체</label>
+        </li>
+      </button>
+      <button class="btC" id="btn2">
+        <li id="li-for-panel-2">
+          <label class="panel-label" for="panel-2-ctrl">상의</label>
+        </li>
+      </button>
+      <button class="btC" id="btn3">
+        <li id="li-for-panel-3">
+          <label class="panel-label" for="panel-3-ctrl">하의</label>
+        </li>
+      </button>
+      <button class="btC" id="btn4">
+        <li id="li-for-panel-4">
+          <label class="panel-label" for="panel-4-ctrl">아우터</label>
+        </li>
+      </button>
+      <button class="btC" id="btn5">
+        <li id="li-for-panel-5">
+          <label class="panel-label" for="panel-5-ctrl">원피스</label>
+        </li>
+      </button>
+    </ul>
+
+    <!-- THE PANELS -->
+    <article id="panels">
+      <div class="container">
+        <section id="panel-1">
+          <main>
+            <div class="gallery-box">
+              <div id="serialImage1"></div>
+            </div>
+          </main>
+        </section>
+
+        <!------------상의---------------->
+        <section id="panel-2">
+          <main>
+            <div class="gallery-box">
+              <div id="serialImage2"></div>
+            </div>
+          </main>
+        </section>
+
+        <!------------하의---------------->
+        <section id="panel-3">
+          <main>
+            <div class="gallery-box">
+              <div id="serialImage3"></div>
+            </div>
+          </main>
+        </section>
+
+        <section id="panel-4">
+          <main></main>
+        </section>
+
+        <section id="panel-5">
+          <main>
+            <div class="gallery-box">
+              <div class="gallery">
+                <a href="/images/04.png">
+                  <img src="/images/04.png" alt="ICEMANGO" />
+                </a>
+                <div class="description">원피스 01</div>
+              </div>
+              <div class="gallery">
+                <a href="/images/06.png">
+                  <img src="/images/06.png" alt="ICEMANGO" />
+                </a>
+                <div class="description">원피스 02</div>
+              </div>
+            </div>
+          </main>
+        </section>
+      </div>
+    </article>
+    <script src="/javascript/closet.js"></script>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/saveImage.css" />
+    <meta charset="utf-8" />
+    <title>모달창 테스트</title>
+  </head>
+
+  <body>
+    <h1>레어어 팝업창 띄우기</h1>
+    <!-- 버튼 -->
+    <button class="trigger">클릭</button>
+
+    <!-- 팝업 될 레이어 -->
+    <div class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h1 class="title">&nbsp;&nbsp;My Infomation</h1>
+        <form action="/" method="POST">
+          <input type="hidden" value="<%=tag%>" name="tag" />
+          <!-- 분석된 이미지 띄우기 -->
+          <table>
+            <tr>
+              <td>
+                <!-- 분석된 이미지 정보 띄우기 -->
+                <label for="image">Image</label>
+                <img
+                  align="left"
+                  src="upload/python/<%=tag%>.png"
+                  width="200px"
+                  height="200px"
+                />
+              </td>
+              <td>
+                분석 정보 나오는 곳
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="user_select">User Select</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <!-- 옷종류 선택란 -->
+                <font> Type </font>
+                <select name="clo_type">
+                  <option value="<%=clotheType%>" selected
+                    ><%=clotheType%></option
+                  >
+                  <option value="t-shirts">t-shirts</option>
+                  <option value="pants">pants</option>
+                  <option value="outer">outer</option>
+                </select>
+                <!-- 색상 선택란 -->
+                <font> Color </font>
+                <select name="clo_color">
+                  <option value="<%=clotheColor%>" selected
+                    ><%=clotheColor%></option
+                  >
+                  <option value="red">Red</option>
+                  <option value="orange">Orange</option>
+                  <option value="yellow">Yellow</option>
+                  <option value="green">Green</option>
+                  <option value="blue">Blue</option>
+                  <option value="navy">Navy</option>
+                  <option value="puple">Puple</option>
+                  <option value="white">White</option>
+                  <option value="black">Black</option>
+                </select>
+              </td>
+            </tr>
+          </table>
+
+          <input type="button" id="cancel" value="취소" />
+          <input type="submit" id="submit" value="보내기" />
+        </form>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var modal = document.querySelector(".modal");
+      var trigger = document.querySelector(".trigger");
+      var closeButton = document.querySelector(".close-button");
+      var cancelButton = document.querySelector("#cancel");
+
+      //console.log(modal);
+
+      function toggleModal() {
+        modal.classList.toggle("show-modal");
+      }
+
+      function windowOnClick(event) {
+        if (event.target === modal) {
+          toggleModal();
+        }
+      }
+      function back() {
+        window.location.href = "/test";
+      }
+      cancelButton.addEventListener("click", back);
+      trigger.addEventListener("click", toggleModal);
+      closeButton.addEventListener("click", toggleModal);
+      cancel.addEventListener("click", toggleModal);
+      window.addEventListener("click", windowOnClick);
+    </script>
+  </body>
+</html>
