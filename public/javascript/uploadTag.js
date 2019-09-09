@@ -18,8 +18,8 @@ ws.onmessage = function(event) {
     tagNumber.innerHTML = recData;
   }
 };
-ws.onclose = function(event) { 
-  console.log(event)
+ws.onclose = function(event) {
+  console.log(event);
   console.log("client socket close");
 };
 
@@ -49,4 +49,5 @@ function saveDB() {
   form.appendChild(hiddenField1);
   document.body.appendChild(form);
   form.submit();
+  saveDBbutton.removeEventListener("click", saveDB);
 }

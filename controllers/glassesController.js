@@ -1,11 +1,14 @@
-const clothes = require("../models").dcloset;
-const multer = require("multer");
+//const clothes = require("../models").dcloset;
 const gimg = require("../models").gimg_analysis;
 
 exports.glassesImg = async (req, res) => {
-  let recData = await gimg.findAll();
-
+  try {
+    var recData = await gimg.findAll();
+  } catch (err) {
+    console.log(err);
+  }
   res.render("glassesImg", {recData: recData});
+  //console.log(recData);
 };
 
 exports.Postglasses = async (req, res) => {

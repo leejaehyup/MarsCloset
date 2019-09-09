@@ -30,7 +30,8 @@
       <ul>
           <% for(let i=0; i<recData.length; i++) { %>
               <li>
-                  <a href="<%=recData[i].gImg%>" title="카테고리:<%=recData[i].gCategorize%>패턴:<%=recData[i].pattern%>">
+                  <a href="<%=recData[i].gImg%>" title="카테고리:<%=recData[i].gCategorize%>  패턴:<%=recData[i].pattern%>  종류:
+                    <%=recData[i].gtype  %>  스타일:<%=recData[i].gstyle   %>   길이:<%=recData[i].glength%>">
                     <img src="<%=recData[i].gImg%>" alt="" />
                   </a>
               </li>
