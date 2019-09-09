@@ -266,16 +266,14 @@ exports.savePostHome = async (req, res) => {
   const s3 = new AWS.S3({
     accessKeyId: process.env.AWS_S3_ACCESS_KEY,
     secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
-    region: "ap-northeast-2"
+    region: process.env.AWS_S3_REGION
   });
   var param = {
-    Bucket: "marscloset",
+    Bucket: process.env.AWS_S3_BUCKET,
     Key: "image/" + tag,
     ACL: "public-read",
     Body: fs.createReadStream(
-      "C:/Users/dlwog/Desktop/My Node Js (0820심사최종)/public/upload/python/" +
-        tag +
-        ".png"
+      process.env.MYROUTE + "/public/upload/python/" + tag + ".png"
     ),
     ContentType: "image/png"
   };
@@ -285,8 +283,7 @@ exports.savePostHome = async (req, res) => {
     }
     console.log(data);
   });
-  const S3url =
-    "https://marscloset.s3.ap-northeast-2.amazonaws.com/image/" + tag;
+  const S3url = process.env.AWS_S3_URL + tag;
   // let imgFile = req.file;
   //console.log(imgFile);
   console.log(req.body.clo_type);

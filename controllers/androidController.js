@@ -4,7 +4,7 @@ const gimg = require("../models").gimg_analysis;
 
 exports.clotheAll = async (req, res) => {
   let obj = new Object();
-  let cloData = await clothes.findAll({ where: { status: 1 } });
+  let cloData = await clothes.findAll({where: {status: 1}});
   //let cloData = await clothes.findAll({ where: { category: "22219633111" } });
   obj.results = cloData;
   console.log(obj);
@@ -15,11 +15,10 @@ exports.clotheAll = async (req, res) => {
   res.json(cloData);
 };
 
-
 exports.clotheTop = async (req, res) => {
   let obj = new Object();
   let cloData = await clothes.findAll({
-    where: { status: 1, category: "top" }
+    where: {status: 1, category: "top"}
   });
   //let cloData = await clothes.findAll({ where: { category: "22219633111" } });
   obj.results = cloData;
@@ -34,7 +33,7 @@ exports.clotheTop = async (req, res) => {
 exports.clotheBottom = async (req, res) => {
   let obj = new Object();
   let cloData = await clothes.findAll({
-    where: { status: 1, category: "bottom" }
+    where: {status: 1, category: "bottom"}
   });
   console.log("@@@@@@@@@@@@@@@@@@@@");
   //let cloData = await clothes.findAll({ where: { category: "22219633111" } });
@@ -50,7 +49,7 @@ exports.clotheBottom = async (req, res) => {
 exports.sensor = async (req, res) => {
   let obj = new Object();
   let sensor = await closet.findAll({
-    where: { closetID: 1 }
+    where: {closetID: 1}
   });
   obj.results = sensor;
   console.log("###### " + sensor);
@@ -59,16 +58,14 @@ exports.sensor = async (req, res) => {
   res.json(senor);
 };
 
+exports.and_gimg = async (req, res) => {
+  let obj = new Object();
 
-exports.and_gimg = async (req,res) => {
-    let obj = new Object();
+  let glasses = await gimg.findAll({});
 
-    let glasses = await gimg.findAll({});
-
-    obj.results = glasses;
-    console.log("###### " + glasses);
-    let glassesData = JSON.stringify(obj);
-    glasses = JSON.parse(glassesData);
-    res.json(glasses);
-
+  obj.results = glasses;
+  console.log("###### " + glasses);
+  let glassesData = JSON.stringify(obj);
+  glasses = JSON.parse(glassesData);
+  res.json(glasses);
 };

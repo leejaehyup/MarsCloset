@@ -1,4 +1,4 @@
-const API_KEY = "1c89f92aa0ecb4258a562c9e5ed65022";
+const API_KEY = process.env.WEATHER_API_KEY; //ajax로 서버 요청해서 가져오기..
 const COORDS = "coords";
 //const weatherspan = document.querySelector(".weather-js");
 function getWeather(lat, lng) {
@@ -46,7 +46,7 @@ function getSucessPosition(position) {
   getWeather(latitude, longitude);
 }
 function getFailPosition() {
-  console.log("fail the loation data");
+  console.log("fail the lotation data");
 }
 
 function askCoords() {

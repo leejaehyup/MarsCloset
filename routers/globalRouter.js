@@ -1,7 +1,6 @@
 const routes = require("../routes");
 const express = require("express");
 const homeController = require("../controllers/homeController");
-const upload = require("../middleware");
 
 const globalRouter = express.Router(); //express 라우터
 globalRouter.get(routes.home, homeController.home); //get방식 라우터 설정

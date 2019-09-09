@@ -1,13 +1,19 @@
 const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
+const config = require("../config/config");
 
-const sequelize = new Sequelize("Closet", "admin", "marsbest01", {
-  host: "mars-closet-db-public.cpwfg8i7oxlv.ap-northeast-2.rds.amazonaws.com",
-  dialect: "mysql",
-  operatorsAliases: false,
-  logging: false // true시 -> log에 정보 나옴
-});
+const sequelize = new Sequelize(
+  config.database,
+  config.username,
+  config.password,
+  {
+    host: config.host,
+    dialect: "mysql",
+    operatorsAliases: false,
+    logging: false // true시 -> log에 정보 나옴
+  }
+);
 
 const db = {};
 

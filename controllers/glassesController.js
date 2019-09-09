@@ -60,13 +60,11 @@ exports.Postglasses = async (req, res) => {
     region: "ap-northeast-2"
   });
   var param = {
-    Bucket: "marscloset",
+    Bucket: process.env.AWS_S3_BUCKET,
     Key: "glasses/" + data1,
     ACL: "public-read",
     Body: fs.createReadStream(
-      "C:/Users/dlwog/Desktop/My Node Js (0820심사최종)/public/upload/glasses/" +
-        data1 +
-        ".png"
+      process.env.MYROUTE + "/public/upload/glasses/" + data1 + ".png"
     ),
     ContentType: "image/png"
   };
@@ -79,8 +77,7 @@ exports.Postglasses = async (req, res) => {
     }
     console.log(data2);
   });
-  const S3url =
-    "https://marscloset.s3.ap-northeast-2.amazonaws.com/glasses/" + data1;
+  const S3url = process.env.AWS_S3_GLASSES_URL + data1;
 
   let leeData = data1.toString().substring(5, 12);
   await gimg.create({

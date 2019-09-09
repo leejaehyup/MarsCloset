@@ -1,13 +1,14 @@
+const config = require("../config/config");
 const sequelizeAuto = require("sequelize-auto");
 const auto = new sequelizeAuto(
-  process.env.AWS_DB_DATABASE,
-  process.env.AWS_DB_USER,
-  process.env.AWS_DB_PASSWORD,
+  config.database,
+  config.username,
+  config.password,
   {
-    host: process.env.AWS_DB_HOST,
-    dialect: process.env.AWS_DB_DIALECT,
+    host: config.host,
+    dialect: "mysql",
     directory: "models",
-    port: process.env.AWS_DB_PORT,
+    port: 3306,
     additional: {
       timestamps: false
     }
