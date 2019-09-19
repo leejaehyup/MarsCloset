@@ -1,0 +1,31 @@
+
+/*dateTime*/
+
+.dateTime {
+    position: relative;
+    top: 50px;
+    left: -30px;
+    text-align: center;
+    width: 800px;
+    height: 200px;
+  }
+  
+  #time-result {
+    font-family: Arial, Helvetica, sans-serif;
+    color: whitesmoke;
+    font-size: 80px;
+  }
+  #clock {
+    color: white;
+    font-size: 70px;
+  }
+  .greet {
+    font-family: "Gothic A1", sans-serif;
+    position: absolute;
+    top: 250px;
+    left: 20px;
+    padding: 20px;
+    margin-left: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+  }

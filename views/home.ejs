@@ -8,12 +8,16 @@
     <script type="text/javascript" src="/javascript/weather.js"></script>
     <link rel="stylesheet" href="/css/home.css" /> 
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Nanum+Gothic+Coding|Nanum+Myeongjo|Noto+Serif+KR&display=swap" rel="stylesheet">
-    <script src="/javascript/keyboard.js"></script>
-
+    
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700" rel="stylesheet">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
- <!-- <script src="/javascript/soup.js"></script>-->  
+   
+    <script src="/javascript/keyboard.js"></script>
+    <link rel="stylesheet" href="/css/partial/keyboard.css" /> 
 
+    <link rel="stylesheet" href="/css/partial/dateTime.css" /> 
+    <link rel="stylesheet" href="/css/partial/weather.css" /> 
+    
     <title><%=title %></title>
 
 
@@ -76,7 +80,7 @@
     <span>17</span>
     <span>18</span>
     <span>19</span>
-    <span  class="circle" data-title="졸작 1차 심사">20</span>
+    <span class="circle" data-title="졸작 1차 심사">20</span>
     <span>21</span>
     <span>22</span>
     <span>23</span>
@@ -104,7 +108,6 @@
 
 
         <!--메뉴ver2-->
-
         <div class="menu borderXwidth">
             <a href="#">MAIN</a>
             <a href="closet">CLOSET</a>
@@ -113,83 +116,7 @@
           </div>
 
   
-      
-
-
-            
-
-<!--a href="#"> <button id="loginBt">로그인</button></a>-->
-<a href="#join_form"><button id="joinBt">회원가입</button></a>
-<a href="#login_form"><button id="loginBt">로그인</button></a>
-
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~로그인 모달~~~~~~~~~~~~~~~~~`-->
-<a href="#x" class="overlay" id="login_form"></a>
-<div class="popup">
-        <form name = "login" method="post" action="https://www.dongyang.ac.kr">
-    <h2 style="color: black">Welcome SmartCloset!</h2>
-    <p style="color: black">Please enter your login and password here</p>
-    <div>
-        <label for="login" style="color: black">Login</label>
-        <input type="text" name="lg_id" />
-    </div>
-    <div>
-        <label for="password" style="color: black">Password</label>
-        <input type="password" id="lg_pw"  />
-    </div>
-    <input type="button" value="Log In" onclick="login_check()" />
-
-    <a class="close" href="#close"></a>
-</form>
-</div>
-<!----------------------------------------------------------------------->
-<!---------------------회원가입 모달----------------------------------->
-<a href="#x" class="overlay" id="join_form"></a>
-<div class="popup">
-    <!-- 폼 태그 -->
-    <form  name ="join" method="post" action = "http://www.dongyang.ac.kr"> <!-- 액션 -->
-    <h2 style="color: black">Sign Up</h2>
-    <p style="color: black">Please enter your details here</p>
-    <div>
-        <label for="id" style="color: black">Login id</label>
-        <input type="text" name = "mb_id" />
-        <input type ="button" value="ID CHECK" onclick="doublecheck_id()">
-    </div>
-    <div>
-        <label for="pass" style="color: black">Password</label>
-        <input type="password" name = "mb_pw"  />
-    </div>
-    <div>
-        <label for="passre" style="color: black">Password re</label>
-        <input type="text" name="mb_pwre" />
-    </div>
-    <div>
-        <label for="height" style="color: black">User height</label>
-        <input type="text" name ="mb_height" style="color: black" /><span  style="color: black">CM</span>
-    </div>
-    <div>
-            <label for="weight" style="color: black">User Weight</label>
-            <input type="text" name ="mb_weight" style="color: black"/><span style="color: black">KG</span>
-        </div>
-    <div>
-        <label for="weight" style="color: black">Preference</label>
-        <input type = 'checkbox' name = 'preference' value=lovely style="color: black"> <span style="color: black">Lovely</span>
-        <input type = 'checkbox' name = 'preference' value=chic style="color: black"> <span style="color: black">Chic</span>
-        <input type = 'checkbox' name = 'preference' value=office style="color: black"> <span style="color: black">Office</span>
-        <input type = 'checkbox' name = 'preference' value=street style="color: black"> <span style="color: black"Street</span>
-        <input type = 'checkbox' name = 'preference' value=dandy style="color: black"> <span style="color: black">Dandy</span>
-            </div>  
-    <div>
-        <label for="gender" style="color: black">Gender</label>
-        <input type = "radio" name = "gender" value="M" checked style="color: black" ><span  style="color: black"> Man</span>
-        <input type = "radio" name = "gender" value="W" style="color: black" > <span  style="color: black">Woman</span>
-            </div>
-    <input type="button" value="Sign Up" onclick="final_check()" />
-    <input type="reset" value="Reset">
-
-    <a class="close" href="#close"></a>
-</form>
-</div>
-<!-------------------------------------------------------------------------->
+    
   <input type="text" value="" class="keyboardInput">
 
 <div class="shopRank">
@@ -367,17 +294,6 @@
     <div class="tab3_content">
             <table class="tbl_type" border="1" cellspacing="0" summary="쇼핑몰순위목록">
                     <caption>쇼핑몰 인기검색어 순위</caption>
-                    <colgroup>
-                    <col width="10%">
-                    <col>
-                    <col width="10%">
-                    <col width="10%">
-                    <col width="10%">
-                    <col width="10%">
-                    <col width="10%">
-                    <col width="10%">
-                    </colgroup>
-                
                     <thead>
                     <tr>
                     <th abbr=순위 scope="col">순위</th>
@@ -475,51 +391,9 @@
 
     </div>
 
-
+    <script src="/javascript/dateTime.js"></script>
   </body>
 
-
-  <script type="text/javascript">
-
-    function printClock() {
-    
-    var clock = document.getElementById("clock");            // 출력할 장소 선택
-    var currentDate = new Date();                                     // 현재시간
-    var calendar = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate() // 현재 날짜
-    var amPm = 'AM'; // 초기값 AM
-    var currentHours = addZeros(currentDate.getHours(),2); 
-    var currentMinute = addZeros(currentDate.getMinutes() ,2);
-    var currentSeconds =  addZeros(currentDate.getSeconds(),2);
-    
-    if(currentHours >= 12){          // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
-        amPm = 'PM';
-        currentHours = addZeros(currentHours - 12,2);
-    }
-    
-    if(currentSeconds >= 50){               // 50초 이상일 때 색을 변환해 준다.
-       currentSeconds = '<span style="color:#de1951;">'+currentSeconds+'</span>'
-    }
-    clock.innerHTML = currentHours+" : "+currentMinute+" : "+currentSeconds +" <span style='font-size:40px;'>"+ amPm+"</span>"; //날짜를 출력해 줌
-    setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
-    }
-    
-    function addZeros(num, digit) { // 자릿수 맞춰주기
-      var zero = '';
-      num = num.toString();
-      if (num.length < digit) {
-        for (i = 0; i < digit - num.length; i++) {
-          zero += '0';
-        }
-      }
-      return zero + num;
-    }
-        var d = new Date();
-        var currentDate = d.getFullYear() + "년 " + ( d.getMonth() + 1 ) + "월 " + d.getDate() + "일";
-        var result = document.getElementById("time-result");
-        result.innerHTML = currentDate ;
-    //    result.style.fontSize="50px";
-
-    </script>
 
 
 </html>
