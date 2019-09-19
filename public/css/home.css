@@ -511,6 +511,10 @@ a .i1 {
   width: 42px;
   height: 42px;
   display: inline-block;
+<<<<<<< HEAD
+=======
+  float: left;
+>>>>>>> 74204af234ed751b8e391affdf8965f7f57a769b
   overflow: hidden;
   line-height: 40px;
 }
