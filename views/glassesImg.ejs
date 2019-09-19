@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="/css/nf.lightbox.css"
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+    />
+
+    <script src="/Gscripts/jquery-1.4.4.min.js"></script>
+    <script src="/Gscripts/NFLightBox.js"></script>
+
+    <link rel="stylesheet" href="/css/partial/slidingMenu.css" />
+    
+    <script type="text/javascript">
+$(function() {
+        var settings = { containerResizeSpeed: 350 };
+        $("#gallery a").lightBox(settings);
+      });
+    </script>
+
+
+    <title>Glasses Gallery</title>
+
+
+  </head>
+
+  <body>
+
+    <% include ./partial/slidingMenu %>
+
+
+      <div id="mainContent">
+      
+            <h1>스마트 안경 갤러리</h1>
+    <div id="gallery">
+      <ul>
+          <% for(let i=0; i<recData.length; i++) { %>
+              <li>
+                  <a href="<%=recData[i].gImg%>" title="카테고리:<%=recData[i].gCategorize%> <br>
+                    패턴:<%=recData[i].pattern%><br>
+                    종류: <%=recData[i].gtype  %>  스타일:<%=recData[i].gstyle   %><br>   
+                    길이:<%=recData[i].glength%>">
+                    <img src="<%=recData[i].gImg%>" alt="" />
+                  </a>
+              </li>
+            <%}%>
+
+      </ul>
+    </div>
+
+  </div> <!--여기까지 메뉴바 mainContent-->
+  </body>
+
+</html>

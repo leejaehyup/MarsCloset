@@ -1,0 +1,60 @@
+body {
+  position: absolute;
+  width: 1250px;
+  height: 2000px;
+  background: black;
+  color: white;
+}
+
+#saveDBbutton {
+  position: absolute;
+  top: 640px;
+  left: 760px;
+  font-size: 25px;
+}
+
+button {
+  position: absolute;
+  border: 2px solid #f75858;
+  color: white;
+  background: none;
+  background-color: none;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  font-family: "Nanum Myeongjo", serif;
+  font-weight: bold;
+}
+
+button:hover {
+  background: rgb(255, 255, 255);
+  color: #000;
+  box-shadow: 8px 8px 8px rgba(255, 92, 92, 0.466);
+  transform: translateY(-3px);
+}
+
+#image {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 900px;
+  height: 700px;
+  border: 1px solid rgb(78, 78, 78);
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 0 0 2px 1px rgba(0, 37, 116, 0.644);
+
+  -webkit-transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  transform: scaleX(-1);
+
+  filter: FlipH;
+  -ms-filter: "FlipH";
+}
+#TagNumber {
+  position: absolute;
+  top: 720px;
+  left: 25px;
+  font-size: 50px;
+}

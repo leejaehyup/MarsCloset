@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+      <meta charset="utf-8">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="/javascript/homeSerial.js"></script>
+    <script type="text/javascript" src="/javascript/weather.js"></script>
+    <link rel="stylesheet" href="/css/home.css" /> 
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Nanum+Gothic+Coding|Nanum+Myeongjo|Noto+Serif+KR&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+   
+    <script src="/javascript/keyboard.js"></script>
+    <link rel="stylesheet" href="/css/partial/keyboard.css" /> 
+
+    <link rel="stylesheet" href="/css/partial/dateTime.css" /> 
+    <link rel="stylesheet" href="/css/partial/weather.css" /> 
+    
+    <title><%=title %></title>
+
+
+
+  </head>
+
+  <body onload="printClock()">
+      <div class="dateTime">
+          <div id="time-result">
+          </div>
+                  <div id="clock" >
+                  </div>
+      </div>
+
+
+  <div class="greet">
+      <p style="font-size: 80px;">안녕하세요, 마스님!</p>
+      오늘도 좋은 하루 보내세요😊
+  </div>
+
+  <img id="weather-Image" />
+  <div class="weather-js"></div>
+  <div class="temp"></div>
+  <div class="index_margin"></div>
+
+
+  <div class="jzdbox1 jzdbasf jzdcal">
+
+    <div class="jzdcalt">August 2019</div>
+    
+    <span>Su</span>
+    <span>Mo</span>
+    <span>Tu</span>
+    <span>We</span>
+    <span>Th</span>
+    <span>Fr</span>
+    <span>Sa</span>
+    
+    
+    <span class="jzdb"><!--BLANK--></span>
+    <span class="jzdb"><!--BLANK--></span>
+    <span class="jzdb"><!--BLANK--></span>
+    <span class="jzdb"><!--BLANK--></span>
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+    <span class="circle" data-title="MARS 졸업작품회의">4</span>
+    <span>5</span>
+    <span>6</span>
+    <span>7</span>
+    <span>8</span>
+    <span>9</span>
+    <span>10</span>
+    <span>11</span>
+    <span class="circle" data-title="MARS 세미나">12</span>
+    <span>13</span>
+    <span>14</span>
+    <span class="holiday" data-title="광복절">15</span>
+    <span>16</span>
+    <span>17</span>
+    <span>18</span>
+    <span>19</span>
+    <span class="circle" data-title="졸작 1차 심사">20</span>
+    <span>21</span>
+    <span>22</span>
+    <span>23</span>
+    <span>24</span>
+    <span>25</span>
+    <span>26</span>
+    <span>27</span>
+    <span>28</span>
+    <span>29</span>
+    <span>30</span>
+    <span>31</span>
+    <span class="jzdb"><!--BLANK--></span>
+    <span class="jzdb"><!--BLANK--></span>
+    <span class="jzdb"><!--BLANK--></span>
+    <span class="jzdb"><!--BLANK--></span>
+    <span class="jzdb"><!--BLANK--></span>
+    <span class="jzdb"><!--BLANK--></span>
+    <span class="jzdb"><!--BLANK--></span>
+    </div>
+
+
+        <form action="test" >
+            <input type="submit" class="test"/><p id="tt">옷 등록</p>
+        </form>
+
+
+        <!--메뉴ver2-->
+        <div class="menu borderXwidth">
+            <a href="#">MAIN</a>
+            <a href="closet">CLOSET</a>
+            <a href="coordi">CODI</a>
+            <a href="glassesImg">WISH LIST</a>
+          </div>
+
+  
+    
+  <input type="text" value="" class="keyboardInput">
+
+<div class="shopRank">
+
+  <div id="css_tabs">
+    <input id="tab1" type="radio" name="tab" checked="checked" />
+    <input id="tab2" type="radio" name="tab" />
+    <input id="tab3" type="radio" name="tab" />
+    <label for="tab1">여성 쇼핑몰</label>
+    <label for="tab2">남성 쇼핑몰</label>
+    <label for="tab3">쇼핑몰 인기 검색어</label>
+
+    <div class="tab1_content">
+            <main class="grid">
+                    <article>
+                            <img src="/icons/Wshop1.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>1위<br><%=name2[0]%></h3>
+                                <p>조회수 <%=click2[0]%></p>
+                                <div class="btGO"><div class="eff"></div> <a href="<%=shopping2[0]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="/icons/Wshop2.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>2위<br><%=name2[1]%></h3>
+                                <p>조회수 <%=click2[1]%></p>
+                                <div class="btGO"><div class="eff"></div> <a href="<%=shopping2[1]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="/icons/Wshop3.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>3위<br><%=name2[2]%></h3>
+                                <p>조회수 <%=click2[2]%></p> 
+                                <div class="btGO"><div class="eff"></div> <a href="<%=shopping2[2]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="/icons/Wshop4.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>4위<br><%=name2[3]%></h3>
+                                <p>조회수 <%=click2[3]%></p>
+                                <div class="btGO"><div class="eff"></div> <a href="<%=shopping2[3]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="/icons/Wshop5.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>5위<br><%=name2[4]%></h3>
+                                <p>조회수 <%=click2[4]%></p> 
+                                <div class="btGO"><div class="eff"></div> <a href="<%=shopping2[4]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="/icons/Wshop6.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>6위<br><%=name2[5]%></h3>
+                                <p>조회수 <%=click2[5]%></p> 
+                                <div class="btGO"><div class="eff"></div> <a href="<%=shopping2[5]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="/icons/Wshop7.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>7위<br><%=name2[6]%></h3>
+                                <p>조회수 <%=click2[6]%></p>
+                                <div class="btGO"><div class="eff"></div> <a href="<%=shopping2[6]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="/icons/Wshop8.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>8위<br><%=name2[7]%></h3>
+                                <p>조회수 <%=click2[7]%></p> 
+                                <div class="btGO"><div class="eff"></div> <a href="<%=shopping2[7]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="/icons/Wshop9.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>9위<br><%=name2[8]%></h3>
+                                <p>조회수 <%=click2[8]%></p> 
+                                <div class="btGO"><div class="eff"></div> <a href="<%=shopping2[8]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+
+
+                  </main>
+        
+
+    </div>
+<!--남성쇼핑몰 순위-->
+      <div class="tab2_content">
+
+            <main class="grid">
+                    <article>
+                            <img src="/icons/Mshop1.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>1위<br><%=name[0]%></h3>
+                                <p>조회수 <%=click[0]%></p>
+                                <div class="btGOM"><div class="effM"></div> <a href="<%=shopping[0]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="/icons/Mshop2.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>2위<br><%=name[1]%></h3>
+                                <p>조회수 <%=click[1]%></p>
+                                <div class="btGOM"><div class="effM"></div> <a href="<%=shopping[1]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="/icons/Mshop3.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>3위<br><%=name[2]%></h3>
+                                <p>조회수 <%=click[2]%></p> 
+                                <div class="btGOM"><div class="effM"></div> <a href="<%=shopping[2]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="/icons/Mshop4.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>4위<br><%=name[3]%></h3>
+                                <p>조회수 <%=click[3]%></p>
+                                <div class="btGOM"><div class="effM"></div> <a href="<%=shopping[3]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="/icons/Mshop5.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>5위<br><%=name[4]%></h3>
+                                <p>조회수 <%=click[4]%></p> 
+                                <div class="btGOM"><div class="effM"></div> <a href="<%=shopping[4]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="/icons/Mshop6.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>6위<br><%=name[5]%></h3>
+                                <p>조회수 <%=click[5]%></p> 
+                                <div class="btGOM"><div class="effM"></div> <a href="<%=shopping[5]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="/icons/Mshop7.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>7위<br><%=name[6]%></h3>
+                                <p>조회수 <%=click[6]%></p>
+                                <div class="btGOM"><div class="effM"></div> <a href="<%=shopping[6]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="/icons/Mshop8.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>8위<br><%=name[7]%></h3>
+                                <p>조회수 <%=click[7]%></p> 
+                                <div class="btGOM"><div class="effM"></div> <a href="<%=shopping[7]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+                        <article>
+                            <img src="/icons/Mshop9.jpg" alt="Sample photo">
+                            <div class="text">
+                                <h3>9위<br><%=name[8]%></h3>
+                                <p>조회수 <%=click[8]%></p> 
+                                <div class="btGOM"><div class="effM"></div> <a href="<%=shopping[8]%>"> 바로가기 </a>  </div>
+                            </div>
+                        </article>
+
+
+                  </main>
+        
+
+       </div>
+    <div class="tab3_content">
+            <table class="tbl_type" border="1" cellspacing="0" summary="쇼핑몰순위목록">
+                    <caption>쇼핑몰 인기검색어 순위</caption>
+
+                    <thead>
+                    <tr>
+                    <th abbr=순위 scope="col">순위</th>
+                    <th abbr=품목 scope="col">품목</th>
+                    <th scope="col">p</th>
+                    </tr>
+                    </thead>
+                
+                    <tbody>
+                    <tr>
+                    <td>1</td>
+                    <td><%=product[0]%></td>
+                    <td>102,981</td>
+                    </tr>
+                
+                   
+                
+                    <tr>
+                    <td class="ranking" scope="row">2</td>
+                    <td><%=product[1]%></td>
+                    <td>90,112</td>
+                    </tr>
+                
+                    <tr>
+                    <td class="ranking" scope="row">3</td>
+                    <td><%=product[2]%></td>
+                    <td>89,886</td>
+                
+                    </tr>
+                    <tr>
+                    <td class="ranking" scope="row">4</td>
+                    <td><%=product[3]%></td>
+                    <td>86,232</td>
+                    </tr>
+                
+                    <tr>
+                    <td class="ranking" scope="row">5</td>
+                    <td><%=product[4]%></td>
+                    <td>83,333</td>
+                    </tr>
+                
+                    <tr>
+                    <td class="ranking" scope="row">6</td>
+                    <td><%=product[5]%></td>
+                    <td>83,118</td>
+                    </tr>
+                
+                    <tr>
+                    <td class="ranking" scope="row">7</td>
+                    <td><%=product[6]%></td>
+                    <td>81,162</td>
+                    </tr>
+
+                    <tr>
+                    <td class="ranking" scope="row">8</td>
+                    <td><%=product[7]%></td>
+                    <td>55,201</td>
+                    </tr>
+                
+                    <tr>
+                    <td class="ranking" scope="row">9</td>
+                    <td><%=product[8]%></td>
+                    <td>35,967</td>
+                    </tr>
+
+                    <tr>
+                    <td class="ranking" scope="row">10</td>
+                    <td><%=product[9]%></td>
+                    <td>11,704</td>
+                    </tr>
+
+                    </tbody>
+                    </table>
+            
+    
+    </div>
+</div>
+
+</div>
+
+    <div class="container">
+        <input id="switch" type="checkbox" hidden>
+        <label for="switch" class="switch">
+           <h1 class="female">✝</h1>
+           <h1 class="male">➜</h1>
+        </label>
+
+     </div>
+
+
+
+
+    <div id="serialYes"></div>
+    <div id="serialImage">
+
+    </div>
+
+    <script src="/javascript/dateTime.js"></script>
+  </body>
+
+
+
+</html>

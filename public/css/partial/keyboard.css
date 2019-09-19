@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Gothic+A1|Nanum+Gothic|Nanum+Gothic+Coding|Nanum+Myeongjo|Noto+Sans+KR|Noto+Serif+KR&display=swap');
+
+
+/* 키보드 텍스트 입력상자*/
+.keyboardInput {
+    position: absolute;
+    top: 735px;
+    left: 100px;
+  }
+  
+  #keyboardInputInitiator0 {
+    width: 250px;
+    height: 40px;
+    font-size: 25px;
+  }
+  
+  #keyboardInputMaster {
+    position: absolute;
+    border: 2px groove #949494;
+    color: #ffffff;
+    background-color: #333333;
+    text-align: left;
+    z-index: 1000000;
+    width: 1000px;
+    height: 250px;
+  }
+  /* 키보드 밖 언어설정부분*/
+  #keyboardInputMaster thead tr th {
+    height: 50px;
+    text-align: left;
+    padding: 2px 5px 2px 4px;
+    background-color: inherit;
+    border: 0px none;
+  }
+  /* 언어선택 부분*/
+  #keyboardInputMaster thead tr th select,
+  #keyboardInputMaster thead tr th label {
+    width: 100px;
+    height: 50px;
+    color: #ff0000;
+    font: bold 20px Arial, sans-serif;
+    padding: 10px;
+  }
+  
+  /*clear,X 버튼 부분*/
+  #keyboardInputMaster thead tr td {
+    text-align: right;
+    padding: 2px 4px 2px 5px;
+    background-color: inherit;
+    border: 0px none;
+  }
+  /*clear,X 버튼*/
+  #keyboardInputMaster thead tr td span {
+    padding: 1px 4px;
+    font: bold 25px Arial, sans-serif;
+    border: 1px outset #aaaaaa;
+    background-color: #505050;
+    cursor: pointer;
+  }
+  #keyboardInputMaster thead tr td span.pressed {
+    border: 1px inset #999999;
+    background-color: #505050;
+  }
+  /*키보드 내부 테이블*/
+  #keyboardInputMaster tbody tr td {
+    text-align: left;
+    margin: 0px;
+    padding: 0px 4px 3px 4px;
+  }
+  #keyboardInputMaster tbody tr td div {
+    text-align: center;
+    position: relative;
+    height: 0px;
+  }
+  #keyboardInputMaster tbody tr td div#keyboardInputLayout {
+    height: auto;
+  }
+  /* 키보드 스페이스바 제외 4줄*/
+  #keyboardInputMaster tbody tr td div#keyboardInputLayout table {
+    height: 20px;
+    white-space: nowrap;
+    width: 1000px;
+    border-collapse: separate;
+  }
+  /* 키보드 스페이스바*/
+  #keyboardInputMaster
+    tbody
+    tr
+    td
+    div#keyboardInputLayout
+    table.keyboardInputCenter {
+    width: 800px;
+    margin: 0px auto;
+  }
+  /* 키보드 내부 문자 부분*/
+  #keyboardInputMaster tbody tr td div#keyboardInputLayout table tbody tr td {
+    vertical-align: middle;
+    padding: 0px 5px 0px 5px;
+    white-space: pre;
+    font: normal 40px "Times New Roman", Times, serif;
+    border-top: 1px solid #e5e5e5;
+    border-right: 1px solid #5d5d5d;
+    border-bottom: 1px solid #5d5d5d;
+    border-left: 1px solid #e5e5e5;
+    background-color: rgb(129, 129, 129);
+    height: 100px;
+    cursor: copy;
+  }
+  #keyboardInputMaster
+    tbody
+    tr
+    td
+    div#keyboardInputLayout
+    table
+    tbody
+    tr
+    td.last {
+    width: 15%;
+  }
+  #keyboardInputMaster
+    tbody
+    tr
+    td
+    div#keyboardInputLayout
+    table
+    tbody
+    tr
+    td.alive {
+    background-color: rgba(214, 169, 255, 0.904);
+  }
+  #keyboardInputMaster
+    tbody
+    tr
+    td
+    div#keyboardInputLayout
+    table
+    tbody
+    tr
+    td.target {
+    background-color: rgba(214, 169, 255, 0.904);
+  }
+  #keyboardInputMaster
+    tbody
+    tr
+    td
+    div#keyboardInputLayout
+    table
+    tbody
+    tr
+    td.hover {
+    border-top: 1px solid #d5d5d5;
+    border-right: 1px solid #555555;
+    border-bottom: 1px solid #555555;
+    border-left: 1px solid #d5d5d5;
+    background-color: #504f4f;
+  }
+  #keyboardInputMaster
+    tbody
+    tr
+    td
+    div#keyboardInputLayout
+    table
+    tbody
+    tr
+    td.pressed,
+  #keyboardInputMaster
+    tbody
+    tr
+    td
+    div#keyboardInputLayout
+    table
+    tbody
+    tr
+    td.dead {
+    border-top: 1px solid #555555;
+    border-right: 1px solid #d5d5d5;
+    border-bottom: 1px solid #d5d5d5;
+    border-left: 1px solid #555555;
+    background-color: #cccccc;
+  }
+  /*키보드 밑바닥 버전 안 보이게 설정함*/
+  #keyboardInputMaster tbody tr td div var {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    font: bold italic 11px Arial, sans-serif;
+    display: none;
+  }
+  
+  /*키보드 아이콘*/
+  .keyboardInputInitiator {
+    position: absolute;
+    top: 737px;
+    left: 380px;
+    width: 90px;
+    height: 40px;
+    margin-left: 3px;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  
