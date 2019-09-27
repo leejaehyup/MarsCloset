@@ -31,9 +31,8 @@ body {
   .todayCD{
     position: absolute;
     top: 100px; left: 380px;
-
     width: 250px; height: 500px;
-    font-family: 'Noto Serif KR', serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-size: 20px;
       border: 3px dashed #ffffff;
       padding: 50px;
@@ -42,14 +41,11 @@ body {
   }
 
 
-
-
 .button_base {
 
     margin: 0;
     border: 0;
-    font-size: 18px;
-
+    font-size: 20px;
     margin-top: -25px;
     margin-left: -100px;
     width: 150px;

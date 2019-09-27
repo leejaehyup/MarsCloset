@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
 	return sequelize.define('gimg_analysis', {
 		gimgNum: {
 			type: DataTypes.INTEGER(11),
-			allowNull: false,
+			allowNull: true,
 			defaultValue: '0'
 		},
 		gImg: {

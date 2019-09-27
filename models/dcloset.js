@@ -51,9 +51,9 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING(45),
 			allowNull: true
 		},
-		style: {
+		season: {
 			type: DataTypes.STRING(45),
-			allowNull: true
+			allowNull: false
 		}
 	}, {
 		tableName: 'dcloset',

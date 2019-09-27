@@ -11,191 +11,47 @@
 
     <script src="/Gscripts/jquery-1.4.4.min.js"></script>
     <script src="/Gscripts/NFLightBox.js"></script>
-    <title>Glasses Gallery</title>
-  </head>
-  <body>
-      <button onclick="goBack()" class="btBack">&nbsp;&lt;&nbsp;</button>
+
+    <link rel="stylesheet" href="/css/partial/slidingMenu.css" />
+    
     <script type="text/javascript">
-      $(function() {
+$(function() {
         var settings = { containerResizeSpeed: 350 };
         $("#gallery a").lightBox(settings);
       });
-      
-      function goBack() {
-        window.history.back();
-      } // 뒤로가기버튼 추가 
     </script>
-<h1>스마트 안경 갤러리</h1>
+
+
+    <title>Glasses Gallery</title>
+
+
+  </head>
+
+  <body>
+
+    <% include ./partial/slidingMenu %>
+
+
+      <div id="mainContent">
+      
+            <h1>스마트 안경 갤러리</h1>
     <div id="gallery">
       <ul>
           <% for(let i=0; i<recData.length; i++) { %>
               <li>
-                  <a href="<%=recData[i].gImg%>" title="카테고리:<%=recData[i].gCategorize%>  패턴:<%=recData[i].pattern%>  종류:
-                    <%=recData[i].gtype  %>  스타일:<%=recData[i].gstyle   %>   길이:<%=recData[i].glength%>">
+                  <a href="<%=recData[i].gImg%>" title="카테고리:<%=recData[i].gCategorize%> <br>
+                    패턴:<%=recData[i].pattern%><br>
+                    종류: <%=recData[i].gtype  %>  스타일:<%=recData[i].gstyle   %><br>   
+                    길이:<%=recData[i].glength%>">
                     <img src="<%=recData[i].gImg%>" alt="" />
                   </a>
               </li>
             <%}%>
-      <!--
-        <li>
-          <a href="/Gphotos/01.jpg" title="여기에 옷 정보">
-            <img src="/Gphotos/t01.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/02.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t02.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/03.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t03.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/04.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t04.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/05.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t05.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/06.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t06.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/07.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t07.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/08.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t08.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/09.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t09.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/10.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t10.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/11.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t11.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/12.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t12.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/13.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t13.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/14.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t14.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/15.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t15.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/16.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t16.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/17.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t17.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/18.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t18.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="Gphotos/19.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="Gphotos/t19.jpg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a
-            href="/Gphotos/20.jpg"
-            title="Add title to show image name or description"
-          >
-            <img src="/Gphotos/t20.jpg" alt="" />
-          </a>
-        </li>
-        -->
+
       </ul>
     </div>
+
+  </div> <!--여기까지 메뉴바 mainContent-->
   </body>
+
 </html>

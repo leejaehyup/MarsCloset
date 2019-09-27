@@ -5,32 +5,19 @@ body {
   width: 1200px;
   height: 1920px;
   background: black;
-  color: #fc5c00;
+  color: #ff9494;
+
 }
 
 h1 {
+  position: absolute;
+  top: 5px;
+  left: 100px;
   font-family: "Gothic A1", sans-serif;
   text-align: center;
   color: #fae9bc;
 }
 
-/*뒤로가기버튼*/
-.btBack {
-  position: absolute;
-  top: 100px;
-  right: 60px;
-  font-size: 100px;
-  background: none;
-  color: #ffffff;
-  border-radius: 50%;
-  padding: 0px;
-  border: 1px solid #ffffff;
-  cursor: pointer;
-}
-.btBack:hover {
-  color: #f16b6f;
-  box-shadow: 3px 3px 3px 3px rgba(253, 59, 59, 0.404);
-}
 #jquery-overlay {
   position: absolute;
   top: 0;
@@ -160,7 +147,9 @@ h1 {
   float: left;
   text-align: left;
 }
+/*이미지 설명 캡션*/
 #lightbox-image-details-caption {
+  color: #ff9955;
   font-weight: bold;
   display: block;
   padding: 10px;
@@ -168,21 +157,12 @@ h1 {
   line-height: 25px;
   vertical-align: middle;
 }
-#lightbox-image-details-currentNumber {
-  display: block;
-  clear: left;
-  padding-bottom: 1em;
-  display: inline;
-  height: 16px;
-  line-height: 16px;
-  vertical-align: middle;
-}
 #lightbox-image-details-previous-image,
 #lightbox-image-details-previous-text,
 #lightbox-image-details-next-image,
 #lightbox-image-details-next-text {
   display: inline;
-  height: 100px;
+  height: 200px;
   line-height: 25px;
   vertical-align: middle;
   cursor: pointer;
