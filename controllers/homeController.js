@@ -4,9 +4,11 @@ const cheerio = require("cheerio");
 const iconv = require("iconv-lite");
 const clothes = require("../models").dcloset;
 const sharp = require("sharp"); //이미지 조절
+const calender = require("../models").calender;
 portSerial.serial();
 
 exports.coordi = async (req, res) => {
+  
   let top = await clothes.findAll({
     where: {
       status: 1,
@@ -315,14 +317,5 @@ exports.savePostHome = async (req, res) => {
 };
 
 exports.example = async (req, res) => {
-  try {
-    console.log(clothes);
-    let wow = await clothes.findAll({});
-    res.render("example", {data: wow});
-    console.log(wow[0].id);
-  } catch (err) {
-    console.log(err);
-    res.status(400);
-  }
-  console.log(wow);
+  res.render("example");
 };

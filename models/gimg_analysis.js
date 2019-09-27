@@ -38,6 +38,11 @@ module.exports = function(sequelize, DataTypes) {
 		userID: {
 			type: DataTypes.STRING(20),
 			allowNull: true
+		},
+		id: {
+			type: DataTypes.INTEGER(11),
+			allowNull: false,
+			primaryKey: true
 		}
 	}, {
 		tableName: 'gimg_analysis',
