@@ -3,10 +3,18 @@ const request = require("request");
 const cheerio = require("cheerio");
 const iconv = require("iconv-lite");
 const clothes = require("../models").dcloset;
+
 const sharp = require("sharp"); //이미지 조절
 const axios = require("axios");
 
 portSerial.serial();
+
+exports.exam = async (req, res) => {
+  let bottom = await clothes.findAll({
+    where: {status: 1, category: "bottom"}
+  });
+  res.json(bottom);
+};
 
 exports.coordi = async (req, res) => {
   let top = await clothes.findAll({
@@ -177,6 +185,7 @@ exports.kakaoImage = async (req, res) => {
 
     var userUploadedImagePath =
       userUploadedFeedMessagesLocation + tag + "." + imageTypeDetected[1];
+    /*
     try {
       sharp(imageBuffer.data)
         .resize(400, 300)
@@ -188,6 +197,25 @@ exports.kakaoImage = async (req, res) => {
     } catch (err) {
       console.log(err);
     }
+
+
+    *.
+    // Save decoded binary image to disk
+    /*
+    try {
+      require("fs").writeFile(userUploadedImagePath, imageBuffer.data, function(
+        err
+      ) {
+        if (err) throw err;
+        console.log(
+          "DEBUG - feed:message: Saved to disk image attached by user:",
+          userUploadedImagePath
+        );
+      });
+    } catch (error) {
+      console.log("ERROR:", error);
+    }
+    */
   } catch (error) {
     console.log("ERROR:", error);
   }

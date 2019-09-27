@@ -7,6 +7,7 @@ globalRouter.get(routes.home, homeController.home); //get방식 라우터 설정
 globalRouter.post(routes.home, homeController.savePostHome); //upload.multer,
 globalRouter.get(routes.coordi, homeController.coordi);
 
+globalRouter.get("/exam",homeController.exam);
 globalRouter.get(routes.test, homeController.test);
 
 globalRouter.post("/saveImage", homeController.saveImage);
