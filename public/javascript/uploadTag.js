@@ -36,7 +36,7 @@ function saveDB() {
   var form = document.createElement("form");
   form.setAttribute("charset", "UTF-8");
   form.setAttribute("method", "Post"); //Post 방식
-  form.setAttribute("action", "/saveImage"); //요청 보낼 주소
+  form.setAttribute("action", "/kakaoImg"); //요청 보낼 주소
   var hiddenField = document.createElement("input");
   hiddenField.setAttribute("type", "hidden");
   hiddenField.setAttribute("name", "image");
