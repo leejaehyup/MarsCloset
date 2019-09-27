@@ -3,8 +3,15 @@ const request = require("request");
 const cheerio = require("cheerio");
 const iconv = require("iconv-lite");
 const clothes = require("../models").dcloset;
-const sharp = require("sharp"); //이미지 조절
+
 portSerial.serial();
+
+exports.exam = async(req,res)=>{
+  let bottom = await clothes.findAll({
+    where: {status: 1, category: "bottom"}
+  });
+  res.json(bottom);
+}
 
 exports.coordi = async (req, res) => {
   let top = await clothes.findAll({
@@ -61,7 +68,7 @@ exports.home = (req, res) => {
       arr_link[i] = rank_text;
       i++;
     });
-    i = 0;
+    i = 0; 
     $(".mw_basic_list_click").each(function() {
       var rank = $(this);
       rank_text = rank.text();
@@ -186,6 +193,7 @@ exports.saveImage = async (req, res) => {
 
     var userUploadedImagePath =
       userUploadedFeedMessagesLocation + tag + "." + imageTypeDetected[1];
+      /*
     try {
       sharp(imageBuffer.data)
         .resize(400, 300)
@@ -197,6 +205,7 @@ exports.saveImage = async (req, res) => {
     } catch (err) {
       console.log(err);
     }
+    *.
     // Save decoded binary image to disk
     /*
     try {
