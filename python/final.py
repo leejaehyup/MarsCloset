@@ -1,10 +1,11 @@
 import pymysql.cursors
 from random import randint
 import vm
+import json
 
 # MySQL Connection 연결
-conn = pymysql.connect(host='localhost',port=3306, user='root',
-                       passwd='apmsetup', db='Closet', charset='utf8')
+conn = pymysql.connect(host='localhost',port=3306, user='user',
+                       passwd='pass', db='Closet', charset='utf8')
 
 # Connection 으로부터 Cursor 생성
 curs = conn.cursor()
@@ -43,7 +44,7 @@ for row in range(0, len(pre)):
     curs.execute(head + sqlB + clothes_season)
     Bottom = curs.fetchall()
 
-    for i in range(0, 10):
+    for i in range(0, 20):
         Tnum = randint(0, len(Top)-1)
         Bnum = randint(0, len(Bottom)-1)
 
@@ -53,13 +54,18 @@ for row in range(0, len(pre)):
         print(Bottom[Bnum])
 	
 
+
 #정렬
 savedata.sort(key=lambda savedata: savedata[0], reverse=True)
 #print("정렬값: ", savedata)
 #print(len(savedata))
 
+final_result=[]
 #상위 5개 값
-print(savedata[0:5])
+for i in range(0,5):
+    j = json.dumps({'Top' : savedata[i][1], 'Bottom' : savedata[i][2]})
+    final_result.append(j)
+
 
 #connection 닫기
 conn.close()
