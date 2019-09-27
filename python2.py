@@ -11,14 +11,20 @@ import matplotlib.pyplot as plt
 import io 
 import tkinter
 import numpy as np
+import automl_analysis
 import cv2 as cv
 import os
+import threading
 #pip install opencv-python
 
-
-
+'''
+automl_analysis.pre(image_url, name)
+'''
 imagePath = sys.argv[1]
 tag = sys.argv[2]
+kakaoTitle = sys.argv[3]
+Thread = threading.Thread(target=automl_analysis.pre, args=(imagePath, kakaoTitle))
+Thread.start()
 
 class App():
     BLUE = [255,0,0]        # rectangle color
@@ -256,6 +262,7 @@ if __name__ == '__main__':
     window=tkinter.Tk()
     window.title("YUN DAE HEE")
     window.geometry("{0}x{1}+0+0".format(window.winfo_screenwidth(), window.winfo_screenheight()))
+    window.attributes("-topmost", True)
     #window.overrideredirect(True)
     App(window)
     window.mainloop()
@@ -264,107 +271,5 @@ if __name__ == '__main__':
     cv.destroyAllWindows()
 
 
-
-
-
-img = cv.imread('public/upload/python/'+tag+".png",cv.IMREAD_UNCHANGED)
-
-data = np.reshape(img, (-1,3))
-data = np.float32(data)
-
-criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 10, 1.0)
-flags = cv.KMEANS_RANDOM_CENTERS
-compactness,labels,centers = cv.kmeans(data,1,None,criteria,10,flags)
-print('bgr({})'.format(centers[0].astype(np.int32)))
-
-
-
-API_URL = 'https://kapi.kakao.com/v1/vision/product/detect'
-MYAPP_KEY = os.environ['KAKAO_API_KEY']
-
-def detect_product(filename):
-    headers = {'Authorization': 'KakaoAK {}'.format(MYAPP_KEY)}
-
-    try:
-        files = { 'file' : open(filename, 'rb')}
-        resp = requests.post(API_URL, headers=headers, files=files)
-        resp.raise_for_status()
-        return resp.json()
-    except Exception as e:
-        print(str(e))
-        sys.exit(0)
-
-def show_products(filename, detection_result):
-    try:
-        #image_resp = requests.get(filename)
-        #image_resp.raise_for_status()
-        #file_jpgdata = BytesIO(image_resp.content)
-        image = Image.open(filename)
-        
-    except Exception as e:
-        print(str(e))
-        sys.exit(0)
-
-
-    draw = ImageDraw.Draw(image)
-    for val in detection_result.values():
-        if 'objects' in val:
-            state = True
-        else:
-            state = False
-    #for val in detection_result.values():
-     #   if val['objects'] is None:
-      #      state = False
-       # else:
-        #    state = True
-
-    if(state == True):
-        for obj in detection_result['result']['objects']:
-            global x1,y1,x2,y2
-            x1 = int(obj['x1']*image.width)
-            y1 = int(obj['y1']*image.height)
-            x2 = int(obj['x2']*image.width)
-            y2 = int(obj['y2']*image.height)
-            draw.rectangle([(x1,y1), (x2, y2)], fill=None, outline=(255,0,0,255))
-            draw.text((x1+5,y1+5), obj['class'], (255,0,0))
-            area=(x1,y1,x2,y2)
-            #print(x1)
-            #print(y1)
-            #print(x2)
-            #print(y2)
-            print(obj['class'])
-            img = cv.imread(imagePath)
-            crop_img = img[y1:y2, x1:x2]
-            cv.imwrite('public/upload/kakao/'+tag+".png", crop_img)
-            global kakaoPath
-            kakaoPath = "public/upload/kakao/"+tag+".png"
-            #crop_img = image.crop(area) 
-            #b = io.BytesIO()
-        
-            #crop_img.save(b, format="PNG") 
-            #crop_img.save("public/upload/kakao/"+tag+".png") 
-
-    else:
-        print("not clothes")
-
-    del draw
-
-    return image
-
-if __name__ == "__main__":
-   # parser = argparse.ArgumentParser(description='Detect Products.')
-   # parser.add_argument('image_file', type=str, nargs='?',
-    #    default=imagePath,
-     #   help='image file to show product\'s rect')
-
-    #args = parser.parse_args()
-    imagePath =sys.argv[1]
-    detection_result = detect_product(imagePath)
-    image = show_products(imagePath, detection_result)
-    #image.show()
-
-
-
-
-#print(str(results))
+#Thread.join()
 sys.stdout.flush()

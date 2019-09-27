@@ -4,6 +4,8 @@ const cheerio = require("cheerio");
 const iconv = require("iconv-lite");
 const clothes = require("../models").dcloset;
 const sharp = require("sharp"); //이미지 조절
+const axios = require("axios");
+
 portSerial.serial();
 
 exports.coordi = async (req, res) => {
@@ -144,7 +146,7 @@ exports.home = (req, res) => {
   });
 };
 
-exports.saveImage = async (req, res) => {
+exports.kakaoImage = async (req, res) => {
   let tag = req.body.tag;
   let img = req.body.image;
   try {
@@ -166,22 +168,11 @@ exports.saveImage = async (req, res) => {
     // This regular image extracts the "jpeg" from "image/jpeg"
     var imageTypeRegularExpression = /\/(.*?)$/;
 
-    // Generate random string
-    var crypto = require("crypto");
-    var seed = crypto.randomBytes(20);
-    var uniqueSHA1String = crypto
-      .createHash("sha1")
-      .update(seed)
-      .digest("hex");
-
     var base64Data = img;
 
     var imageBuffer = decodeBase64Image(base64Data);
     var userUploadedFeedMessagesLocation = "public/upload/image/";
 
-    var uniqueRandomImageName = "image-" + uniqueSHA1String;
-    // This variable is actually an array which has 5 values,
-    // The [1] value is the real image extension
     var imageTypeDetected = imageBuffer.type.match(imageTypeRegularExpression);
 
     var userUploadedImagePath =
@@ -197,49 +188,63 @@ exports.saveImage = async (req, res) => {
     } catch (err) {
       console.log(err);
     }
-    // Save decoded binary image to disk
-    /*
-    try {
-      require("fs").writeFile(userUploadedImagePath, imageBuffer.data, function(
-        err
-      ) {
-        if (err) throw err;
-        console.log(
-          "DEBUG - feed:message: Saved to disk image attached by user:",
-          userUploadedImagePath
-        );
-      });
-    } catch (error) {
-      console.log("ERROR:", error);
-    }
-    */
   } catch (error) {
     console.log("ERROR:", error);
   }
-
   const {PythonShell} = require("python-shell");
-  let options = {
+  let kakao = [];
+  let kakaoOptions = {
     mode: "text",
     pythonPath: "",
     pythonOptions: ["-u"], // get print results in real-time
     scriptPath: "",
     args: [userUploadedImagePath, tag]
   };
-  PythonShell.run("python2.py", options, async function(err, results) {
+  PythonShell.run("kakao_vision.py", kakaoOptions, async function(
+    err,
+    results
+  ) {
+    if (err) throw err;
+    for (let i = 0; i < results.length; i++) {
+      kakao[i] = results[i];
+      console.log(results[i]);
+    }
+    res.render("kakaoImg", {kakao: kakao, tag: tag});
+  });
+};
+
+exports.saveImage = async (req, res) => {
+  let kakaoTitle = req.body.kakaoTitle.trim();
+  let kakaopath = "public/" + req.body.kakaopath;
+  let tag = req.body.tag;
+  console.log(kakaopath);
+
+  const {PythonShell} = require("python-shell");
+
+  let cutOptions = {
+    mode: "text",
+    pythonPath: "",
+    pythonOptions: ["-u"], // get print results in real-time
+    scriptPath: "",
+    args: [kakaopath, tag, kakaoTitle]
+  };
+  PythonShell.run("python2.py", cutOptions, async function(err, results) {
     if (err) throw err;
     for (let i = 0; i < results.length; i++) {
       console.log(results[i]);
     }
-    try {
-    } catch (err) {
-      console.log(err);
-    } finally {
-      res.render("saveImage", {
-        tag: tag,
-        clotheType: results[1],
-        clotheColor: results[0]
-      });
-    }
+    let clotheDataString = results[0].replace(/'/g, '"');
+    let clotheDataJson = JSON.parse(clotheDataString);
+    res.render("saveImage", {
+      tag: tag,
+      clotheCategory: clotheDataJson.category,
+      clotheType: clotheDataJson.type,
+      clotheSubclass: clotheDataJson.subclass,
+      clothePattern: clotheDataJson.pattern,
+      clotheStyle: clotheDataJson.style,
+      clotheLength: clotheDataJson.length,
+      clotheColor: ""
+    });
   });
 };
 
@@ -315,14 +320,17 @@ exports.savePostHome = async (req, res) => {
 };
 
 exports.example = async (req, res) => {
+  /*
+  const data = req.body;
+  console.log(data);
+  res.send("success");
+*/
+
   try {
-    console.log(clothes);
-    let wow = await clothes.findAll({});
-    res.render("example", {data: wow});
-    console.log(wow[0].id);
+    const data = await axios.get("http://192.168.0.48/LED");
+    console.log(data.data.trim());
+    res.send(data.data.trim());
   } catch (err) {
     console.log(err);
-    res.status(400);
   }
-  console.log(wow);
 };

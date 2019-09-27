@@ -13,5 +13,6 @@ globalRouter.post("/saveImage", homeController.saveImage);
 globalRouter.post(routes.uploadTag, homeController.uploadTag);
 globalRouter.get("/example", homeController.example);
 globalRouter.get(routes.closet, homeController.closet);
+globalRouter.post(routes.kakaoImg, homeController.kakaoImage);
 
 module.exports = globalRouter;

@@ -1,5 +1,6 @@
 //const clothes = require("../models").dcloset;
 const gimg = require("../models").gimg_analysis;
+const axios = require("axios");
 
 exports.glassesImg = async (req, res) => {
   try {
@@ -26,13 +27,20 @@ exports.Postglasses = async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-  console.log(typeof relData); //object
   console.log(relData);
-  console.log(relData[0]);
-  console.log(typeof relData[0]);
+  console.log(typeof relData); //object
+  console.log(relData.length);
+  //console.log(relData[0]);
+  //console.log(typeof relData[0]);
   let asd = relData[0].replace(/'/g, '"');
   console.log(asd);
-  let LEE = JSON.parse(asd);
+  category = asd.category;
+  subclass = asd.subclass;
+  pattern = asd.pattern;
+  type = asd.type;
+  style = asd.style;
+  length = asd.length;
+  /*let LEE = JSON.parse(asd);
   console.log(LEE);
   console.log(LEE.category);
   console.log(LEE.type);
@@ -42,9 +50,11 @@ exports.Postglasses = async (req, res) => {
   type = LEE.type;
   style = LEE.style;
   length = LEE.length;
+*/
+  //console.log(data2);
 
   var base64Data = req.body.test2.replace(/^data:image\/png;base64,/, "");
-  require("fs").writeFile(
+  require("fs").writeFileSync(
     "public/upload/glasses/" + data1 + ".png",
     base64Data,
     "base64",

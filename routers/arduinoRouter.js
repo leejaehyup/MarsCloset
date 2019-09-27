@@ -5,6 +5,7 @@ const arduinoController = require("../controllers/arduinoController");
 const arduinoRouter = express.Router(); //express 라우터
 
 arduinoRouter.post(routes.glasses, arduinoController.arduino);
-arduinoRouter.get(routes.hanger, arduinoController.hanger);
+arduinoRouter.get(routes.wifiLED, arduinoController.wifiLED);
+arduinoRouter.post(routes.wifiTag, arduinoController.wifiTag);
 
 module.exports = arduinoRouter;

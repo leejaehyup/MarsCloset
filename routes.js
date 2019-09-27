@@ -1,4 +1,4 @@
-
+//closet
 const HOME = "/";
 const TEST = "/test";
 const UPLOADTAG = "/uploadTag";
@@ -8,13 +8,15 @@ const CLOTHEALL = "/and_clotheAll";
 const CLOTHETOP = "/and_clotheTop";
 const CLOTHEBOTTOM = "/and_clotheBottom";
 const SENSOR = "/and_sensor";
-const ANDGLASS = "/and_glasses"
-
+const ANDGLASS = "/and_glasses";
+const KAKAOIMAGE = "/kakaoImg";
+//glasses
 const GLASSES = "/glasses";
 const GLASSESIMG = "/glassesImg";
-
+//arduino
 const ARDUINO = "/arduino";
-const HANGER = "/hanger";
+const WIFILED = "/wifiLED";
+const WIFITAG = "/wifiTag";
 
 const routes = {
   home: HOME,
@@ -28,9 +30,11 @@ const routes = {
   glassesImg: GLASSESIMG,
   clotheTop: CLOTHETOP,
   clotheBottom: CLOTHEBOTTOM,
-  hanger: HANGER,
   sensor: SENSOR,
-  and_gimg : ANDGLASS
+  and_gimg: ANDGLASS,
+  kakaoImg: KAKAOIMAGE,
+  wifiLED: WIFILED,
+  wifiTag: WIFITAG
 };
 
 module.exports = routes;
