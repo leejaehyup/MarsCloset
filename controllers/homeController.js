@@ -6,9 +6,80 @@ const clothes = require("../models").dcloset;
 const temp = require("../models").LeeJaeHyup;
 
 const sharp = require("sharp"); //이미지 조절
-const axios = require("axios");
+
+const calender = require("../models").calendar;
+
+const axios = require("axios"); //ajax
 
 portSerial.serial();
+
+exports.calenderDelete = async (req, res) => {
+  let obj = new Object();
+
+  var reg_date = req.param("reg_date");
+  var day = req.param("day");
+
+  console.log("regdate : " + reg_date);
+  console.log("day : " + day);
+
+  await calender.destroy({where: {date: reg_date, day: day}});
+  let cal = await calender.findAll();
+  //let cloData = await clothes.findAll({ where: { category: "22219633111" } });
+  obj.results = cal;
+  console.log(obj);
+  let recData = JSON.stringify(obj);
+  //recData = "{results:" + recData + "}";
+  /*cal = JSON.parse(recData);
+  console.log(cal);
+
+  console.log("cal !!! : "+typeof(recData));
+
+  res.json(cal);*/
+
+  console.log("recData : " + recData);
+
+  res.render("example", {data: recData});
+};
+
+exports.calenderInsert = async (req, res) => {
+  var date = req.body.regdate;
+  var day = req.body.day;
+  var content = req.body.content;
+  try {
+    console.log(date);
+    console.log(day);
+    console.log(content);
+    await calender.create({
+      date: date,
+      day: day,
+      content: content
+    });
+  } catch (err) {
+    console.log(err);
+  }
+  res.send("suc");
+};
+
+exports.calenderFind = async (req, res) => {
+  let obj = new Object();
+
+  let cal = await calender.findAll();
+  //let cloData = await clothes.findAll({ where: { category: "22219633111" } });
+  obj.results = cal;
+  console.log(obj);
+  let recData = JSON.stringify(obj);
+  //recData = "{results:" + recData + "}";
+  /*cal = JSON.parse(recData);
+  console.log(cal);
+
+  console.log("cal !!! : "+typeof(recData));
+
+  res.json(cal);*/
+
+  console.log("recData : " + recData);
+
+  res.render("example", {data: recData});
+};
 
 exports.exam = async (req, res) => {
   let bottom = await clothes.findAll({
@@ -218,6 +289,7 @@ exports.kakaoImage = async (req, res) => {
   } catch (error) {
     console.log("ERROR:", error);
   }
+  console.log(userUploadedImagePath, tag);
   const {PythonShell} = require("python-shell");
   let kakao = [];
   let kakaoOptions = {
@@ -370,6 +442,8 @@ exports.savePostHome = async (req, res) => {
 };
 
 exports.example = async (req, res) => {
+  res.render("example");
+
   /*
   const data = req.body;
   console.log(data);

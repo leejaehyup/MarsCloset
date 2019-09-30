@@ -59,6 +59,7 @@ for row in range(0, len(pre)):
    
 
 
+
 #정렬
 savedata.sort(key=lambda savedata: savedata[0], reverse=True)
 #print("정렬값: ", savedata)

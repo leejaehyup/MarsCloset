@@ -10,6 +10,7 @@ const CLOTHEBOTTOM = "/and_clotheBottom";
 const SENSOR = "/and_sensor";
 const ANDGLASS = "/and_glasses";
 const KAKAOIMAGE = "/kakaoImg";
+
 //glasses
 const GLASSES = "/glasses";
 const GLASSESIMG = "/glassesImg";
@@ -18,6 +19,12 @@ const ARDUINO = "/arduino";
 const WIFILED = "/wifiLED";
 const WIFITAG = "/wifiTag";
 const WIFICLOSET = "/wifiCloset";
+
+//calendar
+const CALINT = "/calenderInsert";
+const CALFIND = "/calenderFind";
+const CALDEL = "/calenderDelete";
+const ANDCAL = "/and_calendar";
 
 const routes = {
   home: HOME,
@@ -36,7 +43,11 @@ const routes = {
   kakaoImg: KAKAOIMAGE,
   wifiLED: WIFILED,
   wifiTag: WIFITAG,
-  wifiCloset: WIFICLOSET
+  wifiCloset: WIFICLOSET,
+  calenderInsert: CALINT,
+  calenderFind: CALFIND,
+  and_calender: ANDCAL,
+  calenderDelete: CALDEL
 };
 
 module.exports = routes;

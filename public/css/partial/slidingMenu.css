@@ -14,7 +14,7 @@
 }
 #hamburger ~ label {
   font-size: 100px;
-  top: -20px; left: 20px;
+  top: -30px; left: 20px;
   z-index: 1;
 cursor: pointer;
 }
@@ -50,5 +50,4 @@ cursor: pointer;
   position: relative;
   padding: 2.6em 1em 1em;
   width: 100%;
-
 }
