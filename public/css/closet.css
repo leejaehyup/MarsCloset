@@ -7,7 +7,7 @@ body {
   height: 1920px;
   background: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
-  font-family: "Gothic A1", sans-serif;
+
 }
 
 main {
@@ -20,6 +20,57 @@ main p {
 }
 
 
+/*슬라이딩메뉴*/
+#hamburger { 
+  display: none; 
+}
+#hamburger ~ * {
+  position: absolute;
+  color:#fff;
+  transition: transform 0.4s;
+}
+#hamburger:checked ~ * { 
+  transform: translate3d(200px, 0, 0); 
+}
+#hamburger ~ label {
+  font-size: 100px;
+  top: 10px; left: 50px;
+  z-index: 1;
+cursor: pointer;
+}
+#hamburger ~ nav {
+  background: black;
+  font-size: 25px;
+  width: 230px;
+  left: -220px;
+  height: 100px;
+}
+#hamburger ~ nav * {
+  margin: 0; padding: 0;
+  color: white;
+}
+#hamburger ~ nav header {
+  background: rgb(255, 145, 173);
+  padding: 1em;
+  padding-left: 50px;
+  height: 30px;
+}
+#hamburger ~ nav a {
+  height: 25px;
+  display: block;
+  text-decoration: none;
+  padding: 1em;
+  padding-left: 50px;
+}
+#hamburger ~ nav a:hover { 
+  background: rgb(145, 145, 145);
+ }
+
+#mainContent {
+  position: relative;
+  padding: 2.6em 1em 1em;
+  width: 100%;
+}
 
   /* 기본 효과 */
   .gallery {

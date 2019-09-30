@@ -16,4 +16,9 @@ globalRouter.get("/example", homeController.example);
 globalRouter.get(routes.closet, homeController.closet);
 globalRouter.post(routes.kakaoImg, homeController.kakaoImage);
 
+globalRouter.post(routes.calenderInsert, homeController.calenderInsert);
+
+globalRouter.get(routes.calenderFind, homeController.calenderFind);
+globalRouter.get(routes.calenderDelete, homeController.calenderDelete);
+
 module.exports = globalRouter;
