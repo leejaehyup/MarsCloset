@@ -17,6 +17,7 @@ const GLASSESIMG = "/glassesImg";
 const ARDUINO = "/arduino";
 const WIFILED = "/wifiLED";
 const WIFITAG = "/wifiTag";
+const WIFICLOSET = "/wifiCloset";
 
 const routes = {
   home: HOME,
@@ -34,7 +35,8 @@ const routes = {
   and_gimg: ANDGLASS,
   kakaoImg: KAKAOIMAGE,
   wifiLED: WIFILED,
-  wifiTag: WIFITAG
+  wifiTag: WIFITAG,
+  wifiCloset: WIFICLOSET
 };
 
 module.exports = routes;

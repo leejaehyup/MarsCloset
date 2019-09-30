@@ -1,10 +1,15 @@
 import pymysql.cursors
 from random import randint
 import vm
-
+import os
+import json
+#os.environ['KAKAO_API_KEY']
 # MySQL Connection 연결
-conn = pymysql.connect(host='localhost',port=3306, user='root',
-                       passwd='apmsetup', db='Closet', charset='utf8')
+conn = pymysql.connect(host=os.environ['AWS_DB_HOST'],port=3306, user=os.environ['AWS_DB_USER'],
+                       passwd=os.environ['AWS_DB_PASSWORD'], db=os.environ['AWS_DB_DATABASE'], charset='utf8')
+# MySQL Connection 연결
+#conn = pymysql.connect(host='localhost',port=3306, user='root',
+#                       passwd='apmsetup', db='Closet', charset='utf8')
 
 # Connection 으로부터 Cursor 생성
 curs = conn.cursor()
@@ -43,7 +48,7 @@ for row in range(0, len(pre)):
     curs.execute(head + sqlB + clothes_season)
     Bottom = curs.fetchall()
 
-    for i in range(0, 10):
+    for i in range(0, 20):
         Tnum = randint(0, len(Top)-1)
         Bnum = randint(0, len(Bottom)-1)
 
@@ -51,15 +56,21 @@ for row in range(0, len(pre)):
         savedata.append([result, Top[Tnum][0], Bottom[Bnum][0]])
         print(Top[Tnum])
         print(Bottom[Bnum])
-	
+   
+
 
 #정렬
 savedata.sort(key=lambda savedata: savedata[0], reverse=True)
 #print("정렬값: ", savedata)
 #print(len(savedata))
 
+final_result=[]
 #상위 5개 값
-print(savedata[0:5])
+for i in range(0,5):
+    j = json.dumps({'Top' : savedata[i][1], 'Bottom' : savedata[i][2]})
+    final_result.append(j)
+
+print(final_result)
 
 #connection 닫기
 conn.close()

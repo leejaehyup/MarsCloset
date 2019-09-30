@@ -3,6 +3,7 @@ const request = require("request");
 const cheerio = require("cheerio");
 const iconv = require("iconv-lite");
 const clothes = require("../models").dcloset;
+const temp = require("../models").LeeJaeHyup;
 
 const sharp = require("sharp"); //이미지 조절
 const axios = require("axios");
@@ -185,7 +186,7 @@ exports.kakaoImage = async (req, res) => {
 
     var userUploadedImagePath =
       userUploadedFeedMessagesLocation + tag + "." + imageTypeDetected[1];
-    /*
+
     try {
       sharp(imageBuffer.data)
         .resize(400, 300)
@@ -198,8 +199,6 @@ exports.kakaoImage = async (req, res) => {
       console.log(err);
     }
 
-
-    *.
     // Save decoded binary image to disk
     /*
     try {
@@ -276,17 +275,39 @@ exports.saveImage = async (req, res) => {
   });
 };
 
-exports.test = (req, res) => {
+exports.test = async (req, res) => {
   let data = portSerial.serialData;
+  await temp.destroy({where: {}});
   console.log(data);
   res.render("test", {title: "test!!", data: data});
 };
 
-exports.uploadTag = (req, res) => {
+exports.getUploadTag = async (req, res) => {
+  let rfid = await temp.findAll({});
+  if (rfid.length > 0) {
+    console.log(rfid[0].rfid);
+    try {
+      let clotheData = await clothes.findOne({
+        where: {rfid_number: rfid[0].rfid}
+      });
+      if (clotheData) {
+        rfid = "RFID Tag duplicate";
+        res.send(rfid); //값 보내기
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    res.send(rfid[0].rfid);
+  } else {
+    res.send("");
+  }
+};
+
+exports.uploadTag = async (req, res) => {
   const img = req.body.image;
   res.render("uploadTag", {data: img});
 };
-
+//db값 저장
 exports.savePostHome = async (req, res) => {
   let clotheType = req.body.clo_type;
   let clotheColor = req.body.clo_color;
@@ -337,6 +358,7 @@ exports.savePostHome = async (req, res) => {
       category: category,
       subclass: clotheType,
       Color: clotheColor,
+      season: "w",
       status: 1
     });
   } catch (err) {

@@ -54,6 +54,10 @@ module.exports = function(sequelize, DataTypes) {
 		season: {
 			type: DataTypes.STRING(45),
 			allowNull: false
+		},
+		hangerID: {
+			type: DataTypes.STRING(45),
+			allowNull: true
 		}
 	}, {
 		tableName: 'dcloset',

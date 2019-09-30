@@ -3,7 +3,7 @@ from operator import eq
 
 
 #엑셀 불러오기
-load_cloth=load_workbook("vm.xlsx", data_only=True)
+load_cloth=load_workbook("C:/Users/dlwog/Desktop/vm.xlsx", data_only=True)
 cloth_excel=load_cloth['cloth']
 style_excel=load_cloth['style']
 
@@ -13,7 +13,7 @@ def style(pre, row):
 
     if pre[row][2] == "Lovely":
         #Top
-        sqlT = " category LIKE 'top' and subclass3 NOT IN ('mantoman', 'hoody', 'business', 'casual')"
+        sqlT = " category LIKE 'top' "
         #Bottom
         sqlB = " category LIKE 'bottoms' and subclass1 LIKE 'skirt'"
 
