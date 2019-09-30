@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+<% for(let i =0; i<kakao.length; i++) {%> 
+    <div id=<%=i%>>
+        <img class ='kakaoImage'  src="upload/kakao/<%=tag%><%=i+1%>.png" %>
+        <div class = 'kakaopath' style="display: none">upload/kakao/<%=tag%><%=i+1%>.png</div>
+        <div class = 'tag' style="display: none"><%=tag%></div>
+        <div class ='kakaoName'> <%=kakao[i]%></div>
+    </div>
+<%}%>
+<script src="/javascript/kakaoImage.js"></script>
+  </body>
+</html>
