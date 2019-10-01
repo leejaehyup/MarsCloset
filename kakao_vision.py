@@ -36,20 +36,23 @@ def show_products_file(file_directory, detection_result):
 
     draw = ImageDraw.Draw(image)
     number = 1
-    for obj in detection_result['result']['objects']:
-        imgname = "public/upload/kakao/"+tag +""+ str(number) + '.png'
-        x1 = int(obj['x1']*image.width)
-        y1 = int(obj['y1']*image.height)
-        x2 = int(obj['x2']*image.width)
+    try :
+        for obj in detection_result['result']['objects']:
+            imgname = "public/upload/kakao/"+tag +""+ str(number) + '.png'
+            x1 = int(obj['x1']*image.width)
+            y1 = int(obj['y1']*image.height)
+            x2 = int(obj['x2']*image.width)
 
 
 
-        y2 = int(obj['y2']*image.height)
-        tempImage = image.crop((x1, y1, x2, y2))
-        resize_image = tempImage.resize((400, 300))
-        resize_image.save(imgname)
-        print(obj['class'])
-        number = number + 1
+            y2 = int(obj['y2']*image.height)
+            tempImage = image.crop((x1, y1, x2, y2))
+            resize_image = tempImage.resize((400, 300))
+            resize_image.save(imgname)
+            print(obj['class'])
+            number = number + 1
+    except Exception as e:
+        print(e)
     del draw
 
     return image

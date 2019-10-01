@@ -5,6 +5,22 @@ const image = $("#image").attr("src");
 //var ws = new WebSocket("wss://082e0902.ngrok.io/");
 const serialYes = document.getElementById("serialYes");
 
+setInterval(() => {
+  $.ajax({
+    url: "./uploadTag",
+    method: "GET",
+    dataType: "json"
+  })
+    .done(function(json) {
+      let recData = json;
+      tagNumber.innerHTML = recData;
+      console.log(json);
+    })
+    .fail(function(status) {
+      console.log(status);
+    });
+}, 1000);
+
 // 연결이 수립되면 서버에 메시지를 전송한다
 ws.onopen = function(event) {
   ws.send("Client message: Hi!");

@@ -28,8 +28,8 @@ h1 {
 }
 #jquery-lightbox {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50px;
+  left: 100px;
   width: 100%;
   z-index: 100;
   text-align: center;
@@ -168,10 +168,12 @@ h1 {
   cursor: pointer;
   cursor: hand;
 }
+
 #gallery {
   position: absolute;
-  top: 60px;
+  top: 75px;
   left: 20px;
+  margin: 10px;
   width: 1000px;
   height: 1920px;
 }
