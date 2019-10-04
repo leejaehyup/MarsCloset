@@ -7,6 +7,11 @@ load_cloth=load_workbook("vm.xlsx", data_only=True)
 cloth_excel=load_cloth['cloth']
 style_excel=load_cloth['style']
 
+'''
+설명 : 상의 하의의 정보를 받고 vm 엑셀 파일을 참조하여 코디 점수를 내주는 함수
+인자 : Bottom 정보 5개, top 정보 5개
+retrun값 : allpoint 합산 점수 (int)
+'''
 
 #사용자정의함수 vm사용
 def usedvm(bottoms1,bottoms2,bottoms3,bottoms4,bottomsstyle,top1,top2,top3,top4,topstyle) :
@@ -255,25 +260,38 @@ conn = pymysql.connect(host='',
 curs = conn.cursor()
  
 # SQL문 순서대로 검색, 삭제, 삽입
+#dcloset 대상 ('사용자 옷') 정보 불러오기
 sql1 = "select cloImg,category,subclass1,subclass2,subclass3,subclass4,Color from dcloset"
+#새로운 정보 생성시마다 중복을 피하기 위해 모두 삭제후 재입력
 sql2 = "delete from gicloset"
+#대상인 옷1 | 어울리는 옷 1, 2, 3, 4, 5, section : 안경이 대상인지, 옷장 내의 옷이 대상인지 구분 /하여 insert
 sql3 = "insert into gicloset(cloImg,recom1,recom2,recom3,recom4,recom5,section) values (%s, %s, %s, %s, %s, %s,%s)"
+#gimg_analysis대상 '안경'으로 찍은 옷 정보 불러오기
 sql4= "select gimg,gCategorize,gtype,glength,gsubclass,pattern,gstyle from gimg_analysis"
 
 curs.execute(sql2)
 curs.execute(sql4)
+#안경 이미지 정보 가져오기 실행! (sql4)
 grows = curs.fetchall()
 curs.execute(sql1)
 
-# 데이타 Fetch
+# 데이타 Fetch 
 rows = curs.fetchall()
+'''
+rows =(사용자의 옷) 레코드가 담긴 변수
+savedata[] : (옷 PK, 옷 코디) 구성으로 값을 리스트로 저장 후 정렬
+'''
+
 for row1 in rows:
 #db에 넣을 값
     savedata=[]
 #대상이 상의일때
+    'row1 = top임  /row1[1]이 top 이고 onepiece가 아닐 때'
     if eq(row1[1],"top") and not(eq(row1[2],"onepiece")) :
         for row2 in rows:
+            'row2 = bottom인 옷들!'
             if eq(row2[1],"bottoms") and not(eq(row2[2],"onepiece")):
+                'row2의 PK, row2의 바지와 row 1의 코디 매칭값을 savedata에 저장'
                 savedata.append([row2[0],usedvm(row2[2],row2[3],row2[4],row2[5],row2[6],
                                                 row1[2],row1[3],row1[4],row1[5],row1[6])])
 #대상이 하의일때
@@ -287,7 +305,10 @@ for row1 in rows:
         for row2 in rows:
             if eq(row2[2],"onepiece"):
                 savedata.append([row2[0],9])
+                
+    #savedata 내림차순으로 정렬            
     usedata=sorted(savedata, key=lambda x:x[1],reverse=True)
+    #gicloset에 대상옷1, 어울리는 옷 1, 2, 3, 4, 5 insert
     curs.execute(sql3,(row1[0],usedata[0][0],usedata[1][0],usedata[2][0],usedata[3][0],usedata[4][0],0))
 
 
