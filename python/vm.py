@@ -7,7 +7,11 @@ load_cloth=load_workbook("C:/Users/dlwog/Desktop/vm.xlsx", data_only=True)
 cloth_excel=load_cloth['cloth']
 style_excel=load_cloth['style']
 
-#pre = 레코드, pnum = 레코드 수
+'''
+설명 : 사용자 선호 스타일에 맞는 데이터를 뽑아 내기 위한 조건문 생성 
+인자 : pre = 레코드, pnum = 레코드 수
+return 값 : 상의 하의 조건 쿼리문 (string)
+'''
 def style(pre, row):
     # 선택한 선호 스타일의 수만큼 for문을 돌리고 해당하는 옷을 가져옴
 
@@ -22,19 +26,20 @@ def style(pre, row):
         sqlB = " category LIKE 'bottoms' and subclass1 IN ('skirt', 'pants')"
     
     elif pre[row][2] == "casual":
-        sqlT = " category LIKE 'top' and subclass3 NOT IN ('mantoman', 'hody', 'business', 'casual')"
-        #sqlB = " category LIKE 'bottom' and subclass1 LIKE 'skirt'"
+        sqlT = " category LIKE 'top' and subclass3 IN ('mantoman', 'hody', 'casual')"
+        sqlB = " category LIKE 'bottom' and subclass3 IN ('jogger', 'leggings')
         
     else:
-        sqlT = " category LIKE 'top' and subclass3 NOT IN ('mantoman', 'hody', 'business', 'casual')"
-        #sqlB = " category LIKE 'bottom' and subclass1 LIKE 'skirt'"
+        sqlT = " category LIKE 'top' and subclass3 NOT IN ('box', 'crop')"
+        sqlB = " category LIKE 'bottom' and subclass3 = 'jeans'"
 
     return sqlT, sqlB        
     
-
-#계절
-#clothes_season : 옷의 시즌을 구별할 쿼리문을 담을 변수
-
+'''
+설명 : 현재 기온에 맞는 옷을 분별하기 위한 조건 쿼리문 찾기 
+인자 : 현재 기온 temp
+return 값 : 시즌에 맞는 옷을 추릴 수 있는 조건 쿼리문 (string) - clothes_season
+'''
 def season(temp) :
     if temp <= 2:
         #겨울
@@ -57,7 +62,11 @@ def season(temp) :
 
     return clothes_season
     
-
+'''
+설명 : 상의 하의의 정보를 받고 vm 엑셀 파일을 참조하여 코디 점수를 내주는 함수
+인자 : Bottom 정보 5개, top 정보 5개
+retrun값 : allpoint 합산 점수 (int)
+'''
 #사용자정의함수 vm사용
 def usedvm(bottoms1,bottoms2,bottoms3,bottoms4,bottomsstyle,top1,top2,top3,top4,topstyle) :
    
