@@ -85,12 +85,10 @@ exports.Postglasses = async (req, res) => {
   require("dotenv").config({path: __dirname + "\\" + ".env"});
   //require("dotenv").config();
   const s3 = new AWS.S3({
-    //accessKeyId: process.env.AWS_ACCESS_KEY,
-    //secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    //region: process.env.AWS_S3_REGION
-    accessKeyId: "AKIAJCF26ZOFOJGUWUXQ",
-    secretAccessKey: "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",
-    region: "ap-northeast-2"
+    accessKeyId: process.env.AWS_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_S3_REGION
+
   });
   var param = {
     Bucket: "marscloset",
