@@ -27,7 +27,7 @@ def style(pre, row):
     
     elif pre[row][2] == "casual":
         sqlT = " category LIKE 'top' and subclass3 IN ('mantoman', 'hody', 'casual')"
-        sqlB = " category LIKE 'bottom' and subclass3 IN ('jogger', 'leggings')"
+        sqlB = " category LIKE 'bottom' and subclass3 IN ('jogger', 'leggings')
         
     else:
         sqlT = " category LIKE 'top' and subclass3 NOT IN ('box', 'crop')"
