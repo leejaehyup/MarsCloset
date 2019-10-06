@@ -32,6 +32,10 @@ module.exports = function(sequelize, DataTypes) {
       section: {
         type: DataTypes.INTEGER(4),
         allowNull: true
+      },
+      count: {
+        type: DataTypes.INTEGER(3),
+        allowNull: true
       }
     },
     {

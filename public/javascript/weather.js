@@ -1,4 +1,4 @@
-const API_KEY = process.env.WEATHER_API_KEY; //ajax로 서버 요청해서 가져오기..
+const API_KEY = "1c89f92aa0ecb4258a562c9e5ed65022"; //ajax로 서버 요청해서 가져오기..
 const COORDS = "coords";
 //const weatherspan = document.querySelector(".weather-js");
 function getWeather(lat, lng) {
@@ -27,7 +27,7 @@ function getWeather(lat, lng) {
       const weathertemp = document.querySelector(".temp");
       weathertemp.innerText = temperature + "℃";
       weatherspan.innerText = "서울시 구로구";
-      // weatherspan.innerText = location;
+      weatherspan.innerText = location;
     });
 }
 

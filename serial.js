@@ -1,7 +1,7 @@
 const SerialPort = require("serialport");
 const Readline = SerialPort.parsers.Readline; //serial통신 값오는거 \n으로 구분해서 가져오기
 
-const serialPort = new SerialPort("COM4", { baudRate: 9600 });
+const serialPort = new SerialPort("COM4", {baudRate: 9600});
 const parser = new Readline();
 serialPort.pipe(parser);
 const serial = () => {

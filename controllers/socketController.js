@@ -11,7 +11,6 @@ exports.socketTag = (ws, req) => {
   ws.on("message", async function(msg) {
     timer = setInterval(async function() {
       data = portSerial.serialData;
-      console.log(data);
       try {
         let clotheData = await clothes.findOne({
           where: {rfid_number: data}
@@ -41,7 +40,6 @@ exports.socket = (ws, req) => {
   ws.on("message", async function(msg) {
     timer = setInterval(async function() {
       data = portSerial.serialData;
-      console.log(data);
       let state = false;
       if (data != null) {
         let clotheData = await clothes.findAll({

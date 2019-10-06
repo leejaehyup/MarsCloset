@@ -1,0 +1,23 @@
+body {
+  position: absolute;
+  width: 1200px;
+  height: 1920px;
+  background: black;
+  color: white;
+}
+
+.mainContainer {
+  margin-top: 100px;
+  margin-left: 150px;
+}
+.mainInfo {
+  margin-left: 150px;
+  color: white;
+}
+.mainName {
+  color: white;
+}
+.coordiContainer {
+  margin-top: 600px;
+  margin-left: 150px;
+}

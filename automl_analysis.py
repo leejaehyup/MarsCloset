@@ -68,6 +68,7 @@ def pre(image_url, name):
         "style":array_data[4],
         "length":array_data[2]}
     print(array_diction)
+    test_num = 1
     return
 
 

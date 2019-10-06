@@ -7,11 +7,27 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/uploadTag.css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>upload Tag</title>
+    <style>
+      body {
+        animation: fadeInAnimation ease 3s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+      }
+      @keyframes fadeInAnimation {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
   </head>
   <body>
     <img id="image" src="<%=data%>" />
-    <div id="TagNumber">number</div>
+    <div id="TagNumber"></div>
 
     <button id="saveDBbutton">저장하기</button>
     <script src="/javascript/uploadTag.js"></script>

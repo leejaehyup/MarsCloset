@@ -22,18 +22,14 @@ exports.Postglasses = async (req, res) => {
   let recData;
   let relData;
   try {
-    recData = JSON.stringify(data3);
-    relData = JSON.parse(recData);
+    relData = JSON.parse(data3);
   } catch (err) {
     console.log(err);
   }
-  console.log(relData);
-  console.log(typeof relData); //object
-  console.log(relData.length);
   //console.log(relData[0]);
   //console.log(typeof relData[0]);
-  let asd = relData[0].replace(/'/g, '"');
-  console.log(asd);
+  let = asd =relData;
+  //let asd = relData[0].replace(/'/g, '"');
   category = asd.category;
   subclass = asd.subclass;
   pattern = asd.pattern;
@@ -53,6 +49,27 @@ exports.Postglasses = async (req, res) => {
 */
   //console.log(data2);
 
+
+
+  if(category =="bottom"){
+    category = "bottoms";
+  }
+  if (pattern == "graphic") {
+    pattern = "printing";
+  }
+  if (subclass == "tube") {
+    subclass = "tube_skirt";
+  }
+  if (clotheType == "skirt") {
+    length = "skirt";
+  }
+  if(subclass =="man_to_man"){
+    subclass="mantoman";
+  }
+
+
+
+  console.log(category, subclass, pattern, type, style, length);
   var base64Data = req.body.test2.replace(/^data:image\/png;base64,/, "");
   require("fs").writeFileSync(
     "public/upload/glasses/" + data1 + ".png",
@@ -66,14 +83,17 @@ exports.Postglasses = async (req, res) => {
   const AWS = require("aws-sdk");
   const fs = require("fs");
   require("dotenv").config({path: __dirname + "\\" + ".env"});
+  //require("dotenv").config();
   const s3 = new AWS.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-
+    //accessKeyId: process.env.AWS_ACCESS_KEY,
+    //secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    //region: process.env.AWS_S3_REGION
+    accessKeyId: "AKIAJCF26ZOFOJGUWUXQ",
+    secretAccessKey: "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",
     region: "ap-northeast-2"
   });
   var param = {
-    Bucket: process.env.AWS_S3_BUCKET,
+    Bucket: "marscloset",
     Key: "glasses/" + data1,
     ACL: "public-read",
     Body: fs.createReadStream(
@@ -81,8 +101,6 @@ exports.Postglasses = async (req, res) => {
     ),
     ContentType: "image/png"
   };
-
-  console.log("param @@@@@@@@@@  " + param);
 
   s3.upload(param, function(err, data2) {
     if (err) {
@@ -101,7 +119,8 @@ exports.Postglasses = async (req, res) => {
     gstyle: style,
     gtype: type,
     pattern: pattern,
-    glength: length
+    glength: length,
+    id: leeData
   });
 
   res.send("suc");

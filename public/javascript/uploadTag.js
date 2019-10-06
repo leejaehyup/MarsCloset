@@ -7,17 +7,17 @@ const serialYes = document.getElementById("serialYes");
 
 setInterval(() => {
   $.ajax({
-    url: "./uploadTag",
+    url: "/uploadTag",
     method: "GET",
     dataType: "json"
   })
-    .done(function(json) {
-      let recData = json;
+    .done(function(data) {
+      let recData = data;
       tagNumber.innerHTML = recData;
-      console.log(json);
     })
     .fail(function(status) {
-      console.log(status);
+      console.log(status.responseText);
+      tagNumber.innerHTML = status.responseText;
     });
 }, 1000);
 
@@ -49,6 +49,11 @@ saveDBbutton.addEventListener("click", saveDB);
 function saveDB() {
   saveDBbutton.removeEventListener("click", saveDB);
   const tagNum = $("#TagNumber").text();
+  if (!tagNum) {
+    swal("RFID TAG를 찍어주세요!");
+    saveDBbutton.addEventListener("click", saveDB);
+    return;
+  }
   var form = document.createElement("form");
   form.setAttribute("charset", "UTF-8");
   form.setAttribute("method", "Post"); //Post 방식

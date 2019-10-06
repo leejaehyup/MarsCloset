@@ -23,12 +23,25 @@
     <link rel="stylesheet" href="/css/partial/weather.css" /> 
     <link rel="stylesheet" href="/css/partial/testCalendar.css" /> 
     <title><%=title %></title>
-
-
+    <style> 
+            body { 
+                animation: fadeInAnimation ease 3s; 
+                animation-iteration-count: 1; 
+                animation-fill-mode: forwards; 
+            } 
+            @keyframes fadeInAnimation { 
+                0% { 
+                    opacity: 0; 
+                } 
+                100% { 
+                    opacity: 1; 
+                } 
+            } 
+        </style> 
 
   </head>
 
-  <body onload="printClock()">
+  <body >
       <div class="dateTime">
           <div id="time-result">
           </div>
@@ -47,7 +60,8 @@
   <div class="temp"></div>
   <div class="index_margin"></div>
 
-  <% include ./partial/testCalendar %>
+<!--달력-->
+<% include ./partial/homeCalendar%>
 
         <form action="test" >
             <input type="submit" class="test"/><p id="tt">옷 등록</p>
