@@ -5,7 +5,11 @@ const iconv = require("iconv-lite");
 const clothes = require("../models").dcloset;
 const temp = require("../models").LeeJaeHyup;
 const gicloset = require("../models").gicloset;
+<<<<<<< HEAD
 const glasses = require("../models").gimg_analysis;
+=======
+const fs = require("fs");
+>>>>>>> 9452ecf4d6af0fd2658c1b299c5f7f62967378c3
 const calender = require("../models").calendar;
 const sharp = require("sharp"); //이미지 조절
 
@@ -19,6 +23,7 @@ exports.exam = async (req, res) => {
   });
   res.json(bottom);
 };
+<<<<<<< HEAD
 
 exports.getCoordiHo = async (req, res) => {
   const data = req.query.data;
@@ -160,6 +165,76 @@ exports.coordi = async (req, res) => {
     */
   });
 
+=======
+
+exports.getImageInfo = async (req, res) => {
+  const info = req.query.image;
+  let imageInfo = await clothes.findOne({where: {cloImg: info}});
+  console.log(imageInfo);
+  res.render("imageInfo", {imageInfo});
+};
+
+exports.getCoordiImage = async (req, res) => {
+  const hangerID = req.query.hangerID + "/LED";
+  console.log(hangerID);
+  try {
+    const data = await axios.get(hangerID);
+    console.log(data.data.trim());
+    res.send(data.data.trim());
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+exports.coordi = async (req, res) => {
+  const {PythonShell} = require("python-shell");
+  let coordi = [];
+  let kakaoOptions = {
+    mode: "text",
+    pythonPath: "",
+    pythonOptions: ["-u"], // get print results in real-time
+    scriptPath: ""
+  };
+  PythonShell.run("./python/final.py", kakaoOptions, async function(
+    err,
+    results
+  ) {
+    if (err) throw err;
+    for (let i = 0; i < results.length; i++) {
+      coordi[i] = JSON.parse(results[i]);
+      console.log(results[i]);
+    }
+    let topData = [];
+    let bottomData = [];
+    for (let i = 0; i < coordi.length; i++) {
+      topData[i] = await clothes.findOne({where: {rfid_number: coordi[i].Top}});
+      bottomData[i] = await clothes.findOne({
+        where: {rfid_number: coordi[i].Bottom}
+      });
+    }
+    //console.log(topData, bottomData);
+    console.log(topData[0].cloImg);
+
+    res.render("coordi", {
+      topData: topData,
+      bottomData: bottomData
+    });
+    /*
+    res.render("coordi", {
+      data: coordi
+    });
+    */
+    //let temp = coordi[0].replace(/'/g, '"').trim();
+    //let data = JSON.parse(temp);
+    //console.log(data.data.length);
+    /*
+    res.render("coordi", {
+      data: data
+    });
+    */
+  });
+
+>>>>>>> 9452ecf4d6af0fd2658c1b299c5f7f62967378c3
   /*
   let top = await clothes.findAll({
     where: {
@@ -253,6 +328,7 @@ exports.home = async (req, res) => {
         });
         i = 0;
         $(".mw_basic_list_link > a").each(function() {
+<<<<<<< HEAD
           var rank = $(this);
           rank_text1 = rank.text();
           arr_link1[i] = rank_text1;
@@ -265,6 +341,20 @@ exports.home = async (req, res) => {
           arr_click1[i] = rank_text1;
           i++;
         });
+=======
+          var rank = $(this);
+          rank_text1 = rank.text();
+          arr_link1[i] = rank_text1;
+          i++;
+        });
+        i = 0;
+        $(".mw_basic_list_click").each(function() {
+          var rank = $(this);
+          rank_text1 = rank.text();
+          arr_click1[i] = rank_text1;
+          i++;
+        });
+>>>>>>> 9452ecf4d6af0fd2658c1b299c5f7f62967378c3
 
         var requestOptions = {
           method: "GET",
@@ -393,7 +483,11 @@ exports.kakaoImage = async (req, res) => {
     }
     if (kakao[0] == "'objects'") {
       console.log("카카오 api에서 이미지 인식을 하지 못했습니다.");
+<<<<<<< HEAD
       res.render("test", {confirm: false});
+=======
+      res.redirect("test");
+>>>>>>> 9452ecf4d6af0fd2658c1b299c5f7f62967378c3
     } else {
       res.render("kakaoImg", {kakao: kakao, tag: tag});
     }
@@ -490,6 +584,7 @@ exports.savePostHome = async (req, res) => {
   if (pattern == "graphic") {
     pattern = "printing";
   }
+<<<<<<< HEAD
   if (subclass == "tube") {
     subclass = "tube_skirt";
   }
@@ -499,12 +594,17 @@ exports.savePostHome = async (req, res) => {
   if (subclass == "man_to_man") {
     subclass = "mantoman";
   }
+=======
+>>>>>>> 9452ecf4d6af0fd2658c1b299c5f7f62967378c3
 
   for (let i = 0; i < seasons.length; i++) {
     season = season + seasons[i];
   }
   if (season === null || season === "" || season === undefined) season = "WSFU";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9452ecf4d6af0fd2658c1b299c5f7f62967378c3
   console.log("저장되는 값들->>>", clotheType, category, style, season);
 
   const AWS = require("aws-sdk");
@@ -574,11 +674,21 @@ exports.savePostHome = async (req, res) => {
       pythonOptions: ["-u"], // get print results in real-time
       scriptPath: ""
     };
+<<<<<<< HEAD
     PythonShell.run("./python/savedb.py", options, async function(
+=======
+    PythonShell.run("./python/gsavedb.py", options, async function(
+>>>>>>> 9452ecf4d6af0fd2658c1b299c5f7f62967378c3
       err,
       results
     ) {
       if (err) throw err;
+<<<<<<< HEAD
+=======
+      for (let i = 0; i < results.length; i++) {
+        console.log("우호코디->>>>" + results[i]);
+      }
+>>>>>>> 9452ecf4d6af0fd2658c1b299c5f7f62967378c3
     });
   } catch (err) {
     console.log(err);

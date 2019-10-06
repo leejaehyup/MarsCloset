@@ -27,6 +27,7 @@
       img {
         border: none;
       }
+<<<<<<< HEAD
 
       #imgCarousel {
         height: 390px;
@@ -143,6 +144,109 @@
         for (let i = 0; i < image.length / 2; i++) {
           top[i] = image[i].style.zIndex;
         }
+=======
+
+      #imgCarousel {
+        height: 390px;
+        margin: 90px auto 120px;
+        position: relative;
+        width: 710px;
+        background-color: #000;
+      }
+      #imgCarousel .arrow {
+        width: 44px;
+        height: 44px;
+        position: absolute;
+        top: 50%;
+        margin-top: -22px;
+        left: 0;
+        cursor: pointer;
+      }
+      #imgCarousel .next {
+        background-position: right top;
+        left: auto;
+        right: 0;
+      }
+      #imgCarousel .arrow:hover {
+        background-position: left bottom;
+      }
+      #imgCarousel .next:hover {
+        background-position: right bottom;
+      }
+      #stage {
+        left: 50%;
+        margin-left: -320px;
+        position: absolute;
+        width: 640px;
+        height: 100%;
+      }
+      #stage img {
+        display: none;
+        border: 2px #999 solid;
+      }
+      #stage .default {
+        display: block;
+        left: 50%;
+        margin-left: -135px;
+        position: absolute;
+      }
+      #stage .animationReady {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      #stage1 {
+        left: 50%;
+        margin-left: -320px;
+        position: absolute;
+        width: 640px;
+        height: 100%;
+      }
+      #stage1 img {
+        display: none;
+        border: 2px #999 solid;
+      }
+      #stage1 .default {
+        display: block;
+        left: 50%;
+        margin-left: -135px;
+        position: absolute;
+      }
+      #stage1 .animationReady {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+
+    <script language="javascript">
+      rebtn = document.recom_btn;
+      okbtn = document.ok_btn;
+      let k = 0;
+      let j = 0;
+      let count = 0;
+      let topData = new Array();
+      let thangerID = new Array();
+      let bhangerID = new Array();
+
+      <%for(let i=0; i<topData.length; i++){ %>
+        thangerID["<%=i%>"] = "<%= topData[i].hangerID%>";
+        <%}%>
+        <%for(let i=0; i<topData.length; i++){ %>
+        bhangerID["<%=i%>"] = "<%= bottomData[i].hangerID%>";
+        <%}%>
+
+      // 확정 버튼 시 처리 해야할 부분
+          console.log(thangerID,bhangerID)
+      function ok() {
+        const image = document.querySelectorAll("img");
+        let top = [];
+        for (let i = 0; i < image.length / 2; i++) {
+          top[i] = image[i].style.zIndex;
+        }
+>>>>>>> 9452ecf4d6af0fd2658c1b299c5f7f62967378c3
         let list = {};
         for (let i = 0; i < image.length / 2; i++) {
           list[i] = top[i];

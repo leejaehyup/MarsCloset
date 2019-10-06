@@ -23,19 +23,25 @@
     </style>
   </head>
   <body>
-    <button onclick="goBack()" class="btBack">&nbsp;&lt;&nbsp;</button>
+    <!--뒤로가기 버튼-->
+    <button onclick="goBack()" class="btBack">
+      <img class="btn-img" src="/icons/left-arrow.png" />
+    </button>
     <script>
       function goBack() {
-        window.location.href = "/";
+        history.back(-1);
       }
     </script>
+
+    <!--설명-->
+    <h4>타이머를 설정한 후, 촬영버튼을 눌러 촬영을 시작해주세요.</h4>
     <video autoplay></video>
 
     <button type="button" id="imgButton">
       <img class="btn-img" src="/icons/photo-camera.png" />
     </button>
-    <!----->
 
+    <<<<<<< HEAD ======= >>>>>>> 9452ecf4d6af0fd2658c1b299c5f7f62967378c3
     <div class="center">
       <select
         name="timer"

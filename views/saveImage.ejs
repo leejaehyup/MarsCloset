@@ -9,23 +9,24 @@
   </head>
 
   <body>
-    <h1>레어어 팝업창 띄우기</h1>
+    <h4 id="tit"> 추출된 이미지 정보를 확인하려면 버튼을 클릭하세요.</h4>
+    
     <!-- 버튼 -->
-    <button class="trigger">클릭</button>
+    <button class="trigger">클릭!</button>
 
-    <!-- 팝업 될 레이어 -->
+    <!-- 모달창 -->
     <div class="modal">
       <div class="modal-content">
         <span class="close-button">&times;</span>
-        <h1 class="title">&nbsp;&nbsp;My Infomation</h1>
+        <h1 class="title">My Infomation</h1>
         <form action="/" method="POST">
           <input type="hidden" value="<%=tag%>" name="tag" />
           <!-- 분석된 이미지 띄우기 -->
           <table>
             <tr>
               <td>
+
                 <!-- 분석된 이미지 정보 띄우기 -->
-                <label for="image">Image</label>
                 <img
                   align="left"
                   src="upload/python/<%=tag%>.png"
@@ -40,32 +41,32 @@
                         value="<%=clotheCategory%>"
                         name="category"
                       />
-                      <div>카테고리-><%=clotheCategory%></div>
+                      <div class="info">카테고리-><%=clotheCategory%></div>
                       <input
                         type="hidden"
                         value="<%=clotheSubclass%>"
                         name="subclass"
                       />
-                      <div>서브클래스-><%=clotheSubclass%></div>
+                      <div class="info">서브클래스-><%=clotheSubclass%></div>
                       <input
                         type="hidden"
                         value="<%=clothePattern%>"
                         name="pattern"
                       />
-                      <div>패턴-><%=clothePattern%></div>
+                      <div class="info"> 패턴-><%=clothePattern%></div>
                       <input type="hidden" value="<%=clotheStyle%>" name="style" />
-                      <div>스타일-><%=clotheStyle%></div>
+                      <div class="info">스타일-><%=clotheStyle%></div>
                       <input type="hidden" value="<%=clotheLength%>" name="length" />
-                      <div>옷길이-><%=clotheLength%></div>
+                      <div class="info">옷 길이-><%=clotheLength%></div>
                      
-                      <div>타입-><%=clotheType%></div>
+                      <div class="info">타입-><%=clotheType%></div>
                       <input type="hidden" value="<%=clotheType%>" name="clo_type" />
                       <!-- 날씨 선택-->
 
-                      <input type='checkbox' name='season' value='W' />겨울
-                      <input type='checkbox' name='season' value='S' checked/>봄
-                      <input type='checkbox' name='season' value='F' />여름
-                      <input type='checkbox' name='season' value='U' />가을
+                      <input class="seasons" type='checkbox' name='season' value='W' />겨울
+                      <input class="seasons" type='checkbox' name='season' value='S' checked/>봄
+                      <input class="seasons" type='checkbox' name='season' value='F' />여름
+                      <input class="seasons" type='checkbox' name='season' value='U' />가을
                     </td>
               </td>
             </tr>
@@ -79,6 +80,8 @@
         </form>
       </div>
     </div>
+
+
 
     <script type="text/javascript">
       var modal = document.querySelector(".modal");
@@ -106,5 +109,7 @@
       cancel.addEventListener("click", toggleModal);
       window.addEventListener("click", windowOnClick);
     </script>
+
+
   </body>
 </html>

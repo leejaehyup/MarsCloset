@@ -1,26 +1,27 @@
 @import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Gothic+A1|Nanum+Gothic|Nanum+Gothic+Coding|Nanum+Myeongjo|Noto+Sans+KR|Noto+Serif+KR&display=swap');
 
 /*슬라이딩메뉴*/
-#hamburger { 
-  display: none; 
-}
+
 #hamburger ~ * {
   position: absolute;
   color:#fff;
   transition: transform 0.4s;
 }
+
 #hamburger:checked ~ * { 
   transform: translate3d(200px, 0, 0); 
 }
 #hamburger ~ label {
   font-size: 100px;
-  top: -30px; left: 20px;
+  top: 10px;
+  left: 25px;
   z-index: 1;
 cursor: pointer;
 }
+
 #hamburger ~ nav {
   background: black;
-  font-size: 25px;
+  font-size: 30px;
   width: 230px;
   left: -220px;
   height: 100px;
@@ -30,11 +31,12 @@ cursor: pointer;
   color: white;
 }
 #hamburger ~ nav header {
-  background: rgb(255, 145, 173);
+  background: rgb(255, 201, 214);
   padding: 1em;
   padding-left: 50px;
   height: 30px;
 }
+
 #hamburger ~ nav a {
   height: 25px;
   display: block;

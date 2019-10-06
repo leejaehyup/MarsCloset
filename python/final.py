@@ -7,7 +7,7 @@ import json
 # MySQL Connection 연결
 conn = pymysql.connect(host=os.environ['AWS_DB_HOST'],port=3306, user=os.environ['AWS_DB_USER'],
                        passwd=os.environ['AWS_DB_PASSWORD'], db=os.environ['AWS_DB_DATABASE'], charset='utf8')
-# MySQL Connection 연결
+
 #conn = pymysql.connect(host='localhost',port=3306, user='root',
 #                       passwd='apmsetup', db='Closet', charset='utf8')
 
@@ -67,6 +67,7 @@ for row in range(0, len(pre)):
             savedata.append([result, Top[Tnum][0], Bottom[Bnum][0]])
 
         
+
 
 #정렬
 savedata.sort(key=lambda savedata: savedata[0], reverse=True)

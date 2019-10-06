@@ -26,10 +26,24 @@
     </style>
   </head>
   <body>
+    <h4>
+      RFID 태그를 리더기에 찍고, 태그 번호가 나오면 사진확정을 눌러주세요.
+    </h4>
+
     <img id="image" src="<%=data%>" />
+    <img src="icons/tag1.png" id="tagIcon" />
     <div id="TagNumber"></div>
 
-    <button id="saveDBbutton">저장하기</button>
+    <script>
+      function goBack() {
+        window.location.href = "/test";
+      }
+    </script>
+
+    <button onclick="goBack()" class="btBack" id="cancelButton">
+      다시찍기
+    </button>
+    <button id="saveDBbutton">사진확정</button>
     <script src="/javascript/uploadTag.js"></script>
   </body>
 </html>

@@ -7,7 +7,10 @@ const COORDI = "/coordi";
 const KAKAOIMAGE = "/kakaoImg";
 const GETCOORDICLOTH = "/getCoordiCloth";
 const IMAGEINFO = "/imageInfo";
+<<<<<<< HEAD
 const GETCOORDIHO = "/getCoordiHo";
+=======
+>>>>>>> 9452ecf4d6af0fd2658c1b299c5f7f62967378c3
 
 //android
 const CLOTHEALL = "/and_clotheAll";
