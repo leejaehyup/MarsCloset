@@ -39,10 +39,12 @@ $(function() {
       <ul>
           <% for(let i=0; i<recData.length; i++) { %>
               <li>
+                
                   <a href="<%=recData[i].gImg%>" title="카테고리:<%=recData[i].gCategorize%> <br>
                     패턴:<%=recData[i].pattern%><br>
                     종류: <%=recData[i].gtype  %>  스타일:<%=recData[i].gstyle   %><br>   
                     길이:<%=recData[i].glength%>">
+                  
                     <img src="<%=recData[i].gImg%>" alt="" />
                   </a>
               </li>

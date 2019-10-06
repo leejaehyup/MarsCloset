@@ -1,14 +1,18 @@
 @import url("https://fonts.googleapis.com/css?family=Do+Hyeon|Gothic+A1|Nanum+Gothic|Nanum+Gothic+Coding|Nanum+Myeongjo|Noto+Sans+KR|Noto+Serif+KR&display=swap");
 body {
   position: absolute;
-  top: 0px;
+  top: 120px;
   left: 0px;
-  width: 1200px;
+  width: 1080px;
   height: 1920px;
   background: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
 
 }
+body::-webkit-scrollbar { 
+  display: none; 
+}
+
 
 main {
   width: 80%;

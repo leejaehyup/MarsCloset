@@ -48,7 +48,7 @@ function click3() {
     $("#serialImage3").html("");
 
     for (let i = 0; i < recData.length; i++) {
-      if (recData[i].category == "bottom") {
+      if (recData[i].category == "bottoms" || recData[i].category == "bottom") {
         imageCreate(recData[i].cloImg, "#serialImage3");
       }
     }
@@ -75,8 +75,8 @@ ws.onmessage = function(event) {
     imageCreate(recData[i].cloImg, "#serialImage1");
   }
 };
-ws.onclose = function(event) { 
-  console.log(event)
+ws.onclose = function(event) {
+  console.log(event);
   console.log("client socket close");
 };
 // 서버로 부터 메시지를 수신한다
@@ -88,9 +88,23 @@ ws.onerror = function(event) {
 
 function imageCreate(data, name) {
   $(name).append("<img id='" + data + "' src= " + data + " class='gallery'>");
+
   /*
   $("#serialImage").append(
     "<img id='" + data + "' src= upload/python/" + data + ".png>"
   );
   */
+}
+
+setInterval(function() {
+  const image = document.querySelectorAll("img");
+  for (let i = 0; i < image.length; i++) {
+    image[i].addEventListener("click", redirectImage);
+  }
+}, 1000);
+
+function redirectImage(e) {
+  console.log(e.target.currentSrc);
+  const url = e.target.currentSrc;
+  window.location.href = "http://www.localhost:4000/imageInfo?image=" + url;
 }

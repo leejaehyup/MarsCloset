@@ -1,154 +1,478 @@
 @import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Gothic+A1|Nanum+Gothic|Nanum+Gothic+Coding|Nanum+Myeongjo|Noto+Sans+KR|Noto+Serif+KR&display=swap');
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    position: absolute;
-    width: 1200px;
-    height: 1920px;
-    background: black;
-    color: white;
-  }
-
-  
-/*뒤로가기버튼*/
-.btBack {
-    position: absolute;
-    top: 50px;
-    left: 50px;
-    font-size: 100px;
-    background: none;
-    color: #ffffff;
-    border-radius: 50%;
-    padding: 0px;
-    border: 1px solid #ffffff;
-    cursor: pointer;
-  }
-  .btBack:hover {
-    color: #f16b6f;
-    box-shadow: 3px 3px 3px 3px rgba(253, 59, 59, 0.404);
-  }
-  
-  /*오늘의 추천DIV*/
-  .todayCD{
-    position: absolute;
-    top: 100px; left: 380px;
-    width: 250px; height: 500px;
-    font-family: 'Nanum Gothic', sans-serif;
-    font-size: 20px;
-      border: 3px dashed #ffffff;
-      padding: 50px;
-      text-align: center;
-      box-shadow: 0px 0px 20px 10px rgba(102,186,255,0.4);
-  }
-
-
-.button_base {
-
-    margin: 0;
-    border: 0;
-    font-size: 20px;
-    margin-top: -25px;
-    margin-left: -100px;
-    width: 150px;
-    height: 40px;
-    text-align: center;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-user-select: none;
-    cursor: default;
+  position: absolute;
+  width: 1080px;
+  height: 1920px;
+  background: black;
+  color: white;
+}
+body::-webkit-scrollbar { 
+  display: none; 
 }
 
-.button_base:hover {
+
+#serialImage {
+  display: flex;
+  flex-direction: row;
+}
+#serialImage img {
+  width: 200px;
+}
+
+
+
+/*menu2*/
+div.menu
+{ position: absolute;
+    left: 0px; top: 700px;
+    font-family: Raleway;
+   width: 100%;
+    padding: 5px;
+    margin-left: -5em;
+	text-align: center;
+}
+
+div.menu a
+{
+    color: #FFF;
+    text-decoration: none;
+    font: 40px Raleway;
+    margin: 0 0 2.5em 2.5em;
+    padding: 10px 10px;
+    position: relative;
+    z-index: 0;
     cursor: pointer;
 }
 
-.preserve-3d {
-    transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d;
-}
-
-
-/*3D버튼 */
-.bt3D {
-    perspective: 500px;
-    -webkit-perspective: 500px;
-    -moz-perspective: 500px;
-    transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d;
-}
-
-.bt3D div {
+/* 메뉴2- Border X get width  */
+div.borderXwidth a:before, div.borderXwidth a:after
+{
     position: absolute;
-    text-align: center;
+    opacity: 0;
+    width: 0%;
+    height: 2px;
+    content: '';
+    background: #FFF;
+    transition: all 0.3s;
+    
+}
+
+div.borderXwidth a:before
+{
+    left: 0px;
+    top: 0px;
+}
+
+div.borderXwidth a:after
+{
+    right: 0px;
+    bottom: 0px;
+}
+
+div.borderXwidth a:hover:before, div.borderXwidth a:hover:after
+{
+    opacity: 1;
     width: 100%;
-    height: 50px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    pointer-events: none;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
 }
 
-.bt3D div:nth-child(1) {
-    color: #ffffff;
-    background-color: #747474;
-    transform: translateZ(0px);
-    -webkit-transform: translateZ(0px);
-    -moz-transform: translateZ(0px);
-    transition: all 0.2s ease;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    transform-origin: 50% 50% -25px;
-    -webkit-transform-origin: 50% 50% -25px;
-    -moz-transform-origin: 50% 50% -25px;
+/* 옷 등록 */
+input.test {
+  position: absolute;
+  top: 480px;
+  left: 80px;
+  background: url("/icons/hang.png") no-repeat;
+  background-size: cover;
+  width: 180px;
+  height: 180px;
+  border: none;
+  padding: 10px;
+  transition: all 0.5s;
+  cursor: pointer;
+  text-align: center;
+ 
 }
 
-.bt3D div:nth-child(2) {
-    color: #ffffff;
-    background-color: #6b5696;
-    transform: rotateX(90deg);
-    -webkit-transform: rotateX(90deg);
-    -moz-transform: rotateX(90deg);
-    transition: all 0.2s ease 0.05s;
-    -webkit-transition: all 0.2s ease 0.05s;
-    -moz-transition: all 0.2s ease 0.05s;
-    transform-origin: 50% 50% -25px;
-    -webkit-transform-origin: 50% 50% -25px;
-    -moz-transform-origin: 50% 50% -25px;
+#tt{
+  position: absolute;
+  top: 582px;
+  left: 130px;
+  font-family: 'Gothic A1', sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+  text-align: center;
+  color: #ffffff;
+}
+#tt:hover{
+  color: rgb(131, 143, 250);
 }
 
-.bt3D:hover div:nth-child(1) {
-    color: #000000;
-    background-color: #808080;
-    transition: all 0.2s ease;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    transform: translateZ(-200px);
-    -webkit-transform: translateZ(-200px);
-    -moz-transform: translateZ(-200px);
-}
-
-.bt3D:hover div:nth-child(2) {
-    color: #ffffff;
-    transition: all 0.2s ease 0.05s;
-    -webkit-transition: all 0.2s ease 0.05s;
-    -moz-transition: all 0.2s ease 0.05s;
-    transform: rotateX(0deg);
-    -webkit-transform: rotateX(0deg);
-    -moz-transform: rotateX(0deg);
+/*토글 스위치*/
+.container {
+  position: absolute;
+  top: 750px;
+  right: 200px;
 }
 
 
-#bt1{
-    position: relative;
- top: 20px; left: 70px;
+.switch {
+  background-color: white;
+  width: 135px;
+  height: 40px;
+  position: absolute;
+  border-radius: 231.6px;
+  border: 7px solid #ccc;
+  cursor: pointer;
+  user-select: none;
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.switch::before,
+.switch::after {
+  content: "";
+  width: 45px;
+  height: 45px;
+  background-color: white;
 
+  position: absolute;
+  border-radius: 50%;
+  top: -20%;
+  left: -3%;
+  transition: all 350ms cubic-bezier(0, 0.95, 0.38, 0.98), background 150ms ease;
+  transform-origin: right center;
+}
+.switch::before {
+  border: 7px solid lightblue;
+}
+.switch::after {
+  background: #fbd3e1;
+  border: 7px solid pink;
+}
+input:checked + .switch:before {
+  background: #d3f0fb;
+  transform: translateX(145%);
+  border: 7px solid pink;
+}
+input + .switch .female {
+  color: pink;
+}
+input:checked + .switch .male {
+  color: lightblue;
+}
+input + .switch .male {
+  color: rgb(255, 255, 255);
+}
+input:checked + .switch .female {
+  color: rgb(255, 255, 255);
+}
+input:checked + .switch:after {
+  background: #d3f0fb;
+  transform: translateX(145%);
+  border: 7px solid lightblue;
+}
+.female,
+.male {
+  position: absolute;
+  font-weight: lighter;
+  color: rgb(255, 255, 255);
+}
+.female {
+  z-index: -1;
+  top: 80%;
+  left: 0%;
+  transform: rotate(180deg);
+  font-size: 77px;
+}
+.male {
+  z-index: -1;
+  left: 82%;
+  top: -150%;
+  font-size: 77px;
+  transform: rotate(-50deg);
+}
+a .i1 {
+  width: 70px;
+  bottom: 2%;
+  position: absolute;
+  right: 3%;
+  text-decoration: none;
+  color: #ccc;
+  font-size: 15px;
+  animation: bounce 2s alternate infinite;
+}
+.i1 {
+  opacity: 0.5;
 }
 
-#bt2{
-    position: relative;
- top: 5px; left: 235px;
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
 
+/*쇼핑몰순위 창*/
+
+.shopRank {
+  position: absolute;
+  bottom: 50px;
+  left: 80px;
+  margin: 0 auto;
+  text-align: center;
+  height: auto;
+  height: fit-content;
+  padding-bottom: 10px;
+}
+
+#css_tabs {
+  font-family: "nanumgothic", "나눔고딕", "malgun gothic", "맑은 고딕", "dotum",
+    "돋움", sans-serif;
+}
+
+/* 탭 선택 시 표시할 요소(div) 정의(1번 탭 선택 시 첫 번째 div 요소 표시) */
+
+#css_tabs input:nth-of-type(1),
+#css_tabs input:nth-of-type(1) ~ div:nth-of-type(1),
+#css_tabs input:nth-of-type(2),
+#css_tabs input:nth-of-type(2) ~ div:nth-of-type(2),
+#css_tabs input:nth-of-type(3),
+#css_tabs input:nth-of-type(3) ~ div:nth-of-type(3) {
+  display: none;
+}
+
+#css_tabs input:nth-of-type(1):checked ~ div:nth-of-type(1),
+#css_tabs input:nth-of-type(2):checked ~ div:nth-of-type(2),
+#css_tabs input:nth-of-type(3):checked ~ div:nth-of-type(3) {
+  display: block;
+}
+
+/* 라벨 기본 스타일 지정 */
+
+#css_tabs > label {
+  display: inline-block;
+  font-variant: small-caps;
+  font-size: 24px;
+  margin: 0px 0px 0px 5px;
+  padding: 10px;
+  text-align: center;
+  width: 20%;
+  line-height: 1.8em;
+  font-weight: bold;
+  border-radius: 3px 3px 0 0;
+  background: #eee;
+  color: #777;
+  border: 1px solid #ccc;
+  border-width: 1px 1px 0;
+}
+
+#css_tabs > label:hover {
+  cursor: pointer;
+}
+
+#css_tabs label[for="tab1"] {
+  margin-left: 5px;
+}
+
+/* 선택된 라벨, 커서를 올린 라벨 스타일 지정 */
+
+#css_tabs input:nth-of-type(1):checked ~ label:nth-of-type(1),
+#css_tabs > label[for="tab1"]:hover {
+  background: #fbd3e1;
+  color: rgb(255, 0, 89);
+}
+
+#css_tabs input:nth-of-type(2):checked ~ label:nth-of-type(2),
+#css_tabs > label[for="tab2"]:hover {
+  background: #d3f0fb;
+  color: rgb(0, 187, 255);
+}
+
+#css_tabs input:nth-of-type(3):checked ~ label:nth-of-type(3),
+#css_tabs > label[for="tab3"]:hover {
+  background: rgb(232, 255, 225);
+  color: rgb(60, 255, 0);
+}
+
+/* 실제 내용이 담긴 div 요소 스타일 지정 */
+
+#css_tabs .tab1_content,
+#css_tabs .tab2_content,
+#css_tabs .tab3_content {
+  padding-top: 5px;
+  padding-left: 30px;
+  border: 1px solid #ddd;
+  width: 950px;
+  height: 930px;
+}
+
+/*이미지 그리드뷰*/
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  align-items: stretch;
+  margin-top: 5px;
+ 
+  height: fit-content;
+}
+.grid > article {
+  width: 270px;
+  height: 300px;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
+}
+.grid > article img {
+  padding-top: 10px;
+  width: 240px;
+  height: 150px;
+}
+
+.text {
+  margin: 10px;
+  padding: 0 20px 20px;
+}
+
+
+/*바로가기버튼-여자*/
+    .btGO{
+      position: relative;
+      top: 2px; left: 45px;
+          width:130px;
+          height:45px;
+          border: 2px solid #fbd3e1;
+          margin: 2px 2px 0 0;
+          float:left;
+          text-align:center;
+          cursor:pointer;
+          box-sizing:border-box;
+          overflow:hidden;
+          font-weight: bold;
+        }
+        .btGO a{
+          font-size: 20px;
+          font-family: 'Noto Serif KR', serif;
+          color:#ff337a;
+          text-decoration:none;
+          line-height:45px;
+          transition:all .5s ease;
+          z-index:2;
+          position:relative;
+        }
+        .eff{
+          width:140px;
+          height:45px;
+          left:-140px;
+          background:#fbd3e1;
+          position:absolute;
+          transition:all .5s ease;
+          z-index:1;
+        }
+        .btGO:hover .eff{
+          left:0;
+        }
+        .btGO:hover a{
+          color:#ff84af;
+      }
+
+
+
+/*바로가기버튼2-남자*/
+.btGOM{
+  position: relative;
+  top: 2px;
+  left: 45px;
+      width:130px;
+      height:45px;
+      border: 2px solid #d3f0fb;
+      float:left;
+      text-align:center;
+      margin: 2px 2px 0 0;
+      cursor:pointer;
+      box-sizing:border-box;
+      overflow:hidden;
+      font-weight: bold;
+    }
+    .btGOM a{
+      font-size: 20px;
+      font-family: 'Noto Serif KR', serif;
+      color:#00bbff;
+      text-decoration:none;
+      line-height:45px;
+      transition:all .5s ease;
+      z-index:2;
+      position:relative;
+    }
+    .effM{
+      width:140px;
+      height:45px;
+      left:-140px;
+      background:#d3f0fb;
+      position:absolute;
+      transition:all .5s ease;
+      z-index:1;
+    }
+    .btGOM:hover .effM{
+      left:0;
+    }
+    .btGOM:hover a{
+      color:#62d5ff;
+  }
+
+
+
+
+
+/*쇼핑몰 인기검색어 순위*/
+
+.tbl_type caption {
+  padding: 20px;
+  font-size: 30px;
+  font-weight: bold;
+}
+.tbl_type {
+  position: relative;
+  left: 70px;
+  width: 800px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 25px;
+  border-collapse: collapse;
+  text-align: center;
+  line-height: 1.5;
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+  border-left: hidden;
+  border-right: hidden;
+  margin: 20px 10px;
+}
+.tbl_type th {
+  background-color: #a09f9f7c;
+  width: 50px;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  vertical-align: top;
+  border: hidden;
+}
+.tbl_type td {
+  border: 1px solid gainsboro;
+  width: 30px;
+  padding: 10px;
+  vertical-align: top;
 }

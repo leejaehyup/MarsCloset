@@ -7,17 +7,17 @@ const serialYes = document.getElementById("serialYes");
 
 setInterval(() => {
   $.ajax({
-    url: "./uploadTag",
+    url: "/uploadTag",
     method: "GET",
     dataType: "json"
   })
-    .done(function(json) {
-      let recData = json;
+    .done(function(data) {
+      let recData = data;
       tagNumber.innerHTML = recData;
-      console.log(json);
     })
     .fail(function(status) {
-      console.log(status);
+      console.log(status.responseText);
+      tagNumber.innerHTML = status.responseText;
     });
 }, 1000);
 

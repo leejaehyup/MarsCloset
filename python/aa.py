@@ -28,7 +28,7 @@ for i in range(5, 20):
     num5 = random.randrange(0,len(Color))  #color
     num6 = random.randrange(0,len(season)) #season
     sql = "insert into dcloset VALUES ('%s', '%s', 'mars', 'top', '%s', '%s', 1, NULL, '%s', '%s', '%s', '%s')"%(i, i, subclass1[0], Color[num5], subclass2[num2], subclass3[num3], subclass4[num4], season[num6])
-    print(sql)
+    #print(sql)
     curs.execute(sql)
     
 #shirts
@@ -42,7 +42,7 @@ for i in range(20, 40):
     num5 = random.randrange(0,len(Color))  #color
     num6 = random.randrange(0,len(season)) #season
     sql = "insert into dcloset VALUES ('%s', '%s', 'mars', 'top', '%s', '%s', 1, NULL, '%s', '%s', '%s', '%s');"%(i, i, subclass1[1], Color[num5], subclass2[num2], subclass3[num3], subclass4[num4], season[num6])
-    print(sql)
+    #print(sql)
     curs.execute(sql)
 
 # 바지
@@ -56,7 +56,7 @@ for i in range(40, 60):
     num5 = random.randrange(0,len(Color))  #color
     num6 = random.randrange(0,len(season)) #season
     sql = "insert into dcloset VALUES ('%s', '%s', 'mars', 'bottoms', '%s', '%s', 1, NULL, '%s', '%s', '%s', '%s');"%(i, i, subclass1[0], Color[num5], subclass2[0], subclass3[num3], subclass4[num4], season[num6])
-    print(sql)
+    #print(sql)
     curs.execute(sql)
 
 # 치마
@@ -70,5 +70,5 @@ for i in range(60, 80):
     num5 = random.randrange(0,len(Color))  #color
     num6 = random.randrange(0,len(season)) #season
     sql = "insert into dcloset VALUES ('%s', '%s', 'mars', 'bottoms', '%s', '%s', 1, NULL, '%s', '%s', '%s', '%s');"%(i, i, subclass1[1], Color[num5], subclass2[0], subclass3[num3], subclass4[num4], season[num6])
-    print(sql)
+    #print(sql)
     curs.execute(sql)

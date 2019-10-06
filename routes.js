@@ -4,12 +4,18 @@ const TEST = "/test";
 const UPLOADTAG = "/uploadTag";
 const CLOSET = "/closet";
 const COORDI = "/coordi";
+const KAKAOIMAGE = "/kakaoImg";
+const GETCOORDICLOTH = "/getCoordiCloth";
+const IMAGEINFO = "/imageInfo";
+
+//android
 const CLOTHEALL = "/and_clotheAll";
 const CLOTHETOP = "/and_clotheTop";
 const CLOTHEBOTTOM = "/and_clotheBottom";
 const SENSOR = "/and_sensor";
 const ANDGLASS = "/and_glasses";
-const KAKAOIMAGE = "/kakaoImg";
+const ANDCALENDAR = "/and_calendar";
+const CLOTHNUMBER = "/and_clothNumber";
 
 //glasses
 const GLASSES = "/glasses";
@@ -47,7 +53,11 @@ const routes = {
   calenderInsert: CALINT,
   calenderFind: CALFIND,
   and_calender: ANDCAL,
-  calenderDelete: CALDEL
+  calenderDelete: CALDEL,
+  getCoordiCloth: GETCOORDICLOTH,
+  andCalendar: ANDCALENDAR,
+  andClothNumber: CLOTHNUMBER,
+  imageInfo: IMAGEINFO
 };
 
 module.exports = routes;

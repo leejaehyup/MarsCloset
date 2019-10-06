@@ -4,17 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/css/kakaoImage.css" />
     <title>Document</title>
   </head>
   <body>
-<% for(let i =0; i<kakao.length; i++) {%> 
-    <div id=<%=i%>>
+      <h4> 분석된 사진들 중 옷장에 등록하고 싶은 옷을 선택해주세요. </h4>
+  
+    <!--뒤로가기 버튼-->
+    <button onclick="goBack()" class="btBack"> <img class="btn-img" src="/icons/left-arrow.png" /></button>
+    <script>
+      function goBack() {
+        history.back(-1);
+      }
+    </script>
+
+      <div class = "wrapper">
+    <% for(let i =0; i<kakao.length; i++) {%> 
+      <div id=<%=i%>>
         <img class ='kakaoImage'  src="upload/kakao/<%=tag%><%=i+1%>.png" %>
         <div class = 'kakaopath' style="display: none">upload/kakao/<%=tag%><%=i+1%>.png</div>
         <div class = 'tag' style="display: none"><%=tag%></div>
-        <div class ='kakaoName'> <%=kakao[i]%></div>
-    </div>
-<%}%>
+        <div class ='kakaoName'> <%=kakao[i]%></div
+          >
+      </div>
+      <%}%>
+      </div>
 <script src="/javascript/kakaoImage.js"></script>
   </body>
 </html>

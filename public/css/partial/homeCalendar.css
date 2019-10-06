@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css?family=Do+Hyeon|Gothic+A1|Nanum+Gothic|Nanum+Gothic+Coding|Nanum+Myeongjo|Noto+Sans+KR|Noto+Serif+KR&display=swap");
+
+#calendar {
+  position: absolute;
+  top: 270px;
+  right: 12px;
+  width: 490px;
+  height: 400px;
+  border: 1px solid #bdbdbd;
+  text-align: center;
+  color: white;
+  font-family: "Noto Sans KR", sans-serif;
+    box-shadow: 5px 5px 5px 5px rgba(255, 255, 255, 0.226);
+}
+
+#calendar td {
+  padding-top: 5px;
+  height: 30px;
+}
+#yearmonth {
+  font-size: 20px;
+  font-family: "Noto Sans KR", sans-serif;
+}
+#before,
+#next {
+  cursor: pointer;
+  text-align: center;
+  font-size: 15px;
+  color: rgb(73, 230, 0);
+}
+
+/*몇요일*/
+.yj_day {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/*몇일*/
+.dateNum {
+  font-size: 12px;
+  padding-left: 5px;
+  padding-bottom: 5px;
+  width: 60px;
+  vertical-align: top;
+}

@@ -46,7 +46,7 @@ def show_products_file(file_directory, detection_result):
 
 
             y2 = int(obj['y2']*image.height)
-            tempImage = image.crop((x1, y1, x2, y2))
+            tempImage = image.crop((x1-20, y1-20, x2+20, y2+20))
             resize_image = tempImage.resize((400, 300))
             resize_image.save(imgname)
             print(obj['class'])
@@ -59,8 +59,8 @@ def show_products_file(file_directory, detection_result):
 
 
 if __name__ == "__main__":
-    #img = imagePath
-    img = './aaa.jpg'
+    img = imagePath
+    #img = './aaa.jpg'
     # 파일로 vision api에 요청을 보냅니다
     detection_result = detect_product_file(img)
     image = show_products_file(img, detection_result)

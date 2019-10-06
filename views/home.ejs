@@ -11,24 +11,21 @@
 
     <link rel="stylesheet" href="/css/home.css" /> 
     
-   <!-- 날씨아이콘? -->
+   <!-- 날씨아이콘 -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
-   <!-- 가상키보드 -->
-    <script src="/javascript/keyboard.js"></script>
-    <link rel="stylesheet" href="/css/partial/keyboard.css" /> 
-
-<!-- 날짜 + 시간 -->
+  
+<!-- 날짜 + 시간 css -->
     <link rel="stylesheet" href="/css/partial/dateTime.css" /> 
     <link rel="stylesheet" href="/css/partial/weather.css" /> 
-    <link rel="stylesheet" href="/css/partial/testCalendar.css" /> 
+
+    <link rel="stylesheet" href="/css/partial/homeCalendar.css" /> 
+    
     <title><%=title %></title>
-
-
 
   </head>
 
-  <body onload="printClock()">
+  <body>
       <div class="dateTime">
           <div id="time-result">
           </div>
@@ -38,7 +35,7 @@
 
 
   <div class="greet">
-      <p style="font-size: 80px;">안녕하세요, 마스님!</p>
+      <p style="font-size: 60px;">안녕하세요, 여러분!</p>
       오늘도 좋은 하루 보내세요😊
   </div>
 
@@ -47,7 +44,10 @@
   <div class="temp"></div>
   <div class="index_margin"></div>
 
-  <% include ./partial/testCalendar %>
+
+
+<!--달력-->
+  <% include ./partial/homeCalendar%>
 
         <form action="test" >
             <input type="submit" class="test"/><p id="tt">옷 등록</p>
@@ -59,11 +59,8 @@
             <a href="#">MAIN</a>
             <a href="closet">CLOSET</a>
             <a href="coordi">CODI</a>
-            <a href="glassesImg">WISH LIST</a>
+            <a href="glassesImg" >GLASSES GALLERY</a>
           </div>
-
-    
-  <input type="text" value="" class="keyboardInput">
 
 <div class="shopRank">
 
@@ -320,23 +317,13 @@
 
 </div>
 
-    <div class="container">
-        <input id="switch" type="checkbox" hidden>
-        <label for="switch" class="switch">
-           <h1 class="female">✝</h1>
-           <h1 class="male">➜</h1>
-        </label>
-
-     </div>
-
-
-
 
     <div id="serialYes"></div>
     <div id="serialImage">
 
     </div>
 
+    <!--날짜+시간 js-->
     <script src="/javascript/dateTime.js"></script>
   </body>
 

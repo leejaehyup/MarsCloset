@@ -104,6 +104,28 @@ exports.Postglasses = async (req, res) => {
     glength: length
   });
 
+  //우호 코디 실행
+  try {
+    const {PythonShell} = require("python-shell");
+    let options = {
+      mode: "text",
+      pythonPath: "",
+      pythonOptions: ["-u"], // get print results in real-time
+      scriptPath: ""
+    };
+    PythonShell.run("./python/gsavedb.py", options, async function(
+      err,
+      results
+    ) {
+      if (err) throw err;
+      for (let i = 0; i < results.length; i++) {
+        console.log("우호코디->>>>" + results[i]);
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+
   res.send("suc");
 };
 

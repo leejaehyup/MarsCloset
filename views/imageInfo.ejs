@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="/css/closet.css" />
+
+    <link rel="stylesheet" href="/css/imageInfo.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <% include ./partial/slidingMenu %>
+    <div class="mainContainer">
+      <img src="<%=imageInfo.cloImg%>" />
+
+      <div class="mainInfo">group: <%=imageInfo.category%></div>
+
+      <div class="mainInfo">category: <%=imageInfo.subclass1%></div>
+
+      <div class="mainInfo">length: <%=imageInfo.subclass2%></div>
+
+      <div class="mainInfo">type: <%=imageInfo.subclass3%></div>
+
+      <div class="mainInfo">pattern: <%=imageInfo.subclass4%></div>
+
+      <div class="mainInfo">tone: <%=imageInfo.Color%></div>
+    </div>
+  </body>
+</html>
