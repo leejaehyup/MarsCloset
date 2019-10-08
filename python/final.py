@@ -19,7 +19,7 @@ temp = 20
 #시즌 조건문
 clothes_season = vm.season(temp)
 #옷 조건 쿼리 앞 부분 (식별자, 카테고리 4개, Color)
-head = "select rfid_number, subclass1, subclass2, subclass3, subclass4, Color FROM dcloset WHERE"
+head = "select rfid_number, subclass1, subclass2, subclass3, subclass4, Color FROM dcloset WHERE status=1 AND"
 
 # 사용자의 성향 확인
 sql = 'select * from preference where userID like "mars"'
