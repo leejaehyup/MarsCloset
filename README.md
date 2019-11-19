@@ -25,20 +25,20 @@
    ![closet2](./public/images/closet2.png)
      ***
    
-  ###### 백엔드 기능 설명
+###### 백엔드 기능 설명
   
-  1. 개발 언어: node.js, python
+ 1. 개발 언어: node.js, python
     * 프레임워크: express
     
-  2. 데이터베이스: mysql
+ 2. 데이터베이스: mysql
     * ORM : sequelize
     * 객체 스토리지 서버 : S3
     * 데이터베이스 서버관리: AWS RDS  
   
-  3. python: opencv, tkinter
+ 3. python: opencv, tkinter
     * grabcut 알고리즘 : 이미지에서 배경이 아닌 전경에 해당하는 이미지를 추출해 내는 알고리즘
     * tkinter를 통해 gui 프로그래밍
     
-  4. 통신
+ 4. 통신
     * TensorFlow를 통해 학습시킨 모델을 가진 서버와 http 프로토콜을 통해 통신
     * 아두이노 nodeMcu 기기와 http 프로토콜을 통해 통신
