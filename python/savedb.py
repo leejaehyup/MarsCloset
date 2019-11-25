@@ -1,80 +1,16 @@
 from openpyxl import load_workbook
 from operator import eq
+import pymysql.cursors
 import os
 
-
 #엑셀 불러오기
-<<<<<<< HEAD
-load_cloth=load_workbook("C:\Users\pyj\Desktop\My Node Js 1005/python/vm.xlsx", data_only=True)
-=======
 load_cloth=load_workbook(os.environ['MYROUTE']+"/python/vm.xlsx", data_only=True)
->>>>>>> 5970c6318131aa30f89bea66455c59cb9dde2553
 cloth_excel=load_cloth['cloth']
 style_excel=load_cloth['style']
 
-'''
-설명 : 사용자 선호 스타일에 맞는 데이터를 뽑아 내기 위한 조건문 생성 
-인자 : pre = 레코드, pnum = 레코드 수
-return 값 : 상의 하의 조건 쿼리문 (string)
-'''
-def style(pre, row):
-    # 선택한 선호 스타일의 수만큼 for문을 돌리고 해당하는 옷을 가져옴
 
-    if pre[row][2] == "Lovely":
-        #Top
-        sqlT = " category LIKE 'top' "
-        #Bottom
-        sqlB = " category LIKE 'bottoms' and subclass1 LIKE 'skirt'"
-
-    elif pre[row][2] == "Dandy":
-        sqlT = " category LIKE 'top' and subclass3 NOT IN ('crop', 'hoody', 'halter', 'casual')"
-        sqlB = " category LIKE 'bottoms' and subclass1 IN ('skirt', 'pants')"
-    
-    elif pre[row][2] == "casual":
-        sqlT = " category LIKE 'top' and subclass3 IN ('mantoman', 'hody', 'casual')"
-        sqlB = " category LIKE 'bottom' and subclass3 IN ('jogger', 'leggings')"
-        
-    else:
-        sqlT = " category LIKE 'top' and subclass3 NOT IN ('box', 'crop')"
-        sqlB = " category LIKE 'bottom' and subclass3 = 'jeans'"
-
-    return sqlT, sqlB        
-    
-'''
-설명 : 현재 기온에 맞는 옷을 분별하기 위한 조건 쿼리문 찾기 
-인자 : 현재 기온 temp
-return 값 : 시즌에 맞는 옷을 추릴 수 있는 조건 쿼리문 (string) - clothes_season
-'''
-def season(temp) :
-    if temp <= 2:
-        #겨울
-        clothes_season = " and season LIKE 'W'"
-    elif temp > 2 and temp <= 4:
-        #겨울 봄
-        clothes_season = " and season regexp 'W|S'"
-    elif temp > 5 and temp <= 19:
-        #봄 가을
-        clothes_season= " and season regexp 'S|F"
-    elif temp > 19 and temp <= 21:
-        #봄 가을 여름
-        clothes_season = " and season regexp 'S|F|U$'" 
-    elif temp > 21 and temp <=24:
-        #가을 여름
-        clothes_season = " and season regexp 'F|U$'"
-    else:
-        #여름
-        clothes_season =  " and season LIKE 'U'"
-
-    return clothes_season
-    
-'''
-설명 : 상의 하의의 정보를 받고 vm 엑셀 파일을 참조하여 코디 점수를 내주는 함수
-인자 : Bottom 정보 5개, top 정보 5개
-retrun값 : allpoint 합산 점수 (int)
-'''
 #사용자정의함수 vm사용
 def usedvm(bottoms1,bottoms2,bottoms3,bottoms4,bottomsstyle,top1,top2,top3,top4,topstyle) :
-   
     #//////////////////////////////하의
     ###############################pants
     if eq(bottoms1,"pants"):
@@ -268,10 +204,7 @@ def usedvm(bottoms1,bottoms2,bottoms3,bottoms4,bottomsstyle,top1,top2,top3,top4,
 
 
 
-
-
     ######@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@style
-    global tstyle, bstyle
     #top
     if eq(topstyle,"colorful"):
         tstyle=3
@@ -289,7 +222,6 @@ def usedvm(bottoms1,bottoms2,bottoms3,bottoms4,bottomsstyle,top1,top2,top3,top4,
         tstyle=9
 
     #bottoms
-
     if eq(bottomsstyle,"colorful"):
         bstyle=3
     elif eq(bottomsstyle,"lucid"):
@@ -304,13 +236,110 @@ def usedvm(bottoms1,bottoms2,bottoms3,bottoms4,bottomsstyle,top1,top2,top3,top4,
         bstyle=8
     elif eq(bottomsstyle,"zingzy"):
         bstyle=9
-
     if eq(top1, "onepiece"):
         stylepoint=1
     else :
-        stylepoint=style_excel.cell(tstyle,bstyle).value
+        stylepoint=style_excel.cell(tstyle, bstyle).value
 
     clothpoint=cloth_excel.cell(top,bottoms).value
     allpoint=stylepoint+clothpoint
     
     return allpoint
+
+#//////////////////////////////////////////////////////////
+
+# MySQL Connection 연결
+conn = pymysql.connect(host=os.environ['AWS_DB_HOST'],port=3306, user=os.environ['AWS_DB_USER'],
+                       passwd=os.environ['AWS_DB_PASSWORD'], db=os.environ['AWS_DB_DATABASE'], charset='utf8')
+
+# Connection 으로부터 Cursor 생성
+curs = conn.cursor()
+ 
+# SQL문 순서대로 검색, 삭제, 삽입
+
+
+sql1 = "select cloImg,category,subclass1,subclass2,subclass3,subclass4,Color from dcloset"
+sql2 = "delete from gicloset"
+sql3 = "insert into gicloset(cloImg,recom1,recom2,recom3,recom4,recom5,section,count) values (%s, %s, %s, %s, %s, %s, %s,%s)"
+sql4= "select gimg,gCategorize,gtype,glength,gsubclass,pattern,gstyle from gimg_analysis"
+
+curs.execute(sql2)
+curs.execute(sql4)
+grows = curs.fetchall()
+curs.execute(sql1)
+
+# 데이타 Fetch
+rows = curs.fetchall()
+for row1 in rows:
+#db에 넣을 값
+    savedata=[]
+#대상이 상의일때
+    if eq(row1[1],"top") and not(eq(row1[2],"onepiece")) :
+        for row2 in rows:
+            if eq(row2[1],"bottoms") and not(eq(row2[2],"onepiece")):
+                savedata.append([row2[0],usedvm(row2[2],row2[3],row2[4],row2[5],row2[6],
+                                                row1[2],row1[3],row1[4],row1[5],row1[6])])
+#대상이 하의일때
+    elif eq(row1[1],"bottoms") and not(eq(row1[2],"onepiece")):
+        for row2 in rows:
+            if eq(row2[1],"top") and not(eq(row2[2],"onepiece")):
+                 savedata.append([row2[0],usedvm(row1[2],row1[3],row1[4],row1[5],row1[6],
+                                                 row2[2],row2[3],row2[4],row2[5],row2[6])])
+#대상이 원피스일때
+    else :
+        for row2 in rows:
+            if eq(row2[2] ,"onepiece"):
+                savedata.append([row2[0],9])
+    usedata=sorted(savedata, key=lambda x:x[1],reverse=True)
+    if len(usedata) > 4:
+        curs.execute(sql3,(row1[0],usedata[0][0],usedata[1][0],usedata[2][0],usedata[3][0],usedata[4][0],int(0),int(len(usedata))))
+    elif len(usedata) == 4:
+        curs.execute(sql3,(row1[0],usedata[0][0],usedata[1][0],usedata[2][0],usedata[3][0],None,int(0),int(len(usedata))))
+    elif len(usedata) == 3:
+        curs.execute(sql3,(row1[0],usedata[0][0],usedata[1][0],usedata[2][0],None,None,int(0),int(len(usedata))))
+    elif len(usedata) == 2:
+        curs.execute(sql3,(row1[0],usedata[0][0],usedata[1][0],None,None,None,int(0),int(len(usedata))))
+    elif len(usedata) == 1:
+        curs.execute(sql3,(row1[0],usedata[0][0],None,None,None,None,int(0),int(len(usedata))))
+    else :
+        curs.execute(sql3,(row1[0],None,None,None,None,None,int(0),int(len(usedata))))
+
+#안경으로찍은 이미지+옷장
+for grow in grows:
+#db에 넣을 값
+    savedata1=[]
+#대상이 상의일때
+    if eq(grow[1],"top") and not(eq(grow[2],"onepiece")) :
+        for row2 in rows:
+            if eq(row2[1],"bottoms") and not(eq(row2[2],"onepiece")):
+                savedata1.append([row2[0],usedvm(row2[2],row2[3],row2[4],row2[5],row2[6],
+                                                grow[2],grow[3],grow[4],grow[5],grow[6])])
+#대상이 하의일때
+    elif eq(grow[1],"bottoms") and not(eq(grow[2],"onepiece")):
+        for row2 in rows:
+            if eq(row2[1],"top") and not(eq(row2[2],"onepiece")):
+                 savedata1.append([row2[0],usedvm(grow[2],grow[3],grow[4],grow[5],grow[6],
+                                                 row2[2],row2[3],row2[4],row2[5],row2[6])])
+#대상이 원피스일때
+    else :
+        for row2 in rows:
+            if eq(row2[2],"onepiece"):
+                savedata1.append([row2[0],9])
+    usedata1=sorted(savedata1, key=lambda x:x[1],reverse=True)
+    if len(usedata1) > 4:
+        curs.execute(sql3,(grow[0],usedata1[0][0],usedata1[1][0],usedata1[2][0],usedata1[3][0],usedata1[4][0],int(1),int(len(usedata1))))
+    elif len(usedata1) == 4:
+        curs.execute(sql3,(grow[0],usedata1[0][0],usedata1[1][0],usedata1[2][0],usedata1[3][0],None,int(1),int(len(usedata1))))
+    elif len(usedata1) == 3:
+        curs.execute(sql3,(grow[0],usedata1[0][0],usedata1[1][0],usedata1[2][0],None,None,int(1),int(len(usedata1))))
+    elif len(usedata1) == 2:
+        curs.execute(sql3,(grow[0],usedata1[0][0],usedata1[1][0],None,None,None,int(1),int(len(usedata1))))
+    elif len(usedata1) == 1:
+        curs.execute(sql3,(grow[0],usedata1[0][0],None,None,None,None,int(1),int(len(usedata1))))
+    else :
+        curs.execute(sql3,(grow[0],None,None,None,None,None,int(1),int(len(usedata1))))
+# DB에 Complete 하기
+conn.commit()
+
+# Connection 닫기
+conn.close()

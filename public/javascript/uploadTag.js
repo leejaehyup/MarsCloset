@@ -49,6 +49,11 @@ saveDBbutton.addEventListener("click", saveDB);
 function saveDB() {
   saveDBbutton.removeEventListener("click", saveDB);
   const tagNum = $("#TagNumber").text();
+  if (!tagNum) {
+    swal("RFID TAG를 찍어주세요!");
+    saveDBbutton.addEventListener("click", saveDB);
+    return;
+  }
   var form = document.createElement("form");
   form.setAttribute("charset", "UTF-8");
   form.setAttribute("method", "Post"); //Post 방식

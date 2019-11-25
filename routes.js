@@ -7,6 +7,8 @@ const COORDI = "/coordi";
 const KAKAOIMAGE = "/kakaoImg";
 const GETCOORDICLOTH = "/getCoordiCloth";
 
+const IMAGEINFO = "/imageInfo";
+const GETCOORDIHO = "/getCoordiHo";
 
 //android
 const CLOTHEALL = "/and_clotheAll";

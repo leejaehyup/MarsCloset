@@ -95,3 +95,16 @@ function imageCreate(data, name) {
   );
   */
 }
+
+setInterval(function() {
+  const image = document.querySelectorAll("img");
+  for (let i = 0; i < image.length; i++) {
+    image[i].addEventListener("click", redirectImage);
+  }
+}, 1000);
+
+function redirectImage(e) {
+  console.log(e.target.currentSrc);
+  const url = e.target.currentSrc;
+  window.location.href = "http://www.localhost:4000/imageInfo?image=" + url;
+}

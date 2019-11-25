@@ -13,15 +13,13 @@ body {
   left: 25px;
   border: 1px solid #bdbdbd;
   text-align: center;
-padding-left: 10px;
+  padding-left: 10px;
   width: 1000px;
-height: auto;
+  height: auto;
 }
 
 #calendar td {
   height: 100px;
-  
-
 }
 #yearmonth {
   font-size: 40px;

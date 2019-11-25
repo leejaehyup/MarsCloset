@@ -8,6 +8,10 @@ body {
   color: #ff9494;
 
 }
+body::-webkit-scrollbar { 
+  display: none; 
+}
+
 
 h1 {
   position: absolute;

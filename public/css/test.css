@@ -1,59 +1,79 @@
+@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans|Cute+Font|Do+Hyeon|Gaegu|Gothic+A1|Hi+Melody|Jua|Nanum+Brush+Script|Nanum+Gothic|Nanum+Gothic+Coding|Nanum+Myeongjo|Noto+Sans+KR|Noto+Serif+KR&display=swap');
+
 body {
   position: absolute;
-  width: 1200px;
+  width: 1080px;
   height: 1920px;
   background: black;
   color: white;
 }
+body::-webkit-scrollbar { 
+  display: none; 
+}
+
+h4{
+  position: absolute;
+  top: 27px;
+  left: 92px;
+  font-family: 'Gothic A1', sans-serif;
+  font-size: 33px;
+}
+
 
 /*뒤로가기버튼*/
 .btBack {
+  z-index: 1;
   position: absolute;
-    top: 900px;
-    left: 30px;
-    font-size: 100px;
+   top: 900px;
+    left: 65px;
   background: none;
-  color: #ffffff;
-  border-radius: 50%;
-  padding: 0px;
-  border: 1px solid #ffffff;
+  border: 4px outset #ffffff;
+  border-radius: 10px;
   cursor: pointer;
 }
 .btBack:hover {
-  color: #f16b6f;
-  box-shadow: 3px 3px 3px 3px rgba(253, 59, 59, 0.404);
+  background: #b0c4eb;
+  box-shadow: 3px 3px 3px 3px rgba(89, 89, 89, 0.63);
+}
+.btBack img{
+  width: 60px; height: 60px;
 }
 
 video {
   position: absolute;
   top: 50px;
   left: 50px;
+
+  width: 900px;
+  height: 800px;
+
   border: 1px solid rgb(78, 78, 78);
   border-radius: 10px;
-  padding: 5px;
-  box-shadow: 0 0 2px 1px rgba(0, 37, 116, 0.644);
-  width: 1000px;
-  height: 900px;
+  padding: 15px;
+  box-shadow: 0 0 2px 1px rgba(3, 60, 182, 0.692);
+  
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg); /* Safari and Chrome */
   -moz-transform: rotateY(180deg); /* Firefox */
 }
 .btn-img {
-  width: 90px;
-  height: 90px;
+  width: 100px;
+  height: 100px;
 }
 
+/*촬영버튼*/
 #imgButton {
+  z-index: 2;
   position: absolute;
-  top: 820px;
-  left: 920px;
+  top: 870px;
+  left: 840px;
   background: none;
   color: white;
   border: 5px outset #ffffff;
-  font-size: 50px;
   cursor: pointer;
 }
 #imgButton:hover {
   background-color: rgb(212, 212, 212);
   color: black;
+  box-shadow: 3px 3px 3px 3px rgba(171, 208, 255, 0.301);
 }

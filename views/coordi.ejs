@@ -27,6 +27,10 @@
       img {
         border: none;
       }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5970c6318131aa30f89bea66455c59cb9dde2553
 
       #imgCarousel {
         height: 390px;
@@ -38,7 +42,132 @@
       #imgCarousel .arrow {
         width: 44px;
         height: 44px;
+<<<<<<< HEAD
         background: url("img/arrows.png") no-repeat;
+=======
+>>>>>>> 5970c6318131aa30f89bea66455c59cb9dde2553
+        position: absolute;
+        top: 50%;
+        margin-top: -22px;
+        left: 0;
+        cursor: pointer;
+      }
+      #imgCarousel .next {
+        background-position: right top;
+        left: auto;
+        right: 0;
+      }
+      #imgCarousel .arrow:hover {
+        background-position: left bottom;
+      }
+      #imgCarousel .next:hover {
+        background-position: right bottom;
+      }
+      #stage {
+        left: 50%;
+        margin-left: -320px;
+        position: absolute;
+        width: 640px;
+        height: 100%;
+      }
+      #stage img {
+        display: none;
+        border: 2px #999 solid;
+      }
+      #stage .default {
+        display: block;
+        left: 50%;
+        margin-left: -135px;
+        position: absolute;
+      }
+      #stage .animationReady {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      #stage1 {
+        left: 50%;
+        margin-left: -320px;
+        position: absolute;
+        width: 640px;
+        height: 100%;
+      }
+      #stage1 img {
+        display: none;
+        border: 2px #999 solid;
+      }
+      #stage1 .default {
+        display: block;
+        left: 50%;
+        margin-left: -135px;
+        position: absolute;
+      }
+      #stage1 .animationReady {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+<<<<<<< HEAD
+=======
+    <style>
+      body {
+        animation: fadeInAnimation ease 3s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+      }
+      @keyframes fadeInAnimation {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
+>>>>>>> 5970c6318131aa30f89bea66455c59cb9dde2553
+
+    <script language="javascript">
+      rebtn = document.recom_btn;
+      okbtn = document.ok_btn;
+      let k = 0;
+      let j = 0;
+      let count = 0;
+      let topData = new Array();
+      let thangerID = new Array();
+      let bhangerID = new Array();
+
+      <%for(let i=0; i<topData.length; i++){ %>
+        thangerID["<%=i%>"] = "<%= topData[i].hangerID%>";
+        <%}%>
+        <%for(let i=0; i<topData.length; i++){ %>
+        bhangerID["<%=i%>"] = "<%= bottomData[i].hangerID%>";
+        <%}%>
+
+      // 확정 버튼 시 처리 해야할 부분
+          console.log(thangerID,bhangerID)
+      function ok() {
+        const image = document.querySelectorAll("img");
+        let top = [];
+        for (let i = 0; i < image.length / 2; i++) {
+          top[i] = image[i].style.zIndex;
+        }
+<<<<<<< HEAD
+=======
+=======
+
+      #imgCarousel {
+        height: 390px;
+        margin: 90px auto 120px;
+        position: relative;
+        width: 710px;
+        background-color: #000;
+      }
+      #imgCarousel .arrow {
+        width: 44px;
+        height: 44px;
         position: absolute;
         top: 50%;
         margin-top: -22px;
@@ -129,6 +258,8 @@
         for (let i = 0; i < image.length / 2; i++) {
           top[i] = image[i].style.zIndex;
         }
+>>>>>>> 9452ecf4d6af0fd2658c1b299c5f7f62967378c3
+>>>>>>> 5970c6318131aa30f89bea66455c59cb9dde2553
         let list = {};
         for (let i = 0; i < image.length / 2; i++) {
           list[i] = top[i];
@@ -222,8 +353,19 @@
       </div>
     </div>
 
+<<<<<<< HEAD
     <div class="button_base bt3D" name="ok_btn" onclick="ok()" id="bt2">
       <div>지금 코디 확정</div>
+=======
+    <div
+      class="button_base bt3D"
+      name="ok_btn"
+      onclick="ok()"
+      id="bt2"
+      style="margin-left:300px;margin-top:250px;"
+    >
+      <div>코디 확정</div>
+>>>>>>> 5970c6318131aa30f89bea66455c59cb9dde2553
       <div>확정!</div>
     </div>
   </body>

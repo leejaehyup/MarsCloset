@@ -44,9 +44,8 @@ def show_products_file(file_directory, detection_result):
             x2 = int(obj['x2']*image.width)
 
 
-
             y2 = int(obj['y2']*image.height)
-            tempImage = image.crop((x1, y1, x2, y2))
+            tempImage = image.crop((x1-20, y1-20, x2+20, y2+20))
             resize_image = tempImage.resize((400, 300))
             resize_image.save(imgname)
             print(obj['class'])

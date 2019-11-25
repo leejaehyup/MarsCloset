@@ -5,7 +5,9 @@ const iconv = require("iconv-lite");
 const clothes = require("../models").dcloset;
 const temp = require("../models").LeeJaeHyup;
 const gicloset = require("../models").gicloset;
+
 const fs = require("fs");
+const glasses = require("../models").gimg_analysis;
 const calender = require("../models").calendar;
 const sharp = require("sharp"); //이미지 조절
 
@@ -32,13 +34,105 @@ exports.getCoordiImage = async (req, res) => {
   }
 };
 
+exports.getCoordiHo = async (req, res) => {
+  const data = req.query.data;
+
+  let cloth = await clothes.findOne({
+    where: {
+      cloImg: data
+    }
+  });
+  try {
+    cloth = cloth.hangerID + "/LED";
+    console.log(cloth);
+    const _res = await axios.get(cloth);
+    console.log(_res.data.trim());
+    res.send(_res.data.trim());
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+exports.getImageInfo = async (req, res) => {
+  //우호 코디 실행
+  try {
+    const {PythonShell} = require("python-shell");
+    let options = {
+      mode: "text",
+      pythonPath: "",
+      pythonOptions: ["-u"], // get print results in real-time
+      scriptPath: ""
+    };
+    PythonShell.run("./python/savedb.py", options, async function(
+      err,
+      results
+    ) {
+      if (err) throw err;
+    });
+  } catch (err) {
+    console.log(err);
+  }
+  const info = req.query.image;
+  let closetImage = true;
+  let imageInfo = await clothes.findOne({where: {cloImg: info}});
+  let coordiImage = await gicloset.findOne({where: {cloImg: info}});
+  if (!imageInfo) {
+    imageInfo = await glasses.findOne({where: {gImg: info}});
+    closetImage = false;
+  }
+  let arr = [];
+  console.log(typeof coordiImage.count);
+  switch (coordiImage.count) {
+    case 1:
+      arr[0] = coordiImage.recom1;
+      break;
+    case 2:
+      arr[0] = coordiImage.recom1;
+      arr[1] = coordiImage.recom2;
+      break;
+    case 3:
+      arr[0] = coordiImage.recom1;
+      arr[1] = coordiImage.recom2;
+      arr[2] = coordiImage.recom3;
+      break;
+    case 4:
+      arr[0] = coordiImage.recom1;
+      arr[1] = coordiImage.recom2;
+      arr[2] = coordiImage.recom3;
+      arr[3] = coordiImage.recom4;
+      break;
+    case 5:
+      arr[0] = coordiImage.recom1;
+      arr[1] = coordiImage.recom2;
+      arr[2] = coordiImage.recom3;
+      arr[3] = coordiImage.recom4;
+      arr[4] = coordiImage.recom5;
+      break;
+  }
+
+  console.log(coordiImage.count);
+  res.render("imageInfo", {imageInfo, arr, closetImage});
+};
+
+exports.getCoordiImage = async (req, res) => {
+  const hangerID = req.query.hangerID + "/LED";
+  console.log(hangerID);
+  try {
+    const data = await axios.get(hangerID);
+    console.log(data.data.trim());
+    res.send(data.data.trim());
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 exports.coordi = async (req, res) => {
   const {PythonShell} = require("python-shell");
   let coordi = [];
   let kakaoOptions = {
     mode: "text",
     pythonPath: "",
-    pythonOptions: ["-u"],
+    pythonOptions: ["-u"], // get print results in real-time
     scriptPath: ""
   };
   PythonShell.run("./python/final.py", kakaoOptions, async function(
@@ -155,39 +249,51 @@ exports.home = async (req, res) => {
           i++;
         });
 
-        var requestOptions = {
-          method: "GET",
-          uri: "https://store.musinsa.com/app/",
-          headers: {"User-Agent": "Mozilla/5.0"},
-          encoding: null
-        };
+        var rank = $(this);
+        rank_text1 = rank.text();
+        arr_link1[i] = rank_text1;
+        i++;
+      });
+      i = 0;
+      $(".mw_basic_list_click").each(function() {
+        var rank = $(this);
+        rank_text1 = rank.text();
+        arr_click1[i] = rank_text1;
+        i++;
+      });
 
-        request.get(requestOptions, function(error, response, html) {
-          var $ = cheerio.load(html);
-          var rank_text2;
-          var arr_product = new Array();
-          var i = 0;
+      var requestOptions = {
+        method: "GET",
+        uri: "https://store.musinsa.com/app/",
+        headers: {"User-Agent": "Mozilla/5.0"},
+        encoding: null
+      };
 
-          $(".word").each(function() {
-            var rank = $(this);
-            rank_text2 = rank.text();
-            arr_product[i] = rank_text2;
-            i++;
-          });
-          let data = portSerial.serialData;
+      request.get(requestOptions, function(error, response, html) {
+        var $ = cheerio.load(html);
+        var rank_text2;
+        var arr_product = new Array();
+        var i = 0;
 
-          res.render("home", {
-            title: "hello!!",
-            data: data,
-            shopping: arr_link,
-            name: arr_rank,
-            click: arr_click,
-            shopping2: arr_link1,
-            name2: arr_rank1,
-            click2: arr_click1,
-            product: arr_product,
-            data: recData
-          });
+        $(".word").each(function() {
+          var rank = $(this);
+          rank_text2 = rank.text();
+          arr_product[i] = rank_text2;
+          i++;
+        });
+        let data = portSerial.serialData;
+
+        res.render("home", {
+          title: "hello!!",
+          data: data,
+          shopping: arr_link,
+          name: arr_rank,
+          click: arr_click,
+          shopping2: arr_link1,
+          name2: arr_rank1,
+          click2: arr_click1,
+          product: arr_product,
+          data: recData
         });
       });
     });
@@ -230,6 +336,7 @@ exports.kakaoImage = async (req, res) => {
     try {
       sharp(imageBuffer.data)
         .resize(400, 300)
+        .flop()
         .toFile(userUploadedImagePath, (err, info) => {
           if (err) {
             console.log("sharp is error!!");
@@ -262,7 +369,7 @@ exports.kakaoImage = async (req, res) => {
     }
     if (kakao[0] == "'objects'") {
       console.log("카카오 api에서 이미지 인식을 하지 못했습니다.");
-      res.redirect("test");
+      res.render("test", {confirm: false});
     } else {
       res.render("kakaoImg", {kakao: kakao, tag: tag});
     }
@@ -309,7 +416,7 @@ exports.test = async (req, res) => {
   let data = portSerial.serialData;
   await temp.destroy({where: {}});
   console.log(data);
-  res.render("test", {title: "test!!", data: data});
+  res.render("test", {title: "test!!", data: data, confirm: true});
 };
 
 exports.getUploadTag = async (req, res) => {
@@ -356,11 +463,27 @@ exports.savePostHome = async (req, res) => {
   if (pattern == "graphic") {
     pattern = "printing";
   }
+  if (category == "bottom") {
+    category = "bottoms";
+  }
+  if (pattern == "graphic") {
+    pattern = "printing";
+  }
+  if (subclass == "tube") {
+    subclass = "tube_skirt";
+  }
+  if (clotheType == "skirt") {
+    length = "skirt";
+  }
+  if (subclass == "man_to_man") {
+    subclass = "mantoman";
+  }
 
   for (let i = 0; i < seasons.length; i++) {
     season = season + seasons[i];
   }
   if (season === null || season === "" || season === undefined) season = "WSFU";
+
   console.log("저장되는 값들->>>", clotheType, category, style, season);
 
   const AWS = require("aws-sdk");
@@ -380,6 +503,7 @@ exports.savePostHome = async (req, res) => {
     ),
     ContentType: "image/png"
   };
+
   s3.upload(param, function(err, data) {
     if (err) {
       console.log(err);
@@ -401,6 +525,24 @@ exports.savePostHome = async (req, res) => {
       subclass4: pattern,
       season: season,
       status: 0
+    });
+  } catch (err) {
+    console.log(err);
+  }
+  //우호 코디 실행
+  try {
+    const {PythonShell} = require("python-shell");
+    let options = {
+      mode: "text",
+      pythonPath: "",
+      pythonOptions: ["-u"], // get print results in real-time
+      scriptPath: ""
+    };
+    PythonShell.run("./python/savedb.py", options, async function(
+      err,
+      results
+    ) {
+      if (err) throw err;
     });
   } catch (err) {
     console.log(err);

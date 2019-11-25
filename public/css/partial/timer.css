@@ -2,14 +2,14 @@
 .center {
     position: absolute;
     display: inline-block;
-  left: 700px; top:890px;
+  left: 630px; top:910px;
   
   }
   
   /** 타이머 초 선택 옵션 **/
   .custom-select-wrapper {
     width:80px; height:50px;
-   
+
     display: inline-block;
     user-select: none;
   }
@@ -25,8 +25,8 @@
         display: block;
         width: 80px;
         padding: 0 84px 0 22px;
-        font-size: 25px;
         font-weight: 300;
+        font-size: 30px;
         color: #fff;
         line-height: 60px;
         background: #5c9cd8;
@@ -95,10 +95,10 @@
         display: block;
         padding: 0 22px;
         border-bottom: 1px solid #b5b5b5;
-        font-size: 18px;
+        font-size: 30px;
         font-weight: 600;
         color: #000000;
-        line-height: 47px;
+        line-height: 50px;
         cursor: pointer;
         transition: all .4s ease-in-out;
       }

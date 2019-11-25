@@ -1,0 +1,33 @@
+body {
+<<<<<<< HEAD
+  position: absolute;
+  width: 1200px;
+  height: 1920px;
+  background: black;
+  color: white;
+=======
+  background-color: black;
+}
+body::-webkit-scrollbar { 
+  display: none; 
+>>>>>>> 9452ecf4d6af0fd2658c1b299c5f7f62967378c3
+}
+
+.mainContainer {
+  margin-top: 100px;
+  margin-left: 150px;
+}
+.mainInfo {
+  margin-left: 150px;
+  color: white;
+}
+.mainName {
+  color: white;
+}
+<<<<<<< HEAD
+.coordiContainer {
+  margin-top: 600px;
+  margin-left: 150px;
+}
+=======
+>>>>>>> 9452ecf4d6af0fd2658c1b299c5f7f62967378c3
