@@ -1,0 +1,19 @@
+body {
+  background-color: black;
+  padding-top: 20px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.kakaoImage {
+  display: block;
+  margin: 0px auto;
+}
+.kakaoName {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: white;
+}

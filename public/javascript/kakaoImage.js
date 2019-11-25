@@ -8,6 +8,9 @@ const kakaopaths = document.querySelectorAll(".kakaopath");
 })();
 
 function handleClick(e) {
+  for (let i = 0; i < kakaoImage.length; i++) {
+    kakaoImage[i].removeEventListener("click", handleClick);
+  }
   let kakaoContainer = e.target.parentNode.id;
   let kakaoTitle = kakaoName[kakaoContainer].innerHTML;
   let kakaopath = kakaopaths[kakaoContainer].innerHTML;

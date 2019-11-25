@@ -33,44 +33,43 @@
                 />
               </td>
               <td>
-                분석 정보 나오는 곳
+                  <td>
+                      <input
+                        type="hidden"
+                        value="<%=clotheCategory%>"
+                        name="category"
+                      />
+                      <div>카테고리-><%=clotheCategory%></div>
+                      <input
+                        type="hidden"
+                        value="<%=clotheSubclass%>"
+                        name="subclass"
+                      />
+                      <div>서브클래스-><%=clotheSubclass%></div>
+                      <input
+                        type="hidden"
+                        value="<%=clothePattern%>"
+                        name="pattern"
+                      />
+                      <div>패턴-><%=clothePattern%></div>
+                      <input type="hidden" value="<%=clotheStyle%>" name="style" />
+                      <div>스타일-><%=clotheStyle%></div>
+                      <input type="hidden" value="<%=clotheLength%>" name="length" />
+                      <div>옷길이-><%=clotheLength%></div>
+                     
+                      <div>타입-><%=clotheType%></div>
+                      <input type="hidden" value="<%=clotheType%>" name="clo_type" />
+                      <!-- 날씨 선택-->
+
+                      <input type='checkbox' name='season' value='W' />겨울
+                      <input type='checkbox' name='season' value='S' checked/>봄
+                      <input type='checkbox' name='season' value='F' />여름
+                      <input type='checkbox' name='season' value='U' />가을
+                    </td>
               </td>
             </tr>
             <tr></tr>
             <tr>
-              <td>
-                <div>카테고리-><%=clotheCategory%></div>
-                <div>서브클래스-><%=clotheSubclass%></div>
-                <div>패턴-><%=clothePattern%></div>
-                <div>스타일-><%=clotheStyle%></div>
-                <div>옷길이-><%=clotheLength%></div>
-                <!-- 옷종류 선택란 -->
-                <font> Type </font>
-                <select name="clo_type">
-                  <option value="<%=clotheType%>" selected
-                    ><%=clotheType%></option
-                  >
-                  <option value="t-shirts">t-shirts</option>
-                  <option value="pants">pants</option>
-                  <option value="outer">outer</option>
-                </select>
-                <!-- 색상 선택란 -->
-                <font> Color </font>
-                <select name="clo_color">
-                  <option value="<%=clotheColor%>" selected
-                    ><%=clotheColor%></option
-                  >
-                  <option value="red">Red</option>
-                  <option value="orange">Orange</option>
-                  <option value="yellow">Yellow</option>
-                  <option value="green">Green</option>
-                  <option value="blue">Blue</option>
-                  <option value="navy">Navy</option>
-                  <option value="puple">Puple</option>
-                  <option value="white">White</option>
-                  <option value="black">Black</option>
-                </select>
-              </td>
             </tr>
           </table>
 

@@ -15,9 +15,11 @@ ModelKey = {"pattern" : "ICN5140964119692188295", "pants_length" : "ICN922187971
             "t-shirts" : "ICN2694649581366444291", "t-shirts_length" : "ICN8706314141597844622","skirt" : "ICN6916473036674941451", "style" : "ICN6116847621121556535"}
 project_id = "theta-reserve-248104"
 
+test_num = 0
 
 #def pre(image, name ,result_value, x1, y1, x2, y2):
 def pre(image_url, name):
+    test_num = 0
     
     image = Image.open(image_url)
     #image -> bytes
@@ -68,6 +70,7 @@ def pre(image_url, name):
         "style":array_data[4],
         "length":array_data[2]}
     print(array_diction)
+    test_num = 1
     return
 
 

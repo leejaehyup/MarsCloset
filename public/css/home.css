@@ -26,7 +26,7 @@ body {
 /*menu2*/
 div.menu
 { position: absolute;
-    left: 0px; top: 650px;
+    left: 0px; top: 700px;
     font-family: Raleway;
    width: 100%;
     padding: 5px;
@@ -227,10 +227,13 @@ a .i1 {
 
 .shopRank {
   position: absolute;
-  bottom: 130px;
+  bottom: 50px;
   left: 80px;
   margin: 0 auto;
   text-align: center;
+  height: auto;
+  height: fit-content;
+  padding-bottom: 10px;
 }
 
 #css_tabs {
@@ -260,8 +263,9 @@ a .i1 {
 #css_tabs > label {
   display: inline-block;
   font-variant: small-caps;
-  font-size: 20px;
-  padding: 5px;
+  font-size: 24px;
+  margin: 0px 0px 0px 5px;
+  padding: 10px;
   text-align: center;
   width: 20%;
   line-height: 1.8em;
@@ -320,6 +324,9 @@ a .i1 {
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
   align-items: stretch;
+  margin-top: 5px;
+ 
+  height: fit-content;
 }
 .grid > article {
   width: 270px;
@@ -328,8 +335,9 @@ a .i1 {
   box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
 }
 .grid > article img {
-  width: 250px;
-  height: 170px;
+  padding-top: 10px;
+  width: 240px;
+  height: 150px;
 }
 
 .text {

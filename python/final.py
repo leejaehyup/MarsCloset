@@ -13,8 +13,6 @@ conn = pymysql.connect(host=os.environ['AWS_DB_HOST'],port=3306, user=os.environ
 
 # Connection 으로부터 Cursor 생성
 curs = conn.cursor()
-
-
 #현재 기온
 temp = 20
 
@@ -31,8 +29,6 @@ curs.execute(sql)
 
 #해당하는 선호스타일 상세
 pre = curs.fetchall()
-#print(pre)
-
 
 #상의 하의 매칭 저장 변수
 savedata = []
@@ -48,30 +44,46 @@ for row in range(0, len(pre)):
     curs.execute(head + sqlB + clothes_season)
     Bottom = curs.fetchall()
 
-    for i in range(0, 20):
-        Tnum = randint(0, len(Top)-1)
-        Bnum = randint(0, len(Bottom)-1)
-
-        result = vm.usedvm(Bottom[Bnum][1], Bottom[Bnum][2], Bottom[Bnum][3],Bottom[Bnum][4], Bottom[Bnum][5],Top[Tnum][1], Top[Tnum][2], Top[Tnum][3], Top[Tnum][4],Top[Tnum][5])
-        savedata.append([result, Top[Tnum][0], Bottom[Bnum][0]])
-        print(Top[Tnum])
-        print(Bottom[Bnum])
+    # 상의가 없을 때 
+    if len(Top) <= 0 :
+        sqlT = " category = 'top'"
+        curs.execute(head + sqlT + clothes_season)
+        Top = curs.fetchall()
+    if len(Bottom) <= 0:
+        sqlB = " category LIKE 'bottoms'"
+        curs.execute(head + sqlB + clothes_season)
+        Bottom = curs.fetchall()
    
 
+    for i in range(0, 10):
+        Tnum = randint(0, len(Top)-1)
+        Bnum = randint(0, len(Bottom)-1)
+    
+        result = vm.usedvm(Bottom[Bnum][1], Bottom[Bnum][2], Bottom[Bnum][3],Bottom[Bnum][4], Bottom[Bnum][5],Top[Tnum][1], Top[Tnum][2], Top[Tnum][3], Top[Tnum][4],Top[Tnum][5])
+        test = [result, Top[Tnum][0], Bottom[Bnum][0]]
+        
+        #중복을 허용하지 않는 의류 매칭 저장 
+        if test not in savedata:
+            savedata.append([result, Top[Tnum][0], Bottom[Bnum][0]])
 
+        
 
 #정렬
 savedata.sort(key=lambda savedata: savedata[0], reverse=True)
-#print("정렬값: ", savedata)
-#print(len(savedata))
 
-final_result=[]
-#상위 5개 값
-for i in range(0,5):
-    j = json.dumps({'Top' : savedata[i][1], 'Bottom' : savedata[i][2]})
-    final_result.append(j)
+#json 으로 변경
+if len(savedata) < 5:
+    #추천값이 5미만
+    for i in range (0, len(savedata)):
+        j = json.dumps({'Top' : savedata[i][1], 'Bottom' : savedata[i][2]})
+        print(j)
 
-print(final_result)
+else:
+    for i in range(0,5):
+        j = json.dumps({'Top' : savedata[i][1], 'Bottom' : savedata[i][2]})
+        print(j)
 
+
+#print(final_result)
 #connection 닫기
 conn.close()

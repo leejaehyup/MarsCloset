@@ -9,7 +9,6 @@ exports.glassesImg = async (req, res) => {
     console.log(err);
   }
   res.render("glassesImg", {recData: recData});
-  //console.log(recData);
 };
 
 exports.Postglasses = async (req, res) => {
@@ -30,8 +29,6 @@ exports.Postglasses = async (req, res) => {
   console.log(relData);
   console.log(typeof relData); //object
   console.log(relData.length);
-  //console.log(relData[0]);
-  //console.log(typeof relData[0]);
   let asd = relData[0].replace(/'/g, '"');
   console.log(asd);
   category = asd.category;
@@ -40,18 +37,6 @@ exports.Postglasses = async (req, res) => {
   type = asd.type;
   style = asd.style;
   length = asd.length;
-  /*let LEE = JSON.parse(asd);
-  console.log(LEE);
-  console.log(LEE.category);
-  console.log(LEE.type);
-  category = LEE.category;
-  subclass = LEE.subclass;
-  pattern = LEE.pattern;
-  type = LEE.type;
-  style = LEE.style;
-  length = LEE.length;
-*/
-  //console.log(data2);
 
   var base64Data = req.body.test2.replace(/^data:image\/png;base64,/, "");
   require("fs").writeFileSync(
@@ -103,6 +88,28 @@ exports.Postglasses = async (req, res) => {
     pattern: pattern,
     glength: length
   });
+
+  //우호 코디 실행
+  try {
+    const {PythonShell} = require("python-shell");
+    let options = {
+      mode: "text",
+      pythonPath: "",
+      pythonOptions: ["-u"], // get print results in real-time
+      scriptPath: ""
+    };
+    PythonShell.run("./python/gsavedb.py", options, async function(
+      err,
+      results
+    ) {
+      if (err) throw err;
+      for (let i = 0; i < results.length; i++) {
+        console.log("우호코디->>>>" + results[i]);
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
 
   res.send("suc");
 };

@@ -6,111 +6,225 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="/css/coordi.css" />
     <title>코디 추천 화면</title>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/javascript/partial/imgSliding/script.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/javascript/partial/imgSliding/script1.js"
+    ></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      img {
+        border: none;
+      }
+
+      #imgCarousel {
+        height: 390px;
+        margin: 90px auto 120px;
+        position: relative;
+        width: 710px;
+        background-color: #000;
+      }
+      #imgCarousel .arrow {
+        width: 44px;
+        height: 44px;
+        background: url("img/arrows.png") no-repeat;
+        position: absolute;
+        top: 50%;
+        margin-top: -22px;
+        left: 0;
+        cursor: pointer;
+      }
+      #imgCarousel .next {
+        background-position: right top;
+        left: auto;
+        right: 0;
+      }
+      #imgCarousel .arrow:hover {
+        background-position: left bottom;
+      }
+      #imgCarousel .next:hover {
+        background-position: right bottom;
+      }
+      #stage {
+        left: 50%;
+        margin-left: -320px;
+        position: absolute;
+        width: 640px;
+        height: 100%;
+      }
+      #stage img {
+        display: none;
+        border: 2px #999 solid;
+      }
+      #stage .default {
+        display: block;
+        left: 50%;
+        margin-left: -135px;
+        position: absolute;
+      }
+      #stage .animationReady {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      #stage1 {
+        left: 50%;
+        margin-left: -320px;
+        position: absolute;
+        width: 640px;
+        height: 100%;
+      }
+      #stage1 img {
+        display: none;
+        border: 2px #999 solid;
+      }
+      #stage1 .default {
+        display: block;
+        left: 50%;
+        margin-left: -135px;
+        position: absolute;
+      }
+      #stage1 .animationReady {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
 
     <script language="javascript">
-            rebtn = document.recom_btn;
-            okbtn = document.ok_btn;
-         let i=0;
-      let j =0;
-      let count=0;
+      rebtn = document.recom_btn;
+      okbtn = document.ok_btn;
+      let k = 0;
+      let j = 0;
+      let count = 0;
       let topData = new Array();
-      console.log("<%=topData[0].cloImg%>")
-      <% for(let i =0; i<topData.length; i++){%>
-      topData[i] = "<%=topData[i].cloImg%>";
-      i++;
-      <%}%>
-      console.log(topData[0]);
-      let bottomData = new Array();
-      <% for(let i =0; i<bottomData.length; i++){%>
-          bottomData[j] = "<%=bottomData[i].cloImg%>";
-          j++;
-      <%}%>
-      console.log(bottomData[0]);
+      let thangerID = new Array();
+      let bhangerID = new Array();
 
-      // 다시 추천하는 버튼 클릭시 처리 해야할 부분
+      <%for(let i=0; i<topData.length; i++){ %>
+        thangerID["<%=i%>"] = "<%= topData[i].hangerID%>";
+        <%}%>
+        <%for(let i=0; i<topData.length; i++){ %>
+        bhangerID["<%=i%>"] = "<%= bottomData[i].hangerID%>";
+        <%}%>
 
-      function recom() {
-        var image = document.getElementById("img1");
-        var image2 = document.getElementById("img2");
-        count++;
-        if(count==3||count==7){
-        image.src = topData[0];
-        image2.src = bottomData[0];
-        }else {
-          let countTop = count%topData.length;
-          let countBottom = count%bottomData.length;
-          image.src = topData[countTop];
-        image2.src = bottomData[countBottom];
+      // 확정 버튼 시 처리 해야할 부분
+          console.log(thangerID,bhangerID)
+      function ok() {
+        const image = document.querySelectorAll("img");
+        let top = [];
+        for (let i = 0; i < image.length / 2; i++) {
+          top[i] = image[i].style.zIndex;
         }
-        console.log(count);
+        let list = {};
+        for (let i = 0; i < image.length / 2; i++) {
+          list[i] = top[i];
+        }
+        let keysSorted = Object.keys(list).sort(function(a, b) {
+          return list[a] - list[b];
+        });
+        let sorting = keysSorted[image.length/2 - 1];
+        console.log(sorting);
+        $.ajax({
+          url: "/getCoordiCloth",
+          method: "GET",
+          dataType: "json",
+          data: {hangerID: thangerID[sorting]}
+        })
+          .done(function(data) {
+            console.log(data);
+          })
+          .fail(function(err) {
+            console.log(err);
+          });
+        $.ajax({
+          url: "./getCoordiCloth",
+          method: "GET",
+          dataType: "json",
+          data: {hangerID: bhangerID[sorting]}
+        })
+          .done(function(data) {
+            console.log(data);
+          })
+          .fail(function(err) {
+            console.log(err);
+          });
+
+        window.location.href = "http://localhost:4000/";
       }
-            // 확정 버튼 시 처리 해야할 부분
 
-            function ok() {
-              count = 0;
-              if(count ==0){
-              URL = "http://220.68.167.94:333/";
-              window.location.href = "http://localhost:4000/";
-             //window.open("http://localhost:4000/");
-              //location.href = "http://localhost:4000/"
-
-              }
-
-            }
-
-
-            function goBack() {
-              window.history.back();
-            } // 뒤로가기버튼 추가
+      function goBack() {
+        window.history.back();
+      } // 뒤로가기버튼 추가
     </script>
   </head>
   <body>
-    <button onclick="goBack()" class="btBack">&nbsp;&lt;&nbsp;</button>
-    <table align="center" class="todayCD">
-      <tr>
-        <td><font size="200" style="bold">오늘의 추천</font></td>
-      </tr>
-      <tr>
-        <td>
-          <img
-            src="<%=topData[0].cloImg%>"
-            ;
-            width="250"
-            height="200"
-            align="center"
-            id="img1"
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <img
-            src="<%=bottomData[1].cloImg%>"
-            ;
-            width="250"
-            height="200"
-            id="img2"
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div
-            class="button_base bt3D"
-            name="recom_btn"
-            onclick="recom()"
-            id="bt1"
-          >
-            <div>다른 추천 보기</div>
-            <div>클릭!</div>
-          </div>
+    <div id="page">
+      <div id="imgCarousel">
+        <div class="previous arrow">previous</div>
+        <div class="next arrow">next</div>
 
-          <div class="button_base bt3D" name="ok_btn" onclick="ok()" id="bt2">
-            <div>지금 코디 확정</div>
-            <div>확정!</div>
-          </div>
-        </td>
-      </tr>
-    </table>
+        <div id="stage">
+          <a href="#"
+            ><img
+              id="0"
+              src=" <%=topData[0].cloImg%> "
+              width="220"
+              height="220"
+              class="default"
+              alt=""
+          /></a>
+          <% for(let i =1; i < topData.length; i++){ %>
+          <a href="#"
+            ><img
+              id=" <%= i %> "
+              src=" <%= topData[i].cloImg %> "
+              width="220"
+              height="220"
+              alt=""
+          /></a>
+          <% }%>
+        </div>
+        <div id="stage1" style="margin-top:230px;">
+          <a href="#"
+            ><img
+              id="5"
+              src="<%=bottomData[0].cloImg%>"
+              width="220"
+              height="220"
+              class="default"
+              alt=""
+          /></a>
+          <% for(let i =1; i < bottomData.length; i++){%>
+          <a href="#"
+            ><img
+              id="<%=i+bottomData.length%>"
+              src="<%=bottomData[i].cloImg%>"
+              width="220"
+              height="220"
+              alt=""
+          /></a>
+          <% }%>
+        </div>
+      </div>
+    </div>
+
+    <div class="button_base bt3D" name="ok_btn" onclick="ok()" id="bt2">
+      <div>지금 코디 확정</div>
+      <div>확정!</div>
+    </div>
   </body>
 </html>

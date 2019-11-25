@@ -3,7 +3,7 @@ from operator import eq
 
 
 #엑셀 불러오기
-load_cloth=load_workbook("C:/Users/dlwog/Desktop/vm.xlsx", data_only=True)
+load_cloth=load_workbook("C:\Users\pyj\Desktop\My Node Js 1005/python/vm.xlsx", data_only=True)
 cloth_excel=load_cloth['cloth']
 style_excel=load_cloth['style']
 
