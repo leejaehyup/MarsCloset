@@ -1,0 +1,255 @@
+#include <ESP8266WiFi.h>
+#include <WiFiClient.h>
+#include <ESP8266WiFiMulti.h> 
+#include <ESP8266mDNS.h>
+#include <ESP8266WebServer.h>
+#include <ESP8266HTTPClient.h>
+#include "SPI.h"
+#include "MFRC522.h"
+#include <ArduinoJson.h>      //Arduino에서 Json형식 변환시키는 라이브러리
+#include <Adafruit_NeoPixel.h>
+
+ESP8266WiFiMulti wifiMulti;     // Create an instance of the ESP8266WiFiMulti class, called 'wifiMulti'
+
+ESP8266WebServer server(80);    // Create a webserver object that listens for HTTP request on port 80
+
+const int LEDPIN =16;
+const int BUZZER =D1;
+#define PIN D2
+#define NUMPIXELS 7
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+
+
+void handleRoot();              // function prototypes for HTTP handlers
+void handleLED();
+void handleNotFound();
+
+
+StaticJsonBuffer<300> JSONbuffer;   //JSON 버퍼 메모리 할당
+JsonObject& JSONencoder = JSONbuffer.createObject();
+char JSONmessageBuffer[300];
+
+
+
+
+String RFID_Data;
+#define SS_PIN D4  //SDA (SS(Chip Select)과 RST(Reset) 핀 설정)
+#define RST_PIN D3 //RST (나머지 PIN은 SPI 라이브러리를 사용하기에 별도의 설정이 필요없다)
+MFRC522 mfrc522(SS_PIN, RST_PIN); //MFRC522 객체 생성
+int status = 0;
+
+void setup(void){
+  Serial.begin(115200);         // Start the Serial communication to send messages to the computer
+  delay(10);
+  Serial.println('\n');
+  SPI.begin(); //SPI bus 선언
+  mfrc522.PCD_Init(); //MFRC522 선언
+
+  
+  //strip
+pixels.begin();
+
+  pinMode(BUZZER,OUTPUT);
+  pinMode(LEDPIN,OUTPUT);
+  pinMode(PIN, OUTPUT);
+
+  wifiMulti.addAP("wifi_id", "wifi_password");   // add Wi-Fi networks you want to connect to
+
+
+  Serial.println("Connecting ...");
+  int i = 0;
+  while (wifiMulti.run() != WL_CONNECTED) { // Wait for the Wi-Fi to connect: scan for Wi-Fi networks, and connect to the strongest of the networks above
+    delay(250);
+    Serial.print('.');
+  }
+  Serial.println('\n');
+  Serial.print("Connected to ");
+  Serial.println(WiFi.SSID());              // Tell us what network we're connected to
+  Serial.print("IP address:\t");
+  Serial.println(WiFi.localIP());           // Send the IP address of the ESP8266 to the computer
+
+  if (MDNS.begin("esp8266")) {              // Start the mDNS responder for esp8266.local
+    Serial.println("mDNS responder started");
+  } else {
+    Serial.println("Error setting up MDNS responder!");
+  }
+
+  server.on("/", HTTP_GET, handleRoot);     // Call the 'handleRoot' function when a client requests URI "/"
+  server.on("/LED", HTTP_GET, handleLED);  // Call the 'handleLED' function when a POST request is made to URI "/LED"
+  server.onNotFound(handleNotFound);        // When a client requests an unknown URI (i.e. something other than "/"), call function "handleNotFound"
+
+  server.begin();                           // Actually start the server
+  Serial.println("HTTP server started");
+}
+
+
+
+//================================================
+String ipToString(IPAddress ip){
+  String s="";
+  for (int i=0; i<4; i++)
+    s += i  ? "." + String(ip[i]) : String(ip[i]);
+  return s;
+}
+//====================================
+void loop(void){
+  
+  const String IP = ipToString(WiFi.localIP());
+  server.handleClient();                    // Listen for HTTP requests from clients
+
+
+  if(!mfrc522.PICC_IsNewCardPresent()){
+
+    return;
+  }
+  //다른 카드 선택시..
+  if(!mfrc522.PICC_ReadCardSerial()){
+
+    return;
+  }
+
+ 
+  //카드 정보를 시리얼에 출력
+  Serial.print("UID tag : ");
+  String content= "";
+  byte letter;
+  for (byte i = 0; i < mfrc522.uid.size; i++) 
+  {
+     Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
+     Serial.print(mfrc522.uid.uidByte[i], HEX);
+     content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? "0" : ""));
+     content.concat(String(mfrc522.uid.uidByte[i]));
+  }
+  
+  content.toUpperCase();
+  Serial.println();
+  Serial.println("-------------");
+for (byte i = 0; i < mfrc522.uid.size; i++) {
+  Serial.println(mfrc522.uid.uidByte[i]);
+
+}
+
+
+    RFID_Data = content.substring(0);
+  
+
+    
+    Serial.println(RFID_Data);
+ 
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+
+Serial.print("RFID Number >> ");
+    
+
+      if (WiFi.status() == WL_CONNECTED) {
+        JSONencoder ["Hanger_ID"]  = IP;
+        JSONencoder ["RFID"] = RFID_Data;
+        JSONencoder.prettyPrintTo(JSONmessageBuffer, sizeof(JSONmessageBuffer));
+        Serial.println(JSONmessageBuffer);
+        delay(500);
+    
+        //HTTP POST
+        HTTPClient http;    //클래스 정의
+        //http.begin("http://192.168.0.6:4000/wifiCloset?rfid="+RFID_Data);      //Uri 정의 옷장내부 rfid
+        http.begin("http://223.194.169.83:3000/wifiTag?rfid="+RFID_Data+"&Hanger_ID="+IP);      //Uri 정의
+        http.addHeader("Content-Type", "application/json");  //헤더 정의
+        int httpCode = http.POST(JSONmessageBuffer);   //Send the request
+        String payload = http.getString();
+        Serial.println(httpCode);   //HTTP Status 값
+        Serial.println("");
+        Serial.println(payload);    //데이터 값
+        delay(500);
+        http.end();
+        if(payload =="success"||httpCode ==200){
+          tone(BUZZER,500);
+          Serial.println("buzzer on");
+          digitalWrite(BUZZER,HIGH);
+          delay(500);
+        }
+        digitalWrite(BUZZER,LOW);
+         Serial.println("buzzer off");
+      }
+
+
+}
+
+
+
+void handleRoot() {                         // When URI / is requested, send a web page with a button to toggle the LED
+  server.send(200, "text/html", "<form action=\"/LED\" method=\"POST\"><input type=\"submit\" value=\"Toggle LED\"></form>");
+}
+
+void handleLED() {                          // If a POST request is made to URI /LED
+  digitalWrite(LEDPIN,HIGH);   // Change the state of the LED       
+   server.send(200,"text/html","success");                         // Send it back to the browser with an HTTP status 303 (See Other) to redirect   
+
+  //아래의 순서대로 NeoPixel을 반복한다.
+  colorWipe(pixels.Color(255, 0, 0), 30); //빨간색 출력
+   colorWipe(pixels.Color(255,94,0), 30); //주황색 출력
+   colorWipe(pixels.Color(255,228,0), 30); //노랑색 출력
+  colorWipe(pixels.Color(0, 255, 0), 30); //녹색 출력
+  colorWipe(pixels.Color(0, 0, 255), 30); //파란색 출력
+  colorWipe(pixels.Color(0, 0, 129), 30); //남색 출력
+ colorWipe(pixels.Color(170, 0, 255), 30); //보라색 출력
+  theaterChaseRainbow(20);
+  
+ 
+    
+  //server.sendHeader("Location","/");        // Add a header to respond with a new location for the browser to go to the home page again
+
+  pixels.clear();
+  pixels.show();
+  digitalWrite(LEDPIN,LOW);
+}
+
+void handleNotFound(){
+  server.send(404, "text/plain", "404: Not found"); // Send HTTP status 404 (Not Found) when there's no handler for the URI in the request
+}
+
+
+
+
+//NeoPixel에 달린 LED를 각각 주어진 인자값 색으로 채워나가는 함수
+void colorWipe(uint32_t c, uint8_t wait) {
+  for(uint16_t i=0; i<pixels.numPixels(); i++) {
+      pixels.setPixelColor(i, c);
+      pixels.show();
+      delay(wait);
+  }
+}
+
+
+//255가지의 색을 나타내는 함수
+uint32_t Wheel(byte WheelPos) {
+  if(WheelPos < 85) {
+   return pixels.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
+  } else if(WheelPos < 170) {
+   WheelPos -= 85;
+   return pixels.Color(255 - WheelPos * 3, 0, WheelPos * 3);
+  } else {
+   WheelPos -= 170;
+   return pixels.Color(0, WheelPos * 3, 255 - WheelPos * 3);
+  }
+}
+
+
+//LED를 다양한색으로 표현하며 깜빡거린다
+void theaterChaseRainbow(uint8_t wait) {
+  for (int j=0; j < 256; j++) {     //256가지의 색을 표현
+    for (int q=0; q < 3; q++) {
+        for (int i=0; i < pixels.numPixels(); i=i+3) {
+          pixels.setPixelColor(i+q, Wheel( (i+j) % 255));
+        }
+        pixels.show();
+       
+        delay(wait);
+       
+       for (int i=0; i < pixels.numPixels(); i=i+3) {
+          pixels.setPixelColor(i+q, 0); 
+        }
+    }
+  }
+}
