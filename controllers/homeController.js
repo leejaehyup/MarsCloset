@@ -170,7 +170,6 @@ exports.home = async (req, res) => {
   let cal = await calender.findAll();
   obj.results = cal;
   let recData = JSON.stringify(obj);
-  console.log("recData : " + recData);
   var requestOptions = {
     method: "GET",
     uri: "http://men-shoppingmall-rank.com/bbs/board.php?bo_table=B11",
@@ -249,51 +248,39 @@ exports.home = async (req, res) => {
           i++;
         });
 
-        var rank = $(this);
-        rank_text1 = rank.text();
-        arr_link1[i] = rank_text1;
-        i++;
-      });
-      i = 0;
-      $(".mw_basic_list_click").each(function() {
-        var rank = $(this);
-        rank_text1 = rank.text();
-        arr_click1[i] = rank_text1;
-        i++;
-      });
+        var requestOptions = {
+          method: "GET",
+          uri: "https://store.musinsa.com/app/",
+          headers: {"User-Agent": "Mozilla/5.0"},
+          encoding: null
+        };
 
-      var requestOptions = {
-        method: "GET",
-        uri: "https://store.musinsa.com/app/",
-        headers: {"User-Agent": "Mozilla/5.0"},
-        encoding: null
-      };
+        request.get(requestOptions, function(error, response, html) {
+          var $ = cheerio.load(html);
+          var rank_text2;
+          var arr_product = new Array();
+          var i = 0;
 
-      request.get(requestOptions, function(error, response, html) {
-        var $ = cheerio.load(html);
-        var rank_text2;
-        var arr_product = new Array();
-        var i = 0;
+          $(".word").each(function() {
+            var rank = $(this);
+            rank_text2 = rank.text();
+            arr_product[i] = rank_text2;
+            i++;
+          });
+          let data = portSerial.serialData;
 
-        $(".word").each(function() {
-          var rank = $(this);
-          rank_text2 = rank.text();
-          arr_product[i] = rank_text2;
-          i++;
-        });
-        let data = portSerial.serialData;
-
-        res.render("home", {
-          title: "hello!!",
-          data: data,
-          shopping: arr_link,
-          name: arr_rank,
-          click: arr_click,
-          shopping2: arr_link1,
-          name2: arr_rank1,
-          click2: arr_click1,
-          product: arr_product,
-          data: recData
+          res.render("home", {
+            title: "hello!!",
+            data: data,
+            shopping: arr_link,
+            name: arr_rank,
+            click: arr_click,
+            shopping2: arr_link1,
+            name2: arr_rank1,
+            click2: arr_click1,
+            product: arr_product,
+            data: recData
+          });
         });
       });
     });
@@ -301,7 +288,6 @@ exports.home = async (req, res) => {
     console.log(err);
   }
 };
-
 exports.kakaoImage = async (req, res) => {
   let tag = req.body.tag;
   let img = req.body.image;

@@ -65,11 +65,6 @@ for row in range(0, len(pre)):
         #중복을 허용하지 않는 의류 매칭 저장 
         if test not in savedata:
             savedata.append([result, Top[Tnum][0], Bottom[Bnum][0]])
-<<<<<<< HEAD
-=======
-
-        
->>>>>>> 5970c6318131aa30f89bea66455c59cb9dde2553
 
         
 
@@ -77,22 +72,14 @@ for row in range(0, len(pre)):
 savedata.sort(key=lambda savedata: savedata[0], reverse=True)
 
 #json 으로 변경
-<<<<<<< HEAD
 if len(savedata) < 5:
-=======
-if len(savedata) < 4:
->>>>>>> 5970c6318131aa30f89bea66455c59cb9dde2553
     #추천값이 5미만
     for i in range (0, len(savedata)):
         j = json.dumps({'Top' : savedata[i][1], 'Bottom' : savedata[i][2]})
         print(j)
 
 else:
-<<<<<<< HEAD
     for i in range(0,5):
-=======
-    for i in range(0,4):
->>>>>>> 5970c6318131aa30f89bea66455c59cb9dde2553
         j = json.dumps({'Top' : savedata[i][1], 'Bottom' : savedata[i][2]})
         print(j)
 
